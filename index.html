@@ -121,6 +121,56 @@
         /* Speaker notes panel */
         .notes-panel { background: linear-gradient(180deg, #0F172A 0%, #020617 100%); }
 
+        /* ── Mobile responsive ── */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 4.5rem 1rem 5.5rem !important;
+                min-height: 100vh;
+                overflow-y: auto;
+                justify-content: flex-start !important;
+            }
+            .slide > div:first-child:empty { display: none; }
+            .slide > div:last-child { margin-top: auto; }
+            /* Cap headline sizes on mobile */
+            .slide h1 { font-size: 1.875rem !important; line-height: 1.2 !important; }
+            .slide h2 { font-size: 1.375rem !important; line-height: 1.25 !important; }
+            .slide h3 { font-size: 1.125rem !important; line-height: 1.3 !important; }
+            .slide .text-8xl, .slide .text-7xl, .slide .text-6xl { font-size: 2rem !important; line-height: 1.15 !important; }
+            .slide .text-5xl { font-size: 1.75rem !important; line-height: 1.2 !important; }
+            .slide .text-4xl { font-size: 1.5rem !important; line-height: 1.25 !important; }
+            .slide .text-3xl { font-size: 1.25rem !important; }
+            .slide .text-2xl { font-size: 1.125rem !important; }
+            .slide .text-xl  { font-size: 1rem !important; line-height: 1.5 !important; }
+            .slide .text-lg  { font-size: 0.95rem !important; }
+            /* Stack grids */
+            .slide .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            .slide .col-span-5, .slide .col-span-6, .slide .col-span-7, .slide .col-span-8 { grid-column: span 1 / span 1 !important; }
+            /* Tighten card spacing */
+            .slide .p-12, .slide .p-10, .slide .p-8 { padding: 1.25rem !important; }
+            .slide .rounded-3xl { border-radius: 1rem !important; }
+            .slide .space-y-12 > * + *, .slide .space-y-10 > * + *, .slide .space-y-8 > * + * { margin-top: 1rem !important; }
+            /* Top bar tweaks */
+            .top-bar-chip-secondary { display: none !important; }
+            /* Slide flex-wrap behavior */
+            .slide .flex-row, .slide .flex.items-center.justify-between { flex-wrap: wrap; gap: 0.75rem; }
+            /* Modal sizing */
+            .search-mask .max-w-2xl, .search-mask .max-w-5xl { max-width: calc(100vw - 1rem) !important; }
+            .search-mask .px-8 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+            .search-mask .py-8, .search-mask .py-6 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+            /* Tippy on mobile */
+            .tippy-box { max-width: calc(100vw - 2rem) !important; }
+            .tip-card { max-width: 260px !important; }
+            /* Deep dive panel — full width minus small inset */
+            .notes-panel { padding: 1rem !important; }
+            /* Bottom nav dots scrollable */
+            .dot { width: 6px; height: 6px; }
+            /* Hide section dividers / boilerplate that hurts mobile */
+            .slide [class*="text-[11px]"] { font-size: 9px !important; }
+        }
+
         @media print {
             body { overflow: visible; background: white; color: black; }
             .slide { display: flex !important; page-break-after: always; min-height: auto; padding: 2rem; color: black; animation: none; }
@@ -138,18 +188,22 @@
             <span class="text-slate-700">|</span>
             <span class="text-slate-300 font-bold tracking-widest text-[10px] uppercase">Executive Risk Lab</span>
         </div>
-        <div class="bg-slate-900/85 px-4 py-2 rounded-full border border-slate-800 backdrop-blur text-xs">
+        <div class="bg-slate-900/85 px-4 py-2 rounded-full border border-slate-800 backdrop-blur text-xs top-bar-chip-secondary">
             <span class="font-serif text-slate-200">Augury</span><span class="font-serif italic text-augury-500"> Insights</span> <span class="text-slate-600">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span>
         </div>
     </div>
     <div class="flex items-center gap-2 pointer-events-auto">
+        <button x-show="allQuizzesDone()" x-cloak @click="showFinalScore = true" title="Your score" class="flex items-center gap-2 text-augury-300 font-mono text-xs bg-augury-500/15 border border-augury-500/40 px-3 py-2 rounded-full backdrop-blur hover:bg-augury-500/25 transition">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span x-text="totalScore() + '/12'" class="font-bold"></span>
+        </button>
         <button @click="showSearch = true" title="Search (Cmd/Ctrl+K)" class="flex items-center gap-2 text-slate-300 font-mono text-xs bg-slate-900/85 px-3 py-2 rounded-full border border-slate-800 backdrop-blur hover:bg-slate-800">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
             <span class="hidden md:inline">Search</span> <span class="kbd">⌘K</span>
         </button>
-        <button @click="speakerMode = !speakerMode" title="Speaker notes (S)" :class="speakerMode ? 'bg-augury-500/20 border-augury-500/50 text-augury-300' : 'bg-slate-900/85 border-slate-800 text-slate-300'" class="flex items-center gap-2 font-mono text-xs px-3 py-2 rounded-full border backdrop-blur hover:bg-slate-800 transition">
+        <button @click="speakerMode = !speakerMode" title="Deep Dive (S)" :class="speakerMode ? 'bg-augury-500/20 border-augury-500/50 text-augury-300' : 'bg-slate-900/85 border-slate-800 text-slate-300'" class="flex items-center gap-2 font-mono text-xs px-3 py-2 rounded-full border backdrop-blur hover:bg-slate-800 transition">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
-            <span class="kbd">S</span>
+            <span class="hidden md:inline">Deep Dive</span> <span class="kbd">S</span>
         </button>
         <button @click="showJump = !showJump" class="text-slate-300 font-mono text-xs bg-slate-900/85 px-3 py-2 rounded-full border border-slate-800 backdrop-blur hover:bg-slate-800">
             <span x-text="currentSlide" class="text-augury-400 font-bold"></span> / <span x-text="totalSlides"></span>
@@ -220,7 +274,7 @@
         </p>
     </div>
     <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-800 pt-5">
-        <span class="font-mono uppercase tracking-widest">Arrows · Space · Home/End · ⌘K Search · S Notes</span>
+        <span class="font-mono uppercase tracking-widest">Arrows · Space · ⌘K Search · S Deep Dive</span>
         <span><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></span>
     </div>
 </div>
@@ -1418,26 +1472,167 @@
     </div>
 </div>
 
-<!-- Speaker Notes Panel -->
-<div x-show="speakerMode" x-cloak class="fixed bottom-20 left-6 right-6 z-40 max-w-3xl mx-auto no-print">
-    <div class="notes-panel border border-augury-500/40 rounded-2xl shadow-2xl p-5">
-        <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-800">
-            <div class="flex items-center gap-3 flex-wrap">
-                <span class="bg-augury-500/15 text-augury-400 font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-augury-500/30 font-bold">Speaker Notes</span>
+<!-- Deep Dive Panel -->
+<div x-show="speakerMode" x-cloak class="fixed bottom-20 left-3 right-3 sm:left-6 sm:right-6 z-40 max-w-3xl mx-auto no-print">
+    <div class="notes-panel border border-augury-500/40 rounded-2xl shadow-2xl p-4 sm:p-5 max-h-[55vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-800 sticky top-0 bg-slate-900 -mx-4 sm:-mx-5 px-4 sm:px-5 -mt-4 sm:-mt-5 pt-4 sm:pt-5">
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <span class="bg-augury-500/15 text-augury-400 font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-augury-500/30 font-bold">Deep Dive</span>
                 <span class="text-xs text-slate-500 font-mono">Slide <span x-text="currentSlide" class="text-slate-300 font-bold"></span></span>
                 <span class="text-xs text-augury-400 font-mono" x-show="notes[currentSlide]" x-text="notes[currentSlide]?.time"></span>
             </div>
-            <button @click="speakerMode = false" class="text-slate-500 hover:text-slate-300 text-xs font-mono">Press S to close</button>
+            <button @click="speakerMode = false" class="text-slate-500 hover:text-slate-300 text-xs font-mono shrink-0">Close · S</button>
         </div>
         <template x-if="notes[currentSlide]">
             <div>
-                <div class="font-serif font-bold text-augury-300 text-lg mb-1.5" x-text="notes[currentSlide].title"></div>
-                <p class="text-sm text-slate-300 leading-relaxed" x-text="notes[currentSlide].body"></p>
+                <div class="font-serif font-bold text-augury-300 text-lg sm:text-xl mb-2" x-text="notes[currentSlide].title"></div>
+                <p class="text-sm sm:text-[15px] text-slate-300 leading-relaxed whitespace-pre-line" x-text="notes[currentSlide].body"></p>
             </div>
         </template>
         <template x-if="!notes[currentSlide]">
-            <div class="text-sm text-slate-500 italic">No notes for slide <span x-text="currentSlide"></span> yet.</div>
+            <div class="text-sm text-slate-500 italic">No deep-dive content for slide <span x-text="currentSlide"></span> yet.</div>
         </template>
+    </div>
+</div>
+
+<!-- Pre-class Survey Modal -->
+<div x-show="showSurvey" x-cloak class="fixed inset-0 z-[110] search-mask flex items-center justify-center p-6 no-print">
+    <div class="w-full max-w-2xl bg-slate-900 border border-augury-500/40 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="px-8 py-6 bg-gradient-to-r from-augury-500/15 to-transparent border-b border-slate-800">
+            <div class="flex items-center justify-between gap-4">
+                <div>
+                    <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold">Pre-class Pulse</div>
+                    <h2 class="text-2xl font-serif font-bold text-slate-100 mt-1">Help shape the next 90 minutes</h2>
+                    <p class="text-sm text-slate-400 mt-1">4 quick taps. Anonymous. Used to calibrate the depth and examples.</p>
+                </div>
+                <a :href="slidoUrl" target="_blank" class="shrink-0 text-right group">
+                    <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 group-hover:text-slate-400">Live room results</div>
+                    <div class="text-xs font-mono text-augury-400 group-hover:text-augury-300 mt-0.5">Slido →</div>
+                </a>
+            </div>
+        </div>
+        <div class="px-8 py-6 space-y-6 max-h-[65vh] overflow-y-auto">
+            <div>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">Your role</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <template x-for="r in ['Treasury','Risk','Credit','Operations','Strategy / Exec','Other']" :key="r">
+                        <button @click="profile.role = r" :class="profile.role === r ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition" x-text="r"></button>
+                    </template>
+                </div>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">Institution type</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <template x-for="i in ['Bank','NBFC','FinTech','Regulator / Academic','Investor','Other']" :key="i">
+                        <button @click="profile.institution = i" :class="profile.institution === i ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition" x-text="i"></button>
+                    </template>
+                </div>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">How well do you know structured credit?</label>
+                <div class="grid grid-cols-5 gap-2">
+                    <template x-for="k in [{n:1,t:'Newcomer'},{n:2,t:'Learner'},{n:3,t:'Practitioner'},{n:4,t:'Strong'},{n:5,t:'Expert'}]" :key="k.n">
+                        <button @click="profile.knowledge = k.n" :class="profile.knowledge === k.n ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-xs py-3 px-2 rounded-xl border transition flex flex-col items-center gap-1">
+                            <span class="font-mono font-bold text-base" x-text="k.n"></span>
+                            <span x-text="k.t"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">What you most want to walk away with</label>
+                <div class="space-y-2">
+                    <template x-for="e in ['Foundations &amp; frameworks','Indian regulatory clarity','Capital relief / SRT strategy','Math &amp; risk intuition','Where the market is going']" :key="e">
+                        <button @click="profile.expectation = e" :class="profile.expectation === e ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="w-full text-sm py-2.5 px-4 rounded-xl border text-left transition" x-html="e"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div class="px-8 py-5 border-t border-slate-800 bg-slate-950/50 flex items-center justify-between gap-4">
+            <button @click="showSurvey = false; surveyDone = true; saveState();" class="text-xs text-slate-500 hover:text-slate-300 font-mono uppercase tracking-widest transition">Skip for now</button>
+            <button @click="submitSurvey()" :disabled="!surveyComplete()"
+                    class="px-6 py-3 bg-augury-500 hover:bg-augury-400 text-slate-950 text-sm font-black uppercase tracking-widest rounded-xl transition disabled:opacity-30 disabled:cursor-not-allowed">
+                Begin the class →
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Modal -->
+<div x-show="activeQuiz !== null" x-cloak class="fixed inset-0 z-[110] search-mask flex items-center justify-center p-6 no-print">
+    <div x-show="activeQuiz !== null" class="w-full max-w-2xl bg-slate-900 border border-augury-500/40 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="px-8 py-5 bg-gradient-to-r from-augury-500/15 to-transparent border-b border-slate-800 flex items-center justify-between gap-4">
+            <div>
+                <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold" x-text="activeQuiz ? quizzes[activeQuiz].title : ''"></div>
+                <div class="text-sm text-slate-400 mt-1">Question <span x-text="quizIndex + 1" class="font-bold text-slate-200"></span> of 3 · Running score: <span x-text="quizRunning" class="text-augury-400 font-bold"></span>/3</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0">
+                <template x-for="i in 3" :key="i">
+                    <div class="w-3 h-3 rounded-full" :class="(i - 1) < quizIndex ? 'bg-augury-500' : ((i - 1) === quizIndex ? 'bg-augury-500/50 ring-2 ring-augury-500/30' : 'bg-slate-700')"></div>
+                </template>
+            </div>
+        </div>
+        <div class="px-8 py-6 space-y-5" x-show="activeQuiz">
+            <h3 class="text-xl font-serif font-bold text-slate-100 leading-snug" x-text="currentQuestion()?.q || ''"></h3>
+            <div class="space-y-2">
+                <template x-for="(opt, i) in (currentQuestion()?.options || [])" :key="i">
+                    <button @click="answerQuiz(i)" :disabled="quizAnswered"
+                            :class="quizAnswered ? (i === currentQuestion().answer ? 'bg-emerald-500/15 border-emerald-500 text-emerald-300' : (i === quizUserAnswer ? 'bg-rose-500/15 border-rose-500 text-rose-300' : 'bg-slate-800 border-slate-700 text-slate-500 opacity-60')) : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-augury-500/40'"
+                            class="w-full text-left px-5 py-3 rounded-xl border transition text-base flex items-center gap-3">
+                        <span class="font-mono text-xs text-slate-500 shrink-0 w-6" x-text="['A','B','C','D'][i]"></span>
+                        <span class="flex-1" x-text="opt"></span>
+                        <svg x-show="quizAnswered && i === currentQuestion().answer" class="w-5 h-5 shrink-0 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z"/></svg>
+                        <svg x-show="quizAnswered && i === quizUserAnswer && i !== currentQuestion().answer" class="w-5 h-5 shrink-0 text-rose-400" fill="currentColor" viewBox="0 0 20 20"><path d="M14.7 5.3a1 1 0 010 1.4L11.4 10l3.3 3.3a1 1 0 11-1.4 1.4L10 11.4l-3.3 3.3a1 1 0 11-1.4-1.4L8.6 10 5.3 6.7a1 1 0 111.4-1.4L10 8.6l3.3-3.3a1 1 0 011.4 0z"/></svg>
+                    </button>
+                </template>
+            </div>
+            <div x-show="quizAnswered" x-transition class="p-4 bg-slate-950 border border-augury-500/30 rounded-xl">
+                <div class="text-[10px] font-mono uppercase tracking-widest text-augury-500 font-bold mb-1.5">Why</div>
+                <p class="text-sm text-slate-300 leading-relaxed" x-text="currentQuestion()?.explain || ''"></p>
+            </div>
+        </div>
+        <div class="px-8 py-4 border-t border-slate-800 bg-slate-950/50 flex items-center justify-between">
+            <button @click="quizScores[activeQuiz] = quizRunning; saveState(); activeQuiz = null; quizIndex = 0; quizRunning = 0; quizAnswered = false;" class="text-[10px] text-slate-500 hover:text-slate-300 font-mono uppercase tracking-widest transition">Skip checkpoint</button>
+            <button @click="nextQuizQuestion()" x-show="quizAnswered" x-transition
+                    class="px-6 py-2.5 bg-augury-500 hover:bg-augury-400 text-slate-950 text-sm font-black uppercase tracking-widest rounded-xl transition">
+                <span x-text="quizIndex < 2 ? 'Next question →' : 'Finish checkpoint →'"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Final Score Modal -->
+<div x-show="showFinalScore" x-cloak class="fixed inset-0 z-[110] search-mask flex items-center justify-center p-6 no-print">
+    <div class="w-full max-w-2xl bg-slate-900 border-2 border-augury-500/50 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="px-8 py-8 bg-gradient-to-br from-augury-500/15 via-augury-500/5 to-transparent text-center">
+            <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold mb-3">Your Class Score</div>
+            <div class="text-7xl font-serif font-black text-slate-100 leading-none">
+                <span x-text="totalScore()"></span><span class="text-3xl text-slate-500"> / 12</span>
+            </div>
+            <div class="mt-4 inline-block px-5 py-1.5 bg-augury-500/15 text-augury-300 border border-augury-500/40 rounded-full text-sm font-bold uppercase tracking-widest" x-text="scoreTier()"></div>
+        </div>
+        <div class="px-8 py-5 border-t border-slate-800 space-y-4">
+            <p class="text-base text-slate-300 leading-relaxed" x-html="scoreMessage()"></p>
+            <div class="grid grid-cols-4 gap-2 pt-2">
+                <template x-for="n in [1,2,3,4]" :key="n">
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-center">
+                        <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Quiz <span x-text="n"></span></div>
+                        <div class="text-xl font-bold mt-1 font-serif" :class="quizScores[n] === 3 ? 'text-emerald-400' : (quizScores[n] >= 2 ? 'text-augury-400' : 'text-rose-400')">
+                            <span x-text="quizScores[n] !== null ? quizScores[n] : '–'"></span>/3
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="px-8 py-5 border-t border-slate-800 bg-slate-950/50 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <a :href="linkedinShareUrl()" target="_blank" class="text-xs font-mono uppercase tracking-widest text-augury-400 hover:text-augury-300 transition flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+                Share on LinkedIn
+            </a>
+            <button @click="showFinalScore = false" class="px-6 py-2.5 bg-augury-500 hover:bg-augury-400 text-slate-950 text-sm font-black uppercase tracking-widest rounded-xl transition">
+                Continue to Q&amp;A →
+            </button>
+        </div>
     </div>
 </div>
 
@@ -1477,36 +1672,166 @@ function deck() {
         speakerMode: false,
         searchQuery: '',
         searchResults: [],
+        // ── Survey + Quiz + Score state ──
+        profile: { role: '', institution: '', knowledge: 0, expectation: '' },
+        surveyDone: false,
+        showSurvey: false,
+        activeQuiz: null,
+        quizIndex: 0,
+        quizAnswered: false,
+        quizUserAnswer: null,
+        quizRunning: 0,
+        quizScores: { 1: null, 2: null, 3: null, 4: null },
+        showFinalScore: false,
+        scoreShown: false,
+        slidoUrl: 'https://app.sli.do/event/rU7tEYi1VrihLjopQb19wS',
+        slidoCode: 'Open live wall',
+        quizTriggers: { 11: 1, 21: 2, 25: 3, 29: 4 },
+        quizzes: {
+            1: { title: 'Checkpoint 1 — Foundations', subtitle: 'After Engineering Pillars',
+                questions: [
+                    { q: "What is the Boomerang Rule's core claim?", options: [
+                        "Lending is fundamentally a collections business",
+                        "Securitisation is illegal in India",
+                        "Risk transfer requires synthetic structures",
+                        "Default models are always accurate"
+                    ], answer: 0, explain: "Origination is vanity; cash flow recovery is sanity. No structuring can manufacture safety from structural default." },
+                    { q: "True Sale Isolation primarily achieves:", options: [
+                        "Higher interest rates",
+                        "Bankruptcy remoteness from the originator",
+                        "Tax benefits for the SPV",
+                        "Regulatory penalties"
+                    ], answer: 1, explain: "True sale severs the cord — if the originator fails, its creditors have zero legal claim to SPV assets." },
+                    { q: "Which tranche absorbs losses first?", options: [
+                        "Senior (AAA)", "Mezzanine (BBB)", "Equity / First Loss", "All equally"
+                    ], answer: 2, explain: "The Sponge — equity absorbs initial defaults; senior gets paid first." }
+                ] },
+            2: { title: 'Checkpoint 2 — Waterfall & Tranching', subtitle: 'After Worked Example',
+                questions: [
+                    { q: "In a standard waterfall, if collections are insufficient, who gets paid first?", options: [
+                        "Equity holders (originator)", "Mezzanine bondholders",
+                        "Senior bondholders", "The trustee"
+                    ], answer: 2, explain: "Strict subordination — senior gets paid in full before mezz receives a rupee." },
+                    { q: "In the worked example (₹1,000 Cr pool, 99.9% stress ~11.5%), how thick should Senior AAA be?", options: [
+                        "~50%", "~70%", "~88.5%", "~99%"
+                    ], answer: 2, explain: "Senior thickness = 100% − equity (4.5%) − mezzanine (7%) = 88.5%." },
+                    { q: 'What is "excess spread"?', options: [
+                        "Surplus tax on securitisation",
+                        "Pool yield minus tranche coupon — a cushion to absorb write-offs",
+                        "Extra interest charged to borrowers",
+                        "Trustee fee"
+                    ], answer: 1, explain: "Portfolio yield (e.g. 12%) minus tranche coupon (e.g. 7%) = 5% buffer." }
+                ] },
+            3: { title: 'Checkpoint 3 — Math & Stress', subtitle: 'After the War Room',
+                questions: [
+                    { q: "What happens to default correlation in severe systemic stress?", options: [
+                        "Stays constant", "Decreases (more diversification)",
+                        "Non-linearly snaps to 1.0", "Becomes negative"
+                    ], answer: 2, explain: "Diversification evaporates under stress — the model that assumed static correlation breaks." },
+                    { q: "AAA tranches under Basel ASRF must survive what stress interval?", options: [
+                        "95%", "99%", "99.9%", "99.99%"
+                    ], answer: 2, explain: "1-in-1,000 stress year — that is the regulatory bar." },
+                    { q: "In the War Room, increasing asset correlation (ρ) does what to tail loss?", options: [
+                        "Decreases it", "No effect",
+                        "Multiplicatively increases it", "Inverts it"
+                    ], answer: 2, explain: "Higher correlation = more clustered defaults = fatter tail loss distribution." }
+                ] },
+            4: { title: 'Checkpoint 4 — India Regulatory', subtitle: 'After RBI / SARFAESI / IBC',
+                questions: [
+                    { q: "What does RBI's MRR stand for?", options: [
+                        "Maximum Recovery Rate", "Minimum Retention Requirement",
+                        "Mandatory Risk Reserve", "Multi-Rating Rule"
+                    ], answer: 1, explain: "Originator must retain 5–10% (tenor-dependent) — skin-in-the-game." },
+                    { q: "Synthetic securitisation in India is:", options: [
+                        "Encouraged by RBI",
+                        "Largely prohibited for most regulated entities",
+                        "Mandatory for AAA-rated banks",
+                        "Available only to NBFCs"
+                    ], answer: 1, explain: "India learned from 2008 — synthetic structures and re-securitisations are prohibited for most regulated entities." },
+                    { q: "The IL&FS default in 2018 triggered what?", options: [
+                        "A new gold standard for credit rating",
+                        "The Indian NBFC liquidity crisis",
+                        "The end of Indian securitisation",
+                        "RBI's first-ever rate cut"
+                    ], answer: 1, explain: "~₹91,000 Cr group default cascaded through MFs, pension funds, banks. Government superseded the board." }
+                ] }
+        },
         notes: {
-            1:  { title: "Opening — Frame the Class",         time: "~2 min",  body: "Set the frame: lending is fundamentally a collections business. Flight-simulator metaphor — the deck is interactive. Audience will operate dials on slide 19 (Waterfall Tycoon) and 24 (War Room)." },
-            2:  { title: "Boomerang Rule",                    time: "~3 min",  body: "Repeat the line: origination volume is vanity, recovery is sanity. It sticks. Anchor everything downstream to this single axiom." },
-            3:  { title: "Intent vs Ability",                 time: "~3 min",  body: "Behavioral vs mathematical. Make clear: structure addresses ability only. No financial engineering cures fraud." },
-            4:  { title: "Core Thesis",                       time: "~1 min",  body: "Pause for impact. The phrase 'any credit risk is viable if structured properly' is the whole class in one sentence." },
-            6:  { title: "Srenis, Hundis, Pfandbrief",        time: "~4 min",  body: "India-first framing: securitisation is not a Western import. Srenis pooled risk before Wall Street existed. Hover citations for sources." },
-            7:  { title: "IP Royalties — Audience Vote",      time: "~6 min",  body: "Let the class vote with the buttons. Most groups decline initially. Reveal the Bowie → Hipgnosis → Rihanna progression to flip the room." },
-            8:  { title: "LOS Hygiene",                       time: "~3 min",  body: "Plug Aurionpro SmartLender naturally — this is the layer Aurionpro actually builds. Account Aggregator is the modern Indian frame." },
-           14:  { title: "Ecosystem Map",                     time: "~4 min",  body: "Walk left-to-right slowly. Pause on each role. Audience often confuses Trustee vs Servicer — preempt the question." },
-           18:  { title: "Champagne Waterfall",               time: "~2 min",  body: "Quick metaphor stop. Set up the live game next slide." },
-           19:  { title: "Waterfall Tycoon — Live Lab",       time: "~6 min",  body: "Invite a volunteer. Deliberately try Pay Equity first to trigger the covenant breach. Use Reset between runs. This is the highest-energy moment." },
-           20:  { title: "Worked Example — Numbers",          time: "~6 min",  body: "Walk the math slowly. Anchor on the 99.9% stress interval — that is the take-home for AAA sizing. EL of 1.35% vs 11.5% stress loss." },
-           21:  { title: "India's NINJA Moment",              time: "~6 min",  body: "Heavy room moment. IL&FS, DHFL, YES Bank AT1. Pause after: structure enhances ability; it cannot cure intent." },
-           22:  { title: "Correlation Trap",                  time: "~4 min",  body: "Show the formula, don't teach it. Point: when ρ snaps to 1.0, diversification is a fiction. India 2018 parallel hits hard." },
-           23:  { title: "Basel ASRF",                        time: "~3 min",  body: "Point at the math, do not solve it. 'This is what the regulator runs to size your capital.' Move on. Audience will trust you more if you don't drill." },
-           24:  { title: "War Room — Macro Shock",            time: "~8 min",  body: "Audience suggests inputs. Run the sim live. The 'SENIOR BREACHED' banner is the climax — wait for the gasp." },
-           25:  { title: "ALM / Maturity Mismatch",           time: "~3 min",  body: "Borrow short, lend long. Banks securitise to unwind duration risk. Indian NBFCs in 2018 are the cautionary tale." },
-           26:  { title: "RWA Relief",                        time: "~3 min",  body: "Frame in ROE terms. CFOs care about ROE not RWA — connect the two." },
-           27:  { title: "Synthetic Securitisation",          time: "~3 min",  body: "Move risk, keep cash. Flag that India largely prohibits this — leads into the regulatory slide." },
-           28:  { title: "India Regulatory Lens",             time: "~6 min",  body: "Most India-relevant slide for senior risk officers. Emphasize MRR/MHP and the synthetic prohibition. This will be a Q&A magnet." },
-           29:  { title: "SRT — Capital Strategy",            time: "~4 min",  body: "Global tier-1 banks live and die by SRT. ~$25Bn issuance in 2024. India: not yet, but the direction is clear." },
-           30:  { title: "STS Framework",                     time: "~3 min",  body: "Post-2008 mandate. The principles are universal even if specific regimes differ. RBI's STC mirrors this." },
-           31:  { title: "Tokenization Horizon",              time: "~4 min",  body: "Not crypto-hype — institutional. Ondo, Centrifuge, Maple are doing what RBI's tokenized deposit pilot anticipates." },
-           32:  { title: "Glossary",                          time: "~1 min",  body: "Take-home reference. Tell audience this is downloadable." },
-           33:  { title: "Recommended Reading",               time: "~1 min",  body: "Kothari for India, Fabozzi for foundations, Salmon for the cautionary tale." },
-           34:  { title: "Trainer Bio",                       time: "~1 min",  body: "Keep brief — credentials speak for themselves. Bridge to the connect slide." },
-           35:  { title: "Connect — LinkedIn First",          time: "~1 min",  body: "Highlight Augury (training arm) and Infrarisk/Aurionpro (tech arm). If you have a LinkedIn QR printed, hold it up here." },
-           36:  { title: "Q&A — The Floor",                   time: "Open",    body: "Most useful questions come from senior treasury heads. Allocate 15–20 min minimum. India-specific scenarios get the deepest engagement." }
+            1:  { title: "Frame the Journey",                  time: "2 min read",
+                body: "This masterclass walks the credit migration pipeline end-to-end — from a single SME loan being underwritten in a digital LOS, through bankruptcy-remote SPV structuring, tranching mechanics, and credit enhancements, to the modern regulatory perimeter that contains it (RBI's 2021 Master Direction, Basel ASRF), and the synthetic risk transfer strategies global tier-1 banks now run for capital relief.\n\nInteractive widgets at slides 19 (Waterfall Tycoon) and 24 (War Room) let you operate the levers yourself. Citations are hover-linked throughout — every named case, regulation, and formula has a source one tap away." },
+            2:  { title: "The Boomerang Rule",                 time: "3 min read",
+                body: "Lending generates revenue only when capital returns — origination volume without recovery is a balance-sheet illusion. This axiom is structurally important because every layer of securitisation that follows (true sale, tranching, waterfall, enhancements) operates downstream of cash actually being collected.\n\nNo degree of financial engineering converts structural default into safety. When you assess any structure, ask first: are the underlying obligors realistically going to pay? Everything else is plumbing. The 2008 NINJA loans, 2018 IL&FS, 2019 DHFL — all proved the same thing: pristine paper hides hollow collections." },
+            3:  { title: "Intent vs Ability — The Credit Faultline", time: "3 min read",
+                body: "Credit losses split cleanly into two categories. Intent failures are behavioral — fraud, willful default, deception in disclosure. Structure cannot cure intent: if fraudulent paper enters the pool, the entire downstream stack inherits the fraud. IL&FS and DHFL were intent failures dressed in ability paperwork.\n\nAbility failures are mathematical — predictable cash flow shortfalls, macro shocks, sector cycles. Structure CAN address ability through pooling (diversification math), buffers (subordination, excess spread, OC), and tail-risk transfer (mezzanine and equity tranching). When designing a structure, you are exclusively in the ability domain. KYC, behavioral analytics, and origination integrity hold the line on intent." },
+            4:  { title: "The Core Thesis",                    time: "2 min read",
+                body: "The entire class compressed into one sentence: any credit risk is viable if structured properly. The corollary is that there is no universally good or bad asset class — only structures that fit (or don't fit) the underlying cash flow behavior.\n\nMusic royalties were considered unbankable until the Bowie Bonds proved otherwise. SME revolving credit was exotic until the right replenishment mechanism existed. The work of a structured credit practitioner is to design the containment vessel for any idiosyncratic risk profile — not to filter out atypical profiles." },
+            5:  { title: "Standard vs Structured Credit",      time: "3 min read",
+                body: "Standard corporate credit operates on rigid frameworks — debt-equity ratios, EBITDA coverage, working capital cycles. If a company doesn't fit the template, the credit is declined. This works for plain-vanilla balance-sheet financing but is useless for anything atypical: future cash flow streams, intangible IP collateral, hyper-granular SME pools, or risk profiles that don't map to corporate templates.\n\nStructured credit is the lunar rover — custom-engineered to traverse cash flow terrains that bicycle credit cannot. The cost is complexity; the reward is access to capital that would otherwise be locked out." },
+            6:  { title: "Risk Pooling — Ancient Origins",     time: "4 min read",
+                body: "Financial engineering is not a Western invention. India's Srenis (merchant guilds dating back ~2,500 years) pooled maritime cargo risk across many merchants — proto-securitisation in its purest form. Hundis served as both bills of exchange and credit instruments, with structural variants like Shahjog Hundi restricting circulation to vetted intermediaries (an early KYC mechanism).\n\nThe European tradition began with the Prussian Pfandbrief (1769): King Frederick II forced pooling of war-torn noble estates into covered bonds, establishing dual recourse — investors held claims on both the pool AND the issuer. Every contemporary securitisation echoes one of these three architectures." },
+            7:  { title: "IP Royalty Streams — Case Study",    time: "5 min read",
+                body: "A musician approaches you wanting upfront liquidity against future streaming royalties. Standard banks decline — too volatile, too long-dated, intangible collateral. Should you decline too?\n\nIn 1997, the Pullman Group structured the Bowie Bonds: $55M of AAA-rated 10-year notes against future royalties from David Bowie's pre-1990 catalog. Prudential Insurance bought the entire issue. Same logic, scaled up: Hipgnosis Songs Fund (£1Bn LSE listing, 2018) packaged catalogs of Shakira, Justin Bieber, Mark Ronson; Rihanna sold her catalog in 2021; Bruce Springsteen sold his for $550M in 2022. Any predictable cash stream can be securitised once you isolate it from the artist's lifestyle risks." },
+            8:  { title: "The Source — LOS Hygiene",           time: "3 min read",
+                body: "Securitisation is downstream architecture. If origination data is flawed, downstream capital market failures are mathematically guaranteed — you cannot un-default a pool by tranching it.\n\nModern Loan Origination Systems must implement automated data capture: real-time GST and tax data pull, bank statement analysis via the Account Aggregator framework, bureau review, director KYC. The human-in-the-loop step catches what algorithms miss — circular ownership, undisclosed promoter litigation, sector-specific risks. Aurionpro's SmartLender and iCashpro are production examples of this layer for Indian banks and NBFCs. The data captured here propagates through the SPV, the rating agency, and the investor. Flaws compound." },
+            9:  { title: "Three Structural Formats",           time: "3 min read",
+                body: "Large credit exposures get distributed via three architectures. Syndicated lending shares one large loan across multiple banks horizontally — risk remains tethered to the originating consortium's balance sheet capacity. Project finance ring-fences a single asset (highway, power plant) into a non-recourse SPV — repayment tied exclusively to that project's cash yield.\n\nSecuritisation is fundamentally different: it transforms vast pools of small, fragmented, illiquid loans into tradable institutional liabilities. It is the only architecture that can convert thousands of ₹10 lakh SME loans into a ₹500 Cr AAA tranche. Choose the structure based on what you're trying to transform." },
+            10: { title: "The Core Engineering Pillars",       time: "4 min read",
+                body: "Three pillars define structured credit's mechanical foundation.\n\nTrue Sale Isolation transfers legal ownership of the pool from the originator to a bankruptcy-remote SPV — if the originator fails, its corporate creditors have zero legal claim to SPV assets. Asset Pooling smooths idiosyncratic volatility through diversification math — a single SME default is catastrophic, but a default rate across thousands of SMEs is statistically tractable. Covenant Tranching slices the homogeneous pool into separate layers of debt with different risk-reward profiles — senior, mezzanine, equity — accommodating institutional investors with different mandates from a single underlying portfolio." },
+            11: { title: "The Legal Quarantine",               time: "3 min read",
+                body: "True Sale is the legal lobotomy that severs the SPV from its originator. Without it, securitisation collapses — investors would still bear the originator's corporate credit risk, defeating the entire purpose.\n\nIn jurisdictions with weak bankruptcy law, achieving true sale is notoriously hard: courts may re-characterise the transfer as a secured loan, dragging the assets back into the originator's estate. India's SARFAESI and IBC frameworks materially strengthened the legal infrastructure. The SPV itself is typically structured as a trust with an independent trustee — orphaned by design, owned by no one, vulnerable only to claims defined in its constitutive documents." },
+            12: { title: "The Asset Matrix",                   time: "4 min read",
+                body: "Underlying asset behavior dictates SPV design. RMBS (Residential Mortgage-Backed Securities) are highly granular: thousands of small loans, statistically predictable, consumer-macro-driven. CMBS (Commercial Mortgage-Backed Securities) are lumpy and concentrated: a few massive loans, idiosyncratic, single-default-shock vulnerable.\n\nSME ABS sits between: commercial profiles with consumer volume, requiring API-first origination systems (the Aurionpro stack) to parse millions of data points per pool. Indian PTC issuances by HDFC pre-merger and currently by SBI, IIFL, and Piramal mostly target retail and SME pools. Match the structure to the pool — never the reverse." },
+            13: { title: "Static vs Replenishing Pools",       time: "3 min read",
+                body: "Two cash flow behaviors require fundamentally different SPV engineering. Amortizing pools (auto loans, mortgages) have steadily declining balances — principal collections pass through to investors, paying down the bonds as the pool runs off.\n\nRevolving pools (credit cards, lines of credit) are short-term: during the Revolving Period, principal collections are recycled to buy new loans, keeping the pool size constant. When the revolving period ends, the pool enters a controlled amortisation phase. You cannot structure a credit card portfolio like a mortgage pool — investors expect different duration, different prepayment risk, different liquidity." },
+            14: { title: "The Ecosystem & Structural Friction", time: "5 min read",
+                body: "A securitisation transaction involves a constellation of specialised counterparties, each compensated by fees rather than principal exposure — creating predictable agency frictions.\n\nThe Originator sells the risk and walks away with cash. The Arranger structures the deal for fees, with incentives skewed toward closing rather than long-term performance. The Rating Agency (in India: CRISIL, ICRA) stamps the math — but their fees come from the Arranger they're rating, a structural conflict that the 2008 crisis exposed brutally. The SPV is the bankruptcy-remote trust. The Trustee enforces covenants. The Servicer collects payments and handles defaults. Investors fund the tranches. Each role is necessary; each carries incentive misalignment." },
+            15: { title: "When the Pool Breaks — Servicers",   time: "3 min read",
+                body: "An SPV is a legal ghost — it cannot send a collection agent, seize a factory, or negotiate with a defaulting borrower. It depends entirely on designated Servicers to enforce the boomerang.\n\nThe Master Servicer handles routine administration: collecting monthly payments, managing escrows, passing cash through to the SPV's bank accounts. The good-weather operator. The Special Servicer takes over when a loan breaches covenants — with authority to restructure debt, extend maturity, or force liquidation of physical collateral. In India, Special Servicers leverage SARFAESI to seize secured collateral without court intervention; IBC drives unsecured corporate resolution." },
+            16: { title: "The Tranching Tower",                time: "4 min read",
+                body: "From one pool of average commercial loans, you can manufacture three (or more) entirely different securities.\n\nThe Senior AAA tranche is the steel vault: highest priority on cash flows, lowest yield, designed to survive a 99.9% stress year. The Mezzanine BBB tranche absorbs shocks: middle priority, middle yield, the structural shock absorber. The Equity (First Loss) tranche absorbs the first defaults: lowest priority, highest yield, often retained by the originator as required regulatory skin-in-the-game (5–10% under RBI). Each tranche is a different risk-reward vector. Pension funds buy Senior, hedge funds buy Equity, regional banks buy Mezzanine. One pool, three institutions served." },
+            17: { title: "Manufacturing AAA — Credit Enhancements", time: "5 min read",
+                body: "To achieve a AAA rating against an underlying B-rated pool, structured deals stack credit enhancements.\n\nInternal mechanics: Subordination (the tranching tower), Overcollateralization (issuing ₹90 Cr of debt against ₹100 Cr of assets — the ₹10 Cr difference is a pure cushion), Excess Spread (portfolio yield 12% minus tranche coupon cost 7% = 5% margin to absorb write-offs), Reserve Accounts (cash trapped upfront to cover short-term liquidity blips).\n\nExternal guarantees: Monoline Insurance (third-party bond wraps), Corporate Guarantees (dilutes true sale premise), Letters of Credit, and Liquidity Facilities. Each layer pushes the senior tranche higher up the rating spectrum." },
+            18: { title: "The Cash Flow Waterfall",            time: "3 min read",
+                body: "The waterfall is the rigid legal payment cascade that governs how every rupee collected by the servicer flows to investors. Picture a tiered champagne tower: incoming cash fills the top glass (Senior) completely before a single drop overflows to the middle (Mezzanine). If collections are insufficient, the bottom glasses (Equity) stay dry.\n\nThis subordination is not contractual preference — it is legally enforceable. If a servicer or trustee pays Equity before Senior is satisfied, that is a covenant breach, triggering Event-of-Default machinery, special servicer takeover, and potential trustee replacement. The waterfall is what makes AAA ratings real." },
+            19: { title: "Waterfall Tycoon — Live Lab",        time: "4 min read",
+                body: "This interactive lab compresses a month of collections into one decision tree. You receive ₹100M in pool cash. Senior is owed ₹80M, Mezzanine ₹15M, Equity gets the residual.\n\nTry pressing Pay Equity first — you'll trigger an instant Covenant Breach because subordination is violated. The correct order: fill Senior completely (₹80M), then Mezzanine (₹15M), then anything remaining flows to Equity. Excess spread is the residual that compensates the originator for retained risk. In real deals, the waterfall has many more lines — trustee fees, servicer fees, swap counterparty payments, reserve account top-ups — but the core subordination principle never changes." },
+            20: { title: "Worked Example — Subordination Math", time: "6 min read",
+                body: "For a ₹1,000 Cr granular SME pool with PD = 3.0% (through-the-cycle), LGD = 45%, the Expected Loss = PD × LGD = 1.35%. Applying the Basel ASRF curve at the 99.9% confidence level with ρ = 0.04 (retail SME correlation), the stress loss is approximately 11.5% — roughly 8.5× expected loss.\n\nTo rate the senior tranche AAA, subordination buffers must absorb this stress level. Equity covers the expected loss with cushion (4.5% = ₹45 Cr, ~3.3× EL); Mezzanine BBB sits above absorbing the unexpected loss spike (7% = ₹70 Cr). Senior AAA is then 88.5% thick (₹885 Cr) and survives a 1-in-1,000 stress year. This is the math regulators actually run." },
+            21: { title: "The NINJA Illusion — and India's Equivalents", time: "5 min read",
+                body: "In 2008, the market learned that a mathematically pristine SPV waterfall means nothing if the underlying asset pool is garbage. NINJA loans (No Income, No Job, No Assets) had been securitised into AAA tranches via stated-income origination. The structures worked exactly as designed — the inputs were fraudulent.\n\nIndia's equivalents are more visceral. IL&FS (2018) defaulted on ~₹91,000 Cr, cascading through MFs, pension funds, and banks. DHFL (2019) became India's first NBFC resolved under IBC after Cobrapost alleged fictitious loans. YES Bank (2020) saw ~₹8,415 Cr of AT1 bonds written down to zero. The lesson is identical across crises: structure enhances ability; it cannot cure intent." },
+            22: { title: "The Correlation Trap",               time: "5 min read",
+                body: "David X. Li's 2000 Gaussian Copula was the workhorse formula for pricing CDOs through 2008. It assumed default correlations between borrowers were static and could be estimated from historical data — geographic and sectoral diversification was treated as a constant.\n\nThe flaw: in severe systemic stress (liquidity freeze, sudden rate hikes), diversification evaporates non-linearly. A borrower in Mumbai defaulting shouldn't predict one in Delhi defaulting — except when both face the same liquidity shock. Correlation snaps to 1.0, the model breaks, and supposedly diversified pools concentrate into a single catastrophic loss. Felix Salmon's 2009 Wired piece labeled it the formula that killed Wall Street. India's 2018 NBFC crisis showed the same dynamic with Indian characteristics." },
+            23: { title: "Basel ASRF — The Regulatory Math",   time: "6 min read",
+                body: "The Asymptotic Single Risk Factor model (Vasicek, formalised by Gordy in 2003) is what Basel II and III's Internal Ratings-Based (IRB) approach uses to compute regulatory capital. It models loss distribution for an idealised infinite, granular portfolio under a single systematic risk factor.\n\nThe 99.9% confidence interval — surviving a one-in-a-thousand stress year — is the bar for unexpected-loss capital. What matters for executives is not the formula but its implication: AAA tranches must be sized to survive the tail of this distribution. RBI's regime broadly follows Basel; specific risk weights for Indian PTC investments are defined in the September 2021 Master Direction on Securitisation of Standard Assets." },
+            24: { title: "War Room — Macro Shock Simulator",   time: "5 min read",
+                body: "This simulator lets you dial in three macroeconomic inputs (unemployment, rate shock, asset correlation) plus a structural input (equity buffer thickness) and see the calculated tail loss against the capital stack.\n\nIncreasing correlation produces the most dramatic effect — the multiplicative term in the tail-loss formula reflects what happens when diversification evaporates. The SENIOR BREACHED banner appears when the calculated loss exceeds the combined Equity + Mezzanine buffer — at which point Senior AAA holders take principal losses. This is the moment regulators and rating agencies design against. Try ρ = 0.85 with unemployment at 12% — even a thick equity buffer cannot save you." },
+            25: { title: "ALM — The Maturity Mismatch",        time: "3 min read",
+                body: "Beyond structuring fees, securitisation is an ALM (Asset Liability Management) instrument. Banks fund long-duration assets (20-year mortgages, 7-year SME loans) with short-duration, flight-risk liabilities (demand deposits, short-term CDs). This is the structural maturity mismatch that defines commercial banking.\n\nSelling pooled loans via an SPV instantly converts illiquid long-term assets back into liquid cash, eliminating duration risk and freeing the bank to redeploy capital. India's NBFCs in 2018 demonstrated the failure mode: they funded long-term project loans with short-term commercial paper. When CP markets froze post-IL&FS, they could not roll, and the duration mismatch became insolvency." },
+            26: { title: "RWA Relief — The ROE Lever",         time: "4 min read",
+                body: "Under Basel III, every loan on a bank's balance sheet consumes regulatory capital based on its risk weight. A standard ₹1,000 Cr SME loan pool at 100% RWA forces the bank to hold ~₹80 Cr of Tier 1 capital (at the 8% baseline).\n\nSecuritisation lets the bank sell the senior tranche to external investors (0% bank RWA on that portion) and retain the equity tranche at 1250% RWA — but on a much smaller notional. Net effect: capital freed for new lending while economic exposure to the pool's tail risk is contained in the retained equity. ROE leaps. This is why every tier-1 bank globally runs an active securitisation programme." },
+            27: { title: "Synthetic Securitisation",           time: "4 min read",
+                body: "Synthetic structures move the risk without moving the cash. The bank keeps the loans on its balance sheet but enters a Credit Default Swap (CDS) with a counterparty: the bank pays a CDS premium, the counterparty agrees to pay out if the reference pool suffers losses. Economically, the bank has shed credit risk; legally, the assets never moved.\n\nThis was a workhorse for European banks pre-2008. Under current RBI rules, synthetic securitisation is largely prohibited for Indian originators — a deliberate post-2008 design choice to avoid the CDS-CDO contagion dynamics that propagated the global financial crisis." },
+            28: { title: "The Indian Regulatory Lens",         time: "8 min read",
+                body: "India's securitisation architecture is among the most thoughtful globally — built deliberately to prevent 2008 dynamics. RBI's September 2021 Master Direction on Securitisation of Standard Assets defines: MHP (Minimum Holding Period — originator holds loans 3–12 months before securitising, blocking originate-to-distribute), MRR (Minimum Retention Requirement — 5–10% retained skin-in-the-game), eligibility criteria, and the STC (Simple-Transparent-Comparable) framework.\n\nSynthetic securitisation and re-securitisations (CDO-squared) are prohibited for most regulated entities. Enforcement infrastructure is robust: SARFAESI for secured collateral seizure, IBC for unsecured corporate resolution, SEBI's listing and trustee rules for PTCs. Post-IL&FS and DHFL, trustee accountability was tightened materially." },
+            29: { title: "Significant Risk Transfer (SRT)",    time: "5 min read",
+                body: "For tier-1 global banks today, SRT is the dominant capital strategy. The bank doesn't need funding — it has all the deposits it wants — but needs to free regulatory capital.\n\nIt synthetically transfers the mezzanine/equity portion of a loan portfolio via a Credit Linked Note (CLN) sold to institutional investors (pension funds, hedge funds, sovereign wealth funds). The bank retains the prime assets, the client relationship, and the senior yield; investors take on tail risk for a high coupon. EU and US SRT issuance crossed $25Bn in 2024. India does not yet permit synthetic SRT, but conceptually similar effects can be partially achieved via direct assignment and PTC sales." },
+            30: { title: "The STS Framework",                  time: "4 min read",
+                body: "After 2008, the EU codified the Simple-Transparent-Standardised (STS) framework as Regulation 2017/2402. To qualify for preferential regulatory capital treatment, a securitisation must be:\n\nSimple — homogeneous asset pools, no re-securitisations of securitisations. Transparent — loan-level historical data provided to investors, no opaque NINJA collateral. Standardised — enforceable 5% retention; the originator must retain a material net economic interest.\n\nIndia's RBI Master Direction mirrors these principles in its STC criteria. The framework is universal in spirit even where specific regimes differ by jurisdiction." },
+            31: { title: "Tokenization of RWAs",               time: "5 min read",
+                body: "Real World Assets are moving on-chain. A cash flow waterfall codified in a smart contract is an immutable function: when an SME makes a payment, the contract automatically routes fractions to Senior, Mezzanine, and Equity holders' wallets in real-time, frictionlessly.\n\nLive institutional protocols: Maple (institutional lending), Centrifuge (RWA collateral, MakerDAO counterparty), Goldfinch (EM SME credit via trust-through-consensus), Ondo Finance (tokenized US Treasuries, $1B+ TVL by 2024). India's RBI wholesale CBDC pilot (Nov 2022) and retail pilot (Dec 2022) lay groundwork for programmable securitisation natively on regulated rails. Within a decade, much of the trustee and paying-agent apparatus will be code." },
+            32: { title: "Glossary — Reference",               time: "1 min read",
+                body: "Take-home reference of the canonical structured credit acronyms used throughout this class. The 18 terms here are the working vocabulary of any structured credit practitioner. Use Cmd+K to search across the entire deck for any term." },
+            33: { title: "Recommended Reading",                time: "2 min read",
+                body: "For going deeper:\n\nFoundational — Fabozzi & Kothari (canonical text); Vinod Kothari for India-specific depth; Mark Adelson on CDOs; BIS papers on Basel IRB and securitisation framework.\n\nIndia-specific — RBI Master Directions (Sept 2021); SEBI listing norms for SDIs; case histories of IL&FS, DHFL, YES Bank AT1.\n\nCritical/Forward — Felix Salmon's Wired piece on Li's copula; Gary Gorton's Slapped by the Invisible Hand; ICRA/CRISIL annual Indian securitisation market reports." },
+            34: { title: "About the Trainer",                  time: "1 min read",
+                body: "Ajay Surana — Co-founder of Augury Insights and CRO at Infrarisk (an Aurionpro company). Thirty-plus years across treasury, structured finance, and credit risk leadership.\n\nAugury Insights designs executive learning experiences blending bespoke simulations, gamification, case studies, and proprietary AI tools. Infrarisk/Aurionpro builds the lending and treasury technology stacks that operate in production at banks across India and globally." },
+            35: { title: "Follow & Connect",                   time: "1 min read",
+                body: "Three cards: Augury Insights (training arm) — auguryinsights.com, linkedin.com/company/auguryinsights. Ajay Surana (trainer, direct connect) — linkedin.com/in/ajaysurana. Aurionpro Solutions (technology partner) — aurionpro.com, linkedin.com/company/aurionpro.\n\nIf this masterclass was useful, please consider sharing on LinkedIn and tagging us — it helps more risk practitioners find the work." },
+            36: { title: "Masterclass Complete",               time: "Open",
+                body: "You've mapped the credit migration pipeline end-to-end. From digital SME origination through bankruptcy-remote SPV architecture, tranching and waterfall mechanics, credit enhancements, the Basel ASRF math, India's regulatory perimeter, to synthetic SRT and the tokenization horizon.\n\nThe most useful questions come from senior treasury and risk officers — India-specific scenarios get the deepest engagement. Open the floor." }
         },
         init() {
+            this.loadState();
             const m = location.hash.match(/^#slide-(\d+)$/);
             if (m) {
                 const n = parseInt(m[1], 10);
@@ -1514,8 +1839,44 @@ function deck() {
             }
             this.$watch('currentSlide', v => {
                 history.replaceState(null, '', '#slide-' + v);
+                // Quiz triggers: open quiz when entering trigger slide
+                const triggered = this.quizTriggers[v];
+                if (triggered && this.quizScores[triggered] === null && !this.activeQuiz) {
+                    this.startQuiz(triggered);
+                }
+                // Final score reveal — when reaching the Trainer slide if all quizzes done
+                if (v === 34 && this.allQuizzesDone() && !this.scoreShown) {
+                    this.$nextTick(() => { this.showFinalScore = true; this.scoreShown = true; });
+                }
             });
             this.$nextTick(() => this.initTooltips());
+            // Show survey on first load if not done
+            if (!this.surveyDone) {
+                setTimeout(() => { this.showSurvey = true; }, 400);
+            }
+        },
+        loadState() {
+            try {
+                const s = localStorage.getItem('augury-deck-state');
+                if (!s) return;
+                const data = JSON.parse(s);
+                if (data.profile) this.profile = { ...this.profile, ...data.profile };
+                if (typeof data.surveyDone === 'boolean') this.surveyDone = data.surveyDone;
+                if (data.quizScores) this.quizScores = { ...this.quizScores, ...data.quizScores };
+            } catch(e) {}
+        },
+        saveState() {
+            try {
+                localStorage.setItem('augury-deck-state', JSON.stringify({
+                    profile: this.profile,
+                    surveyDone: this.surveyDone,
+                    quizScores: this.quizScores
+                }));
+            } catch(e) {}
+        },
+        resetState() {
+            localStorage.removeItem('augury-deck-state');
+            location.reload();
         },
         initTooltips() {
             if (typeof tippy === 'undefined') { setTimeout(() => this.initTooltips(), 100); return; }
@@ -1588,6 +1949,76 @@ function deck() {
             this.showSearch = false;
             this.searchQuery = '';
             this.searchResults = [];
+        },
+        // ── Survey methods ──
+        surveyComplete() {
+            return this.profile.role && this.profile.institution && this.profile.knowledge && this.profile.expectation;
+        },
+        submitSurvey() {
+            if (!this.surveyComplete()) return;
+            this.surveyDone = true;
+            this.showSurvey = false;
+            this.saveState();
+        },
+        // ── Quiz methods ──
+        startQuiz(n) {
+            this.activeQuiz = n;
+            this.quizIndex = 0;
+            this.quizAnswered = false;
+            this.quizUserAnswer = null;
+            this.quizRunning = 0;
+        },
+        currentQuestion() {
+            if (!this.activeQuiz) return null;
+            return this.quizzes[this.activeQuiz].questions[this.quizIndex];
+        },
+        answerQuiz(optionIdx) {
+            if (this.quizAnswered) return;
+            this.quizUserAnswer = optionIdx;
+            this.quizAnswered = true;
+            const q = this.currentQuestion();
+            if (q && q.answer === optionIdx) this.quizRunning++;
+        },
+        nextQuizQuestion() {
+            if (this.quizIndex < 2) {
+                this.quizIndex++;
+                this.quizAnswered = false;
+                this.quizUserAnswer = null;
+            } else {
+                // End of quiz — save score
+                this.quizScores[this.activeQuiz] = this.quizRunning;
+                this.saveState();
+                this.activeQuiz = null;
+                this.quizIndex = 0;
+                this.quizRunning = 0;
+                this.quizAnswered = false;
+                this.quizUserAnswer = null;
+            }
+        },
+        // ── Score reveal helpers ──
+        totalScore() {
+            return [1,2,3,4].reduce((sum, n) => sum + (this.quizScores[n] || 0), 0);
+        },
+        allQuizzesDone() {
+            return [1,2,3,4].every(n => this.quizScores[n] !== null);
+        },
+        scoreTier() {
+            const s = this.totalScore();
+            if (s === 12) return 'Expert';
+            if (s >= 9)  return 'Well-Versed';
+            if (s >= 5)  return 'Practitioner';
+            return 'Curious Explorer';
+        },
+        scoreMessage() {
+            const s = this.totalScore();
+            const self = this.profile.knowledge || '?';
+            if (s === 12) return `Perfect score — you are who we'd hire to teach this. You rated yourself <strong class="text-augury-400">${self}/5</strong> coming in.`;
+            if (s >= 9)   return `Excellent. You are the person your team turns to. You rated yourself <strong class="text-augury-400">${self}/5</strong> — your quiz shows you were modest.`;
+            if (s >= 5)   return `Strong grasp. You are ready to apply this in your institution. You rated yourself <strong class="text-augury-400">${self}/5</strong>.`;
+            return `Solid first pass — reach out and Augury can take you deeper. You rated yourself <strong class="text-augury-400">${self}/5</strong>.`;
+        },
+        linkedinShareUrl() {
+            return 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.origin + location.pathname);
         }
     }
 }
