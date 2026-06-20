@@ -1,0 +1,1090 @@
+════════════════════════════════════════════════════════════════════════════════
+                   STRUCTURED CREDIT MASTERCLASS — TRAINER NOTES
+                       By Ajay Surana · Augury Insights × Aurionpro
+                                  43 slides · 8 acts
+════════════════════════════════════════════════════════════════════════════════
+
+
+================================================================================
+ACT I — SET UP & ARCHITECTURE (slides 1–8)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 1 · Title — Structured Credit Masterclass
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Welcome. Over the next 90 minutes we'll walk the entire credit migration
+  pipeline.
+
+TALKING POINTS
+  • 43 slides organised in 8 acts
+  • 4 interactive widgets and 4 checkpoint quizzes
+  • Citations on every named example and case
+
+QUOTE
+  "You'll see how structured credit actually works — not the textbook version."
+
+TRANSITION
+  Let's start with the foundational rule that governs everything else.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 2 · The Boomerang Rule (Axiom 01)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Lending is fundamentally a collections business. Cash must return.
+
+TALKING POINTS
+  • Origination volume is vanity; recovery is sanity
+  • No structuring cures structural default
+  • 2008 NINJA loans · 2018 IL&FS · 2019 DHFL — same lesson every time
+  • Every layer downstream depends on cash actually being collected
+
+QUOTE
+  "Cash must return. Everything else is plumbing."
+
+TRANSITION
+  Why does cash sometimes not return? Two reasons.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 3 · Intent vs Ability — The Credit Faultline
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Two failure modes — but only one is structurable.
+
+TALKING POINTS
+  • Intent failures = behavioural (fraud, willful default, deception) — STRUCTURE CAN'T CURE
+  • Ability failures = mathematical (cycles, shocks, coverage) — STRUCTURE CAN CURE
+  • IL&FS and DHFL were INTENT failures dressed up as ability paperwork
+  • Origination integrity (KYC, bureau, Account Aggregator) holds the intent line
+
+QUOTE
+  "Structure addresses ability; nothing addresses bad intent."
+
+TRANSITION
+  Given we can only fix ability — what's our thesis?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 4 · The Core Thesis
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  One sentence: any credit risk is viable if structured properly.
+
+TALKING POINTS
+  • There is no universally good or bad asset class
+  • Only structures that fit (or don't fit) the cash flow
+  • Music royalties were unbankable until Bowie Bonds
+  • SME revolving credit was exotic until master trust mechanics existed
+
+QUOTE
+  "The work of structured credit is building containment vessels —
+   not declining atypical risk."
+
+TRANSITION
+  Compare standard credit to structured credit.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 5 · Standard vs Structured (Bicycle vs Lunar Rover)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Two completely different vehicles for completely different terrains.
+
+TALKING POINTS
+  • Standard corporate credit = rigid templates (EBITDA coverage, debt/equity)
+  • Doesn't fit the box → declined
+  • Structured = lunar rover custom-engineered for volatile cash flow terrains
+  • Cost = complexity; reward = capital access otherwise locked out
+
+QUOTE
+  "Build the rover when the bicycle won't cross the terrain."
+
+TRANSITION
+  This idea is 2,500 years old.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 6 · Risk Pooling — Ancient Origins
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Securitisation is not a Western invention.
+
+TALKING POINTS
+  • India's Srenis pooled maritime cargo risk ~8th century BCE
+  • Hundis = early bills of exchange; Shahjog variant = early KYC restriction
+  • Prussian Pfandbrief 1769 = first covered bond (Frederick II forced pooling
+    of war-torn estates)
+  • Three architectures still echo in every modern deal
+
+QUOTE
+  "What looks new on Wall Street is often ancient on the subcontinent."
+
+TRANSITION
+  Modern application — let's vote.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 7 · IP Royalties Case (Interactive)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  A musician wants liquidity against future streams. Decline or structure?
+
+TALKING POINTS
+  • Audience votes — most groups decline initially
+  • Reveal: Bowie Bonds 1997, $55M AAA placed with Prudential
+  • Same blueprint: Hipgnosis Songs Fund £1Bn LSE listing (2018)
+  • Rihanna catalog 2021; Bruce Springsteen $550M 2022; Justin Bieber $200M 2022
+  • Any predictable cash stream can be securitised
+
+QUOTE
+  "Decline is a structural failure of imagination."
+
+TRANSITION
+  Now let's see the architecture itself.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 8 · The Credit Migration Pipeline
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Every securitised deal walks five stations.
+
+TALKING POINTS
+  • Box 1: Origination — digital LOS underwriting
+  • Box 2: Pooling — asset selection, diversification math
+  • Box 3: SPV — True Sale, bankruptcy-remote trust
+  • Box 4: Tranching — Senior/Mezz/Equity stack with credit enhancements
+  • Box 5: Investors — capital deployed
+  • Forward flow = risk migrating outward
+  • Return flow = the boomerang back to originator's equity
+
+QUOTE
+  "Hold the map. Every slide that follows zooms into one box."
+
+TRANSITION
+  Box 1: Origination.
+
+
+================================================================================
+ACT II — ORIGINATION + STRUCTURAL FOUNDATION (slides 9–14)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 9 · The Source — LOS Hygiene
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Garbage in equals garbage out, mathematically guaranteed.
+
+TALKING POINTS
+  • Real-time GST and tax data pull
+  • Bank statement analysis via Account Aggregator framework
+  • Bureau review + director KYC + SARFAESI flag check
+  • Human-in-the-loop catches what algorithms miss (circular ownership,
+    undisclosed litigation)
+  • Aurionpro SmartLender and iCashpro are production examples
+
+QUOTE
+  "Flaws in origination compound through every downstream layer."
+
+TRANSITION
+  How do large credits get distributed in the first place?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 10 · Three Structural Formats
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Three architectures for distributing large credit exposures.
+
+TALKING POINTS
+  • Syndicated lending = horizontal sharing among banks
+    (tied to consortium balance sheet capacity)
+  • Project Finance = ring-fenced single asset, non-recourse SPV
+    (highway, power plant)
+  • Securitisation = pool fragmentation → tradable institutional liabilities
+  • Only securitisation converts thousands of ₹10L SME loans into a ₹500 Cr AAA
+
+QUOTE
+  "Securitisation is the only architecture that does true alchemy on credit."
+
+TRANSITION
+  What are the structural pillars?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 11 · The Core Engineering Pillars
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Three pillars: Isolate, Blend, Slice.
+
+TALKING POINTS
+  • True Sale Isolation = legal severance from originator default
+  • Asset Pooling = diversification math smoothing idiosyncratic volatility
+  • Covenant Tranching = differentiated risk-reward layers from one pool
+  • Each pillar serves a different institutional purpose
+
+QUOTE
+  "Isolate, blend, slice — in that order."
+
+TRANSITION
+  Now answer the central skeptic challenge.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 12 · Why This Isn't Smoke & Mirrors (7 Mechanisms)        ★ HIGH-LEVERAGE
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  The skeptic asks: 'how can the same pool produce a better risk profile?'
+
+TALKING POINTS — SEVEN MECHANISMS (MEMORISE)
+  1. Bankruptcy Remoteness — True Sale severs investors from originator
+  2. Eligibility Criteria — only good loans enter
+  3. Waterfall — legally enforced cascade
+  4. Note Classes — equity absorbs first
+  5. Liquidity Facility / LOC — external standby for timing gaps
+  6. Excess Spread Trap — auto-divert spread to reserve when performance dips
+  7. LTV Ratchet — accelerate senior amortisation when collateral erodes
+
+  • Every "how does this improve risk?" answer is one of these seven
+  • This is your defence to every skeptic the entire day
+
+QUOTE
+  "Always one of seven. Memorise them — they're your defence."
+
+TRANSITION
+  Now drill into Mechanism 1: legal isolation.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 13 · The Legal Quarantine (Mechanism 1)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  If the bank goes down, do investors lose?
+
+TALKING POINTS
+  • True Sale = the legal lobotomy
+  • Originator's creditors have ZERO claim on SPV assets
+  • SPV = orphaned trust with independent trustee
+  • Indian backbone: SARFAESI for secured + IBC for unsecured
+  • Risk: courts may re-characterise transfer as secured loan in weak jurisdictions
+
+QUOTE
+  "Legally severed = investor protection."
+
+TRANSITION
+  Legal sale isn't the whole story for CFOs.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 14 · Risk Transfer Recognition (Accounting)               ★ CFO MAGNET
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  CFO question: did the assets actually leave my balance sheet?
+
+TALKING POINTS
+  • Legal True Sale ≠ Accounting Derecognition (two separate tests)
+  • IFRS 9 / Ind AS 109 = substantial-risks-and-rewards test + control test +
+    continuing-involvement test
+  • Most SRT and partial-transfer structures FAIL full derecognition
+    because originator retains the equity tranche
+  • Three outcomes:
+      → Full Derecognition (rare)
+      → Partial (common in SRT — continuing involvement at fair value)
+      → No Derecognition (secured-borrowing accounting)
+  • Implication: capital relief may be partial, not total
+
+QUOTE
+  "Legal isolation is necessary; accounting derecognition is the prize."
+
+TRANSITION
+  Now let's see what can be securitised.
+
+
+================================================================================
+ACT III — POOL DESIGN (slides 15–19)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 15 · Asset Class Taxonomy
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  The universe of securitisable assets.
+
+TALKING POINTS — EIGHT CLASSES
+  • RMBS — granular, predictable, consumer-macro driven (HDFC pre-merger PTCs)
+  • CMBS — lumpy, concentrated, single-default-shock risk
+  • Auto ABS — granular, short tenor, residual value risk in leases
+  • Credit Cards — revolving master trust
+    (CRITICAL distinction: current flow vs future flow)
+  • SME ABS — the hybrid: commercial profile + consumer volume
+  • Consumer/Personal — unsecured, FICO-tiered, front-loaded losses
+  • Equipment Leasing — residual value risk (aircraft, rail, IT)
+  • Distressed/NPL — ARC reconstruction at deep discount
+
+QUOTE
+  "Each class is a different terrain. Build the right rover."
+
+TRANSITION
+  What gets INTO the pool? Eligibility.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 16 · Eligibility Criteria (Mechanism 2)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  First line of defence. Applied before any loan sees a tranche.
+
+TALKING POINTS — THREE LAYERS
+  Borrower-level:
+    • FICO/CIBIL 700+
+    • DTI cap 40-50%
+    • Employment seasoning 12+ months
+    • Bureau-clean, KYC + AML
+
+  Loan-level:
+    • LTV cap 75-80%
+    • Current status (no delinquency)
+    • Seasoning (RBI MHP 3-12 months)
+    • Max loan size, maturity within stated tenor
+
+  Pool-level:
+    • Geographic concentration <25% any state
+    • Sectoral cap
+    • Single-borrower ceiling
+    • Weighted-average targets
+    • Replenishment criteria
+
+  • Post-IL&FS RBI's 2021 Master Direction codified all of this
+  • Closed the originate-to-distribute loophole
+
+QUOTE
+  "Only good loans get in. The first defence is at the gate."
+
+TRANSITION
+  Pool behavior depends on asset type.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 17 · Static vs Replenishing Pools
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Pools either run off or recycle — different SPV engineering.
+
+TALKING POINTS
+  • Amortizing (auto loans, mortgages) — balance steadily declines
+  • Principal collections pass through to investors, paying down bonds
+  • Revolving (credit cards, LOC) — short-term assets
+  • Revolving Period: principal recycled to buy NEW loans, pool size constant
+  • End of revolving period → controlled amortisation phase
+  • Cannot structure a credit card portfolio like a mortgage pool
+
+QUOTE
+  "Behavior dictates engineering — not the reverse."
+
+TRANSITION
+  Now who are all the players?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 18 · The Ecosystem & Structural Friction
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  A securitisation has many specialised counterparties — each with misaligned
+  incentives.
+
+TALKING POINTS
+  • Originator sells risk + walks with cash
+  • Arranger structures for fees (incentive: close, not perform)
+  • Rating Agency (CRISIL, ICRA in India) stamps the math —
+    but PAID BY THE ARRANGER (structural 2008 conflict)
+  • SPV = bankruptcy-remote trust
+  • Trustee enforces covenants on behalf of investors
+  • Servicer collects + handles defaults
+  • Investors fund tranches
+  • Each role necessary; each conflicted
+
+QUOTE
+  "Every role is necessary. Every role is conflicted."
+
+TRANSITION
+  When the pool breaks, who acts?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 19 · Servicers — Master/Primary vs Special/Workout
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  SPV is a legal ghost. Servicers do all the actual work.
+
+TALKING POINTS
+  • Master/Primary Servicer = routine administration
+  • Collects monthly payments, manages escrows, passes cash to SPV
+  • The "good weather" operator
+  • Special/Workout Servicer = covenants breached or defaulted
+  • Authority to restructure debt, extend maturity, force liquidation
+  • In India: ARCs operate under SARFAESI for secured + IBC for unsecured
+  • US CMBS uses "Master/Special"; broader market often "Primary/Special"
+
+QUOTE
+  "The SPV can't seize a factory. The servicer can."
+
+TRANSITION
+  Now let's stack the tranching tower.
+
+
+================================================================================
+ACT IV — STRUCTURING MECHANICS (slides 20–25)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 20 · The Tranching Tower (Mechanism 4)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  One pool → three institutional securities.
+
+TALKING POINTS
+  • Senior AAA = steel vault, highest priority, designed to survive
+    99.9% stress year
+  • Mezzanine BBB = middle priority, shock absorber
+  • Equity (First Loss) = lowest priority, highest yield —
+    originator retains as RBI MRR (5-10% skin-in-the-game)
+  • Different yields, different investors, same pool
+  • Pension funds buy Senior; hedge funds buy Equity;
+    regional banks buy Mezzanine
+
+QUOTE
+  "Same milk. Different bottles. Different prices."
+
+TRANSITION
+  How do we make a B-rated pool produce a AAA tranche?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 21 · Manufacturing AAA — Credit Enhancements (Mechanism 5)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Stack the enhancements until senior is AAA.
+
+TALKING POINTS
+  Internal mechanics:
+    • Subordination (the tower itself)
+    • Overcollateralization (₹90 Cr debt against ₹100 Cr assets — ₹10 Cr cushion)
+    • Excess Spread (12% yield − 7% coupon = 5% margin)
+    • Reserve Accounts (cash trapped upfront)
+
+  External guarantees:
+    • Monoline Insurance
+    • Corporate Guarantees (CAUTION: dilutes true sale)
+    • Letters of Credit
+    • Liquidity Facilities
+
+  • Each layer pushes senior higher up the rating spectrum
+
+QUOTE
+  "Stack the cushions. The senior holder never feels the ground."
+
+TRANSITION
+  Static buffers absorb. Dynamic triggers re-route.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 22 · Dynamic Performance Triggers (Mechanisms 6 & 7)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Structures that self-correct across the cycle.
+
+TALKING POINTS
+  Excess Spread Trap (Mech 6):
+    • When delinquencies cross threshold (e.g. 90+ DPD > 5%)
+    • Excess spread is TRAPPED in reserve instead of releasing to equity
+    • Originator loses carry the moment performance dips — aligned incentive
+
+  LTV Ratchet (Mech 7):
+    • When weighted-average LTV breaches threshold
+    • Waterfall RATCHETS UP — more cash diverted to senior amortisation
+    • Mezz/equity coupons starved
+
+  • Other dynamic triggers:
+    Early Amortisation Events, Servicer Termination, Cash-Trapping
+
+QUOTE
+  "Static absorbs. Dynamic re-routes. Both required."
+
+TRANSITION
+  Let's see the waterfall mechanics.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 23 · The Cash Flow Waterfall (Mechanism 3)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Like a tiered champagne tower — legally enforced.
+
+TALKING POINTS
+  • Senior glass fills FIRST, then mezz, then equity
+  • Insufficient cash → bottom glasses stay dry
+  • Subordination is LEGALLY ENFORCEABLE, not contractual preference
+  • Pay equity before senior = Event of Default
+  • → special servicer takeover, trustee replacement potential
+  • Real deals have many lines: trustee fees, servicer fees,
+    swap counterparty, reserve top-ups
+
+QUOTE
+  "Top glass first. Always. Forever."
+
+TRANSITION
+  Try it yourself — volunteer please.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 24 · Waterfall Tycoon (Live Lab)                          ★ HIGH ENERGY
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  ₹100M in. Senior owed ₹80M, Mezz ₹15M, Equity = residual. Distribute.
+
+TALKING POINTS
+  • Invite a volunteer
+  • DELIBERATELY try Pay Equity first → COVENANT BREACH banner
+  • Use Reset between attempts
+  • Correct order: Senior (80) → Mezz (15) → Equity (5 residual)
+  • Excess spread = the residual that compensates originator for retained risk
+  • Core principle never changes regardless of deal complexity
+
+QUOTE
+  "If you got 80-15-5 you've internalised the waterfall."
+
+TRANSITION
+  Let's size buffers with real numbers.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 25 · Worked Example — Subordination Math
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  ₹1,000 Cr SME pool. PD 3%, LGD 45%. Size the AAA tranche.
+
+TALKING POINTS
+  • Expected Loss = PD × LGD = 1.35%
+  • Apply Basel ASRF at 99.9% confidence, ρ = 0.04 (retail SME correlation)
+  • Stress loss ~ 11.5% — roughly 8.5× EL
+  • Equity 4.5% (₹45 Cr) — ~3.3× EL cushion
+  • Mezzanine BBB 7% (₹70 Cr) — absorbs UL spike
+  • Senior AAA 88.5% (₹885 Cr) — survives 1-in-1,000 stress year
+  • This is the math regulators actually run
+
+QUOTE
+  "Senior survives a 1-in-1,000 stress year. That's the AAA bar."
+
+TRANSITION
+  But what if the inputs are garbage?
+
+
+================================================================================
+ACT V — RISK MATH & FAILURE MODES (slides 26–29)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 26 · The NINJA Illusion + India's Equivalents              ★ HEAVY ROOM
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Mathematically pristine waterfall means nothing if inputs are fraudulent.
+
+TALKING POINTS
+  • 2008 NINJA = No Income, No Job, No Assets
+  • Securitised into AAA via stated-income origination
+  • Structures worked exactly as designed; inputs were fraudulent
+
+  India's equivalents are more visceral:
+    • IL&FS 2018: ~₹91,000 Cr default cascaded through MFs, PFs, banks
+    • DHFL 2019: India's first NBFC resolved under IBC
+      (Cobrapost alleged fictitious loans)
+    • YES Bank 2020: ~₹8,415 Cr AT1 written to zero
+
+  • Lesson identical: structure enhances ability; cannot cure intent
+
+QUOTE
+  "Pristine paper, hollow collections."
+
+TRANSITION
+  The math itself failed too — let's see how.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 27 · The Correlation Trap
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Li's Gaussian Copula — the formula that killed Wall Street.
+
+TALKING POINTS
+  • David X. Li 2000 — workhorse formula for pricing CDOs through 2008
+  • Assumed default correlation static, well-behaved, from historical data
+  • Flaw: under severe systemic stress, correlation snaps non-linearly to 1.0
+  • Diversification evaporates — pools concentrate into single catastrophic loss
+  • Felix Salmon 2009 Wired: "Recipe for Disaster"
+  • India 2018 NBFC crisis showed the same dynamic
+
+QUOTE
+  "When the boat tips, every passenger leans the same way."
+
+TRANSITION
+  How does the regulator size capital?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 28 · Basel ASRF Framework
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Asymptotic Single Risk Factor — what regulators actually run.
+
+TALKING POINTS
+  • Vasicek formula, formalised by Gordy 2003
+  • Models loss distribution under one systematic risk factor
+  • Basel II/III IRB approach uses this for regulatory capital
+  • 99.9% confidence interval = 1-in-1,000 stress year
+  • Don't teach the math — point at it
+    (audience trusts you more for not drilling)
+  • RBI follows Basel broadly; specific PTC weights in Sept 2021 Master Direction
+
+QUOTE
+  "This is what the regulator runs. Trust the curve."
+
+TRANSITION
+  Now let's stress test live.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 29 · War Room — Macro Shock Simulator (Live Lab)          ★ CLIMAX
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Dial in macro inputs and watch tail loss against the capital stack.
+
+TALKING POINTS
+  • Audience suggests inputs — high engagement moment
+  • Three dials: unemployment, rate shock, asset correlation ρ
+  • Structural input: equity buffer thickness
+  • Try ρ = 0.85 with unemployment at 12%
+  • Even a thick equity buffer won't save you
+  • "SENIOR BREACHED" banner = the gasp moment — WAIT for it
+  • Correlation has the most dramatic effect
+    (multiplicative term in tail-loss formula)
+
+QUOTE
+  "Correlation does what no other variable does —
+   it breaks the model multiplicatively."
+
+TRANSITION
+  Why do banks even do all of this?
+
+
+================================================================================
+ACT VI — INSTITUTIONAL STRATEGY (slides 30–34)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 30 · ALM — The Maturity Mismatch
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Borrow short, lend long. The structural insolvency of banking.
+
+TALKING POINTS
+  • 20-year mortgages funded by demand deposits = structural duration mismatch
+    defining commercial banking
+  • Securitisation = ALM medicine: converts illiquid long assets → liquid cash
+  • Eliminates duration risk; frees capital to redeploy
+  • Indian NBFCs 2018: funded long-term project loans with short-term CP
+  • Post-IL&FS, CP markets froze → couldn't roll →
+    duration mismatch became insolvency
+
+QUOTE
+  "Securitisation is ALM medicine."
+
+TRANSITION
+  And it frees regulatory capital.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 31 · Risk-Weighted Assets (RWA) Relief
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  ₹1,000 Cr at 100% RWA forces ~₹80 Cr Tier 1 capital locked.
+
+TALKING POINTS
+  • Sell senior tranche to external investors → 0% bank RWA on sold portion
+  • Retain equity tranche at 1250% RWA — but on much smaller notional
+  • Net effect: capital freed for new lending
+  • Economic exposure to tail risk contained in retained equity
+  • ROE leaps
+  • Every tier-1 bank globally runs an active securitisation programme
+    for this exact reason
+
+QUOTE
+  "Free capital. Same yield. Same client."
+
+TRANSITION
+  Now the architectural choice: cash or synthetic?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 32 · Cash vs Synthetic — The Choice
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Two architectures for the same goal — risk transfer.
+
+TALKING POINTS
+  CASH (Full):
+    • Assets sold to bankruptcy-remote SPV — investor cash funds purchase
+    • Delivers FUNDING + capital relief
+    • Legal true sale + accounting derecognition possible
+    • Workhorse for India today
+
+  SYNTHETIC:
+    • Assets STAY on bank balance sheet
+    • Credit risk transferred via Credit Default Swap
+    • Delivers CAPITAL RELIEF ONLY (no funding)
+    • Workhorse for EU/US tier-1 banks via SRT
+    • India: synthetic largely prohibited —
+      partial economic effects via PTC + Direct Assignment
+
+QUOTE
+  "Funding or capital? That's the architectural question."
+
+TRANSITION
+  Let's see synthetic in detail.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 33 · Synthetic Securitisation
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Move risk without moving cash.
+
+TALKING POINTS
+  • Bank keeps loans on balance sheet
+  • Enters Credit Default Swap with counterparty
+  • Bank pays CDS premium → counterparty pays out on losses
+  • Economically: bank sheds credit risk
+  • Legally: assets never moved
+  • Workhorse for European banks pre-2008
+  • Under current RBI rules: largely prohibited for Indian originators
+  • Deliberate post-2008 design choice —
+    avoid CDS-CDO contagion dynamics
+
+QUOTE
+  "Same risk transfer, no cash movement, more complexity."
+
+TRANSITION
+  How does India regulate all of this?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 34 · The Indian Regulatory Lens                           ★ Q&A MAGNET
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Among the most thoughtful global regulatory architectures.
+
+TALKING POINTS
+  RBI Master Direction Sept 2021:
+    • MHP (3-12 months)
+    • MRR (5-10% retained)
+    • STC framework + eligibility criteria
+    • Synthetic securitisation + re-securitisations PROHIBITED
+
+  Enforcement infrastructure:
+    • SARFAESI for secured collateral seizure
+    • IBC for unsecured corporate resolution
+    • SEBI for PTC listing + trustee rules
+
+  • Post-IL&FS, DHFL — trustee accountability tightened materially
+  • Built deliberately to prevent 2008 dynamics
+
+QUOTE
+  "India learned from 2008. The rulebook reflects it."
+
+TRANSITION
+  Theory meets practice.
+
+
+================================================================================
+ACT VII — CASES & HORIZON (slides 35–38)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 35 · Indian Case Studies
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Three institutions, three eras, three problems being solved.
+
+TALKING POINTS
+  HDFC PTC Programme (pre-2023):
+    • Decades of monthly mortgage PTC issuances by HDFC Ltd. pre-merger
+    • Granular pools, standardised tranching, deep secondary market
+    • Indian RMBS template — the reference architecture
+
+  IIFL · Piramal · SBI (2021-25):
+    • Post-Master-Direction era
+    • SME-loan PTCs and Direct Assignments
+    • Tighter MRR/MHP enforcement, narrower eligibility windows
+    • The regulatory rebirth
+
+  Edelweiss · JM Financial ARC (ongoing):
+    • NPL aggregation at deep discount
+    • Issue Security Receipts (SRs)
+    • Resolution via SARFAESI, IBC, settlement, restructuring
+
+  • Same mechanics, three institutional purposes
+
+QUOTE
+  "Same machine, three institutional purposes."
+
+TRANSITION
+  How do global banks game capital optimisation?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 36 · Significant Risk Transfer (SRT)
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  The Holy Grail for tier-1 banks today.
+
+TALKING POINTS
+  • Bank doesn't need funding (has all the deposits it wants) —
+    needs to free regulatory capital
+  • Synthesizes mezzanine/equity portion via Credit Linked Note (CLN)
+  • Sells to institutional investors: pension funds, hedge funds,
+    sovereign wealth
+  • Bank retains prime assets + client relationship + senior yield
+  • Investors take tail risk for high coupon
+  • EU + US SRT issuance crossed $25Bn in 2024
+  • India not yet — synthetic SRT not permitted
+
+QUOTE
+  "Maximum ROE. Minimum balance sheet."
+
+TRANSITION
+  Post-2008 global rules.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 37 · The STS Framework
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Post-2008 mandate to prevent another meltdown.
+
+TALKING POINTS
+  EU Regulation 2017/2402 — Simple, Transparent, Standardised:
+    • Simple = homogeneous pools, no re-securitisations (CDO-squared)
+    • Transparent = loan-level historical data to investors,
+      no opaque NINJA collateral
+    • Standardised = enforceable 5% retention,
+      originator must keep material economic interest
+
+  • India's RBI Master Direction mirrors via STC criteria
+  • Universal principles even where jurisdictional details differ
+
+QUOTE
+  "Simple, transparent, standardised — three words that rebuilt confidence."
+
+TRANSITION
+  Where is all this going?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 38 · Tokenization of RWAs
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Smart contracts replacing trustees.
+
+TALKING POINTS
+  • Cash flow waterfall = immutable function, not 500-page legal document
+  • When SME makes payment, smart contract instantly routes fractions to
+    Senior/Mezz/Equity wallets
+
+  Live institutional protocols:
+    • Maple (institutional lending)
+    • Centrifuge (RWA collateral, MakerDAO counterparty)
+    • Goldfinch (EM SME credit)
+    • Ondo Finance (tokenized US Treasuries, $1B+ TVL by 2024)
+
+  India:
+    • RBI wholesale CBDC pilot (Nov 2022)
+    • Retail pilot (Dec 2022)
+
+  • Within a decade: trustees + paying agents = code
+
+QUOTE
+  "The 500-page indenture becomes 500 lines of code."
+
+TRANSITION
+  Take-home reference.
+
+
+================================================================================
+ACT VIII — REFERENCE & CLOSE (slides 39–43)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 39 · Glossary
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Canonical structured credit vocabulary.
+
+TALKING POINTS
+  • 18 terms covering the working vocabulary of any practitioner
+  • SPV · PTC · DA · SRT · CDS/CLN · OC · PD/LGD/EAD · EL/UL ·
+    RWA · ASRF · MRR/MHP · STC/STS · RMBS/CMBS · ALM · LOS ·
+    SARFAESI · IBC · RWA on-chain
+  • Cmd+K to search across the entire deck for any term
+
+QUOTE
+  "Your structured credit dictionary."
+
+TRANSITION
+  Going deeper?
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 40 · Recommended Reading
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Foundational + India-specific + critical perspectives.
+
+TALKING POINTS
+  Foundational:
+    • Fabozzi & Kothari (canonical text)
+    • Vinod Kothari (India-specific depth)
+    • Mark Adelson (CDOs)
+    • BIS papers (Basel IRB)
+
+  India:
+    • RBI Master Directions Sept 2021
+    • SEBI listing norms for SDIs
+    • Case histories: IL&FS, DHFL, YES Bank AT1
+
+  Critical / Forward:
+    • Felix Salmon Wired piece on Li's copula
+    • Gary Gorton "Slapped by the Invisible Hand"
+    • ICRA / CRISIL annual Indian securitisation reports
+
+QUOTE
+  "Three books, three perspectives, a lifetime of depth."
+
+TRANSITION
+  Quick intro — your trainer.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 41 · About the Trainer
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Brief background.
+
+TALKING POINTS
+  • Ajay Surana — Co-founder Augury Insights
+  • CRO Infrarisk (an Aurionpro Company)
+  • 30+ years across treasury, structured finance, credit risk leadership
+  • Augury = training arm: bespoke simulations, gamification, AI tools
+  • Infrarisk / Aurionpro = lending + treasury technology stack
+    in production at Indian and global banks
+
+QUOTE
+  "Half the day was structuring; the other half is technology."
+
+TRANSITION
+  Stay in touch.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 42 · Follow & Connect
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Three places to find us.
+
+TALKING POINTS
+  • Augury Insights (training arm)
+      auguryinsights.com · LinkedIn /company/auguryinsights
+  • Aurionpro (technology partner)
+      aurionpro.com · LinkedIn /company/aurionpro
+  • Ajay personally — LinkedIn /in/ajaysurana
+      ← PRIMARY contact channel
+  • If this masterclass was useful: share on LinkedIn + tag us
+    → helps more risk practitioners find the work
+
+QUOTE
+  "Tag us so more risk practitioners find this."
+
+TRANSITION
+  Final word.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SLIDE 43 · Masterclass Complete
+────────────────────────────────────────────────────────────────────────────────
+
+HOOK
+  Mapped the full pipeline end-to-end.
+
+TALKING POINTS
+  • From digital SME origination
+  • → bankruptcy-remote SPV
+  • → tranching & waterfall mechanics
+  • → credit enhancements
+  • → Basel ASRF math
+  • → India's regulatory perimeter
+  • → synthetic SRT
+  • → tokenization horizon
+
+QUOTE
+  "Never forget the boomerang."
+
+TRANSITION
+  —
+
+
+════════════════════════════════════════════════════════════════════════════════
+                                    END · 43 SLIDES
+                  Augury Insights × Aurionpro — Trainer Reference
+════════════════════════════════════════════════════════════════════════════════

@@ -2230,6 +2230,11 @@ function deck() {
                 body: "You've mapped the credit migration pipeline end-to-end. From digital SME origination through bankruptcy-remote SPV architecture, tranching and waterfall mechanics, credit enhancements, the Basel ASRF math, India's regulatory perimeter, to synthetic SRT and the tokenization horizon.\n\nIf the work landed, connect with Augury, Aurionpro, or Ajay on the previous slide. The deck stays here — return anytime, search any term, dig into any Deep Dive." }
         },
         init() {
+            // ?reset=1 or ?fresh=1 clears all saved state (quiz scores) before loading
+            if (/[?&](reset|fresh)=1/.test(location.search)) {
+                localStorage.removeItem('augury-deck-state');
+                history.replaceState(null, '', location.pathname + location.hash);
+            }
             this.loadState();
             const m = location.hash.match(/^#slide-(\d+)$/);
             if (m) {
