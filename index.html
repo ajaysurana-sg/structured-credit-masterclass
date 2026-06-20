@@ -7,9 +7,18 @@
     <meta name="description" content="An interactive masterclass on structured credit, securitisation, and capital relief — from digital SME origination to synthetic risk transfer. By Ajay Surana, Augury Insights × Aurionpro.">
     <meta name="author" content="Ajay Surana">
     <meta property="og:title" content="Structured Credit Masterclass — Augury Insights × Aurionpro">
-    <meta property="og:description" content="Interactive flight simulator tracing the credit migration pipeline from origination to synthetic risk transfer. With the Indian regulatory lens.">
+    <meta property="og:description" content="36-slide interactive masterclass tracing the credit migration pipeline from origination to synthetic risk transfer. With the Indian regulatory lens.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://masterclass.beatrisk.org/">
+    <meta property="og:image" content="https://masterclass.beatrisk.org/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Structured Credit Masterclass cover — Augury Insights × Aurionpro, by Ajay Surana">
+    <meta property="og:site_name" content="Augury Insights">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Structured Credit Masterclass — Augury × Aurionpro">
+    <meta name="twitter:description" content="36 slides · interactive simulations · India regulatory lens. By Ajay Surana.">
+    <meta name="twitter:image" content="https://masterclass.beatrisk.org/og-cover.png">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23020617'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='34' fill='%23F08C5C'%3EAI%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1501,30 +1510,26 @@
         <div class="px-8 py-6 bg-gradient-to-r from-augury-500/15 to-transparent border-b border-slate-800">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold">Pre-class Pulse</div>
-                    <h2 class="text-2xl font-serif font-bold text-slate-100 mt-1">Help shape the next 90 minutes</h2>
-                    <p class="text-sm text-slate-400 mt-1">4 quick taps. Anonymous. Used to calibrate the depth and examples.</p>
+                    <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold">Before You Begin</div>
+                    <h2 class="text-2xl font-serif font-bold text-slate-100 mt-1">Tell us a little about you</h2>
+                    <p class="text-sm text-slate-400 mt-1">4 quick taps. Anonymous. Tailors the closing message to your background.</p>
                 </div>
-                <a :href="slidoUrl" target="_blank" class="shrink-0 text-right group">
-                    <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 group-hover:text-slate-400">Live room results</div>
-                    <div class="text-xs font-mono text-augury-400 group-hover:text-augury-300 mt-0.5">Slido →</div>
-                </a>
             </div>
         </div>
         <div class="px-8 py-6 space-y-6 max-h-[65vh] overflow-y-auto">
             <div>
-                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">Your role</label>
-                <div class="grid grid-cols-3 gap-2">
-                    <template x-for="r in ['Treasury','Risk','Credit','Operations','Strategy / Exec','Other']" :key="r">
-                        <button @click="profile.role = r" :class="profile.role === r ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition" x-text="r"></button>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">What best describes you?</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <template x-for="r in ['Risk / Credit professional','Finance / Treasury','Strategy / Leadership','Operations / Technology','Academic / Student','Curious learner']" :key="r">
+                        <button @click="profile.role = r" :class="profile.role === r ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition text-left" x-text="r"></button>
                     </template>
                 </div>
             </div>
             <div>
-                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">Institution type</label>
-                <div class="grid grid-cols-3 gap-2">
-                    <template x-for="i in ['Bank','NBFC','FinTech','Regulator / Academic','Investor','Other']" :key="i">
-                        <button @click="profile.institution = i" :class="profile.institution === i ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition" x-text="i"></button>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">Where do you work?</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <template x-for="i in ['Bank','Non-bank lender','FinTech','Investor / Fund','Regulator / Academic','Other']" :key="i">
+                        <button @click="profile.institution = i" :class="profile.institution === i ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="text-sm py-2.5 px-3 rounded-xl border transition text-left" x-text="i"></button>
                     </template>
                 </div>
             </div>
@@ -1540,9 +1545,9 @@
                 </div>
             </div>
             <div>
-                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">What you most want to walk away with</label>
+                <label class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-3 block">What do you most want to walk away with?</label>
                 <div class="space-y-2">
-                    <template x-for="e in ['Foundations &amp; frameworks','Indian regulatory clarity','Capital relief / SRT strategy','Math &amp; risk intuition','Where the market is going']" :key="e">
+                    <template x-for="e in ['Foundations &amp; frameworks','How regulators think about risk','Capital strategy &amp; risk transfer','Math &amp; risk intuition','Where the market is going']" :key="e">
                         <button @click="profile.expectation = e" :class="profile.expectation === e ? 'bg-augury-500/20 border-augury-500 text-augury-300' : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'" class="w-full text-sm py-2.5 px-4 rounded-xl border text-left transition" x-html="e"></button>
                     </template>
                 </div>
@@ -1684,8 +1689,6 @@ function deck() {
         quizScores: { 1: null, 2: null, 3: null, 4: null },
         showFinalScore: false,
         scoreShown: false,
-        slidoUrl: 'https://app.sli.do/event/rU7tEYi1VrihLjopQb19wS',
-        slidoCode: 'Open live wall',
         quizTriggers: { 11: 1, 21: 2, 25: 3, 29: 4 },
         quizzes: {
             1: { title: 'Checkpoint 1 — Foundations', subtitle: 'After Engineering Pillars',
