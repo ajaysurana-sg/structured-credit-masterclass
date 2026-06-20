@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <radialGradient id="glow1" cx="15%" cy="20%" r="50%">
@@ -17,48 +18,36 @@
       <stop offset="100%" stop-color="#C25734"/>
     </linearGradient>
   </defs>
-
-  <!-- Background -->
   <rect width="1200" height="630" fill="#020617"/>
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
-
-  <!-- Top brand row -->
   <g transform="translate(80, 70)">
-    <!-- Augury Insights wordmark -->
     <text x="0" y="40" font-family="Georgia, serif" font-weight="700" font-size="46" fill="#FFFFFF">AI</text>
     <line x1="78" y1="8" x2="78" y2="48" stroke="#475569" stroke-width="2"/>
     <text x="100" y="28" font-family="Georgia, serif" font-weight="600" font-size="22" fill="#FFFFFF">Augury</text>
     <text x="100" y="52" font-family="Georgia, serif" font-style="italic" font-weight="500" font-size="22" fill="#F08C5C">Insights</text>
-    <!-- Divider -->
     <line x1="270" y1="8" x2="270" y2="48" stroke="#334155" stroke-width="2"/>
-    <!-- aurionpro -->
-    <text x="290" y="46" font-family="Georgia, serif" font-weight="500" font-size="34" fill="#3DA8A3" letter-spacing="-1">aurionpro</text>
+    <g transform="translate(290, 8) scale(0.082)">
+      <path d="M1331.98,222.58c41.39-41.42,103.91-48.88,152.93-22.35l53.65-53.65c-79.15-54.58-188.41-46.67-258.82,23.77-70.44,70.4-78.35,179.67-23.77,258.82l53.65-53.65c-26.53-49.02-19.07-111.55,22.35-152.93Z" fill="#3DA8A3"/>
+      <path d="M1567.06,457.66c70.44-70.44,78.35-179.7,23.73-258.85l-53.65,53.65c26.53,49.02,19.07,111.55-22.32,152.97-41.42,41.39-103.95,48.85-152.93,22.32l-53.65,53.65c79.15,54.62,188.38,46.71,258.82-23.73Z" fill="#3DA8A3"/>
+      <path d="M2973.79,110.82c-112.21,0-203.16,90.96-203.16,203.16s90.96,203.16,203.16,203.16,203.2-90.96,203.2-203.16-90.96-203.16-203.2-203.16ZM2973.79,443.29c-71.37,0-129.27-57.9-129.27-129.3s57.9-129.27,129.27-129.27,129.3,57.87,129.3,129.27-57.9,129.3-129.3,129.3Z" fill="#FFFFFF"/>
+      <path d="M2309.96,110.82c-49.12,0-94.2,17.41-129.3,46.46v-46.46h-73.88v202.02c0,.38-.02.76-.02,1.15s.01.76.02,1.15v337.79h73.88v-182.23c35.1,29.05,80.18,46.46,129.3,46.46,112.2,0,203.16-90.96,203.16-203.16s-90.96-203.16-203.16-203.16ZM2309.96,443.29c-71.37,0-129.24-57.84-129.3-129.19v-.23c.06-71.35,57.93-129.16,129.3-129.16s129.27,57.87,129.27,129.27-57.87,129.3-129.27,129.3Z" fill="#FFFFFF"/>
+      <path d="M1072.46,110.82h-18.47c-49.12,0-94.16,17.43-129.29,46.44v-46.44h-73.88v406.34h73.88v-203.17c0-71.4,57.89-129.29,129.29-129.29h18.47v-73.88Z" fill="#FFFFFF"/>
+      <path d="M1995.96,517.16h73.88v-203.17c0-112.21-90.96-203.17-203.17-203.17-49.12,0-94.16,17.43-129.29,46.44v-46.44h-73.88v406.34h73.88v-203.17c0-71.4,57.89-129.29,129.29-129.29s129.29,57.89,129.29,129.29v203.17Z" fill="#FFFFFF"/>
+      <path d="M2771.7,110.82h-18.47c-49.12,0-94.16,17.43-129.29,46.44v-46.44h-73.88v406.34h73.88v-203.17c0-71.4,57.89-129.29,129.29-129.29h18.47v-73.88Z" fill="#FFFFFF"/>
+      <polygon points="1109.4 313.99 1109.4 517.16 1183.28 517.16 1183.28 110.82 1109.4 110.82 1109.4 313.99" fill="#FFFFFF"/>
+      <path d="M740.01,313.99c0,71.4-57.89,129.29-129.29,129.29s-129.29-57.89-129.29-129.29V110.82h-73.88v203.17c0,112.21,90.97,203.17,203.17,203.17,49.12,0,94.16-17.43,129.29-46.44v46.44h73.88V110.82h-73.88v203.17Z" fill="#FFFFFF"/>
+      <path d="M1146.34,0c-20.4,0-36.94,16.54-36.94,36.94s16.54,36.94,36.94,36.94,36.94-16.54,36.94-36.94S1166.75,0,1146.34,0Z" fill="#FFFFFF"/>
+      <polygon points="352.42 301.63 276.93 0 203.04 0 278.53 301.63 127.71 301.63 203.03 0 129.14 0 0 517.15 73.89 517.15 109.26 375.51 297.02 375.51 332.47 517.15 406.36 517.15 370.91 375.51 352.42 301.63" fill="#FFFFFF"/>
+    </g>
   </g>
-
-  <!-- Eyebrow label -->
   <text x="80" y="220" font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="16" fill="#F08C5C" letter-spacing="3">EXECUTIVE MASTERCLASS</text>
-
-  <!-- Accent bar under eyebrow -->
   <rect x="80" y="234" width="60" height="3" rx="1.5" fill="url(#accentBar)"/>
-
-  <!-- Big serif title -->
   <text x="80" y="312" font-family="Georgia, serif" font-weight="800" font-size="78" fill="#F1F5F9" letter-spacing="-2">Structured Credit:</text>
   <text x="80" y="400" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="58" fill="url(#titleGrad)" letter-spacing="-1.5">Risk, Securitisation</text>
   <text x="80" y="460" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="58" fill="url(#titleGrad)" letter-spacing="-1.5">&amp; Capital Relief</text>
-
-  <!-- Divider line -->
   <line x1="80" y1="510" x2="280" y2="510" stroke="#475569" stroke-width="1.5"/>
-
-  <!-- Trainer line -->
-  <text x="80" y="550" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="22" fill="#CBD5E1">
-    By <tspan font-weight="700" fill="#FFFFFF">Ajay Surana</tspan>
-    <tspan fill="#64748B">  ·  </tspan>30+ years in treasury, structured finance &amp; credit risk
-  </text>
-
-  <!-- Bottom feature line -->
-  <text x="80" y="585" font-family="ui-monospace, Menlo, monospace" font-weight="500" font-size="14" fill="#64748B" letter-spacing="2">36 SLIDES  ·  INTERACTIVE WIDGETS  ·  INDIAN REGULATORY LENS  ·  21 CITATIONS</text>
-
-  <!-- Bottom right URL -->
+  <text x="80" y="550" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="22" fill="#CBD5E1">By <tspan font-weight="700" fill="#FFFFFF">Ajay Surana</tspan><tspan fill="#64748B">  ·  </tspan>30+ years in treasury, structured finance &amp; credit risk</text>
+  <text x="80" y="585" font-family="ui-monospace, Menlo, monospace" font-weight="500" font-size="14" fill="#64748B" letter-spacing="2">37 SLIDES  ·  INTERACTIVE WIDGETS  ·  INDIAN REGULATORY LENS  ·  21 CITATIONS</text>
   <text x="1120" y="585" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-weight="600" font-size="14" fill="#F08C5C" letter-spacing="1">masterclass.beatrisk.org</text>
 </svg>
