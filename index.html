@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Credit Masterclass — Augury Insights × Aurionpro</title>
+    <meta name="description" content="An interactive masterclass on structured credit, securitisation, and capital relief — from digital SME origination to synthetic risk transfer. By Ajay Surana, Augury Insights × Aurionpro.">
+    <meta name="author" content="Ajay Surana">
+    <meta property="og:title" content="Structured Credit Masterclass — Augury Insights × Aurionpro">
+    <meta property="og:description" content="Interactive flight simulator tracing the credit migration pipeline from origination to synthetic risk transfer. With the Indian regulatory lens.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23020617'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='34' fill='%23F08C5C'%3EAI%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+              serif: ['Fraunces', 'Georgia', 'serif']
+            },
+            colors: {
+              augury: { 200: '#FBD3BE', 300: '#F8B499', 400: '#F4A584', 500: '#F08C5C', 600: '#E07042', 700: '#C25734', 800: '#9A4327', 900: '#6B2E1B', 950: '#3D1A10' },
+              aurion: { 200: '#9BE0DC', 300: '#5BC2BD', 400: '#3DA8A3', 500: '#278D88', 600: '#1C6E6A', 700: '#155350', 800: '#0E3935', 900: '#082220' }
+            }
+          }
+        }
+      }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css"/>
+    <style>
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .bg-glow-augury { position: fixed; top: -20%; left: -10%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(240,140,92,0.05) 0%, rgba(2,6,23,0) 70%); z-index: 0; pointer-events: none; }
+        .bg-glow-aurion { position: fixed; bottom: -20%; right: -10%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(39,141,136,0.04) 0%, rgba(2,6,23,0) 70%); z-index: 0; pointer-events: none; }
+        .slide { display: none; min-height: 100vh; width: 100vw; flex-direction: column; justify-content: space-between; padding: 4rem 5rem 5.5rem; box-sizing: border-box; position: relative; z-index: 1; }
+        .slide.active { display: flex; animation: fadein .25s ease-out; }
+        @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+        [x-cloak] { display: none !important; }
+        .math-text { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+        .nav-btn { transition: all .15s ease; }
+        .nav-btn:hover { background: rgba(240,140,92,0.15); border-color: rgba(240,140,92,0.4); color: #F4A584; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: #334155; cursor: pointer; transition: all .15s; }
+        .dot.active { background: #F08C5C; transform: scale(1.6); }
+        .dot:hover { background: #64748b; }
+        .scroll-area { max-height: calc(100vh - 14rem); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #334155 transparent; }
+        .scroll-area::-webkit-scrollbar { width: 6px; }
+        .scroll-area::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+        /* Citation links */
+        .cite {
+            border-bottom: 1px dotted rgba(240,140,92,0.55);
+            color: inherit;
+            cursor: help;
+            transition: all 150ms ease;
+            text-decoration: none;
+            padding-bottom: 1px;
+        }
+        .cite:hover {
+            color: #F4A584;
+            border-bottom-color: rgba(240,140,92,0.95);
+            border-bottom-style: solid;
+        }
+        .cite::after {
+            content: '↗';
+            font-size: 0.7em;
+            margin-left: 0.15em;
+            opacity: 0.55;
+            vertical-align: super;
+            font-weight: 600;
+        }
+        .cite:hover::after { opacity: 1; }
+
+        /* Tippy custom theme */
+        .tippy-box[data-theme~='augury'] {
+            background: #0F172A;
+            border: 1px solid #334155;
+            color: #E2E8F0;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(240,140,92,0.08);
+        }
+        .tippy-box[data-theme~='augury'] > .tippy-arrow { color: #0F172A; }
+        .tippy-box[data-theme~='augury'] > .tippy-arrow::before { border-top-color: #334155 !important; }
+        .tip-card { padding: 14px 16px; max-width: 360px; }
+        .tip-card .tip-title {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 700; color: #F4A584;
+            font-size: 15px; margin-bottom: 6px; line-height: 1.3;
+        }
+        .tip-card .tip-body { font-size: 13px; color: #CBD5E1; line-height: 1.55; margin-bottom: 10px; }
+        .tip-card .tip-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 8px; border-top: 1px solid #1E293B; font-size: 11px;
+        }
+        .tip-card .tip-source {
+            color: #F4A584; text-transform: uppercase; letter-spacing: 0.1em;
+            font-weight: 600; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+        .tip-card .tip-source:hover { color: #F8B499; }
+        .tip-card .tip-time {
+            color: #94A3B8; font-family: monospace;
+            background: #1E293B; padding: 2px 8px; border-radius: 4px;
+        }
+
+        /* Search overlay */
+        .search-mask { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(8px); }
+        .kbd { background: #1E293B; border: 1px solid #334155; padding: 1px 6px; border-radius: 4px;
+               font-family: monospace; font-size: 11px; color: #94A3B8; }
+
+        /* Speaker notes panel */
+        .notes-panel { background: linear-gradient(180deg, #0F172A 0%, #020617 100%); }
+
+        @media print {
+            body { overflow: visible; background: white; color: black; }
+            .slide { display: flex !important; page-break-after: always; min-height: auto; padding: 2rem; color: black; animation: none; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body x-data="deck()" x-init="init()" @keydown.window="handleKey($event)">
+
+<!-- Top bar -->
+<div class="fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 pointer-events-none no-print">
+    <div class="flex items-center gap-3 pointer-events-auto">
+        <div class="flex items-center gap-2 bg-slate-900/85 px-4 py-2 rounded-full border border-slate-800 backdrop-blur">
+            <span class="font-serif font-bold text-augury-500 text-base leading-none">AI</span>
+            <span class="text-slate-700">|</span>
+            <span class="text-slate-300 font-bold tracking-widest text-[10px] uppercase">Executive Risk Lab</span>
+        </div>
+        <div class="bg-slate-900/85 px-4 py-2 rounded-full border border-slate-800 backdrop-blur text-xs">
+            <span class="font-serif text-slate-200">Augury</span><span class="font-serif italic text-augury-500"> Insights</span> <span class="text-slate-600">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span>
+        </div>
+    </div>
+    <div class="flex items-center gap-2 pointer-events-auto">
+        <button @click="showSearch = true" title="Search (Cmd/Ctrl+K)" class="flex items-center gap-2 text-slate-300 font-mono text-xs bg-slate-900/85 px-3 py-2 rounded-full border border-slate-800 backdrop-blur hover:bg-slate-800">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+            <span class="hidden md:inline">Search</span> <span class="kbd">⌘K</span>
+        </button>
+        <button @click="speakerMode = !speakerMode" title="Speaker notes (S)" :class="speakerMode ? 'bg-augury-500/20 border-augury-500/50 text-augury-300' : 'bg-slate-900/85 border-slate-800 text-slate-300'" class="flex items-center gap-2 font-mono text-xs px-3 py-2 rounded-full border backdrop-blur hover:bg-slate-800 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+            <span class="kbd">S</span>
+        </button>
+        <button @click="showJump = !showJump" class="text-slate-300 font-mono text-xs bg-slate-900/85 px-3 py-2 rounded-full border border-slate-800 backdrop-blur hover:bg-slate-800">
+            <span x-text="currentSlide" class="text-augury-400 font-bold"></span> / <span x-text="totalSlides"></span>
+        </button>
+    </div>
+</div>
+
+<!-- Slide jump panel -->
+<div x-show="showJump" x-cloak @click.outside="showJump = false" class="fixed top-16 right-6 z-50 bg-slate-900 border border-slate-700 rounded-xl p-4 shadow-2xl w-80 no-print">
+    <div class="text-xs uppercase tracking-widest text-slate-400 font-mono mb-3">Jump to slide</div>
+    <div class="grid grid-cols-6 gap-1">
+        <template x-for="n in totalSlides">
+            <button @click="currentSlide = n; showJump = false" :class="currentSlide === n ? 'bg-augury-500 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'" class="py-1.5 text-xs font-mono rounded" x-text="n"></button>
+        </template>
+    </div>
+</div>
+
+<!-- Bottom nav -->
+<div class="fixed bottom-0 left-0 w-full px-6 py-4 flex justify-between items-center z-50 no-print">
+    <button @click="currentSlide = Math.max(1, currentSlide - 1)"
+            :disabled="currentSlide === 1"
+            class="nav-btn flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/85 border border-slate-800 text-slate-300 text-xs font-mono uppercase tracking-widest backdrop-blur disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+        Prev
+    </button>
+    <div class="flex items-center gap-1.5 bg-slate-900/85 px-4 py-2 rounded-full border border-slate-800 backdrop-blur max-w-[60vw] overflow-x-auto">
+        <template x-for="n in totalSlides">
+            <div @click="currentSlide = n" :class="currentSlide === n ? 'dot active' : 'dot'"></div>
+        </template>
+    </div>
+    <button @click="currentSlide = Math.min(totalSlides, currentSlide + 1)"
+            :disabled="currentSlide === totalSlides"
+            class="nav-btn flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/85 border border-slate-800 text-slate-300 text-xs font-mono uppercase tracking-widest backdrop-blur disabled:opacity-30 disabled:cursor-not-allowed">
+        Next
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+    </button>
+</div>
+
+<div class="bg-glow-augury"></div>
+<div class="bg-glow-aurion"></div>
+
+<!-- 1: Title -->
+<div class="slide" :class="{ 'active': currentSlide === 1 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-7">
+        <div class="flex items-center gap-7 mb-1">
+            <div class="flex items-center gap-3">
+                <span class="font-serif font-bold text-white text-5xl tracking-tight leading-none">AI</span>
+                <div class="h-12 w-px bg-slate-600"></div>
+                <div class="leading-tight">
+                    <div class="font-serif font-semibold text-white text-2xl">Augury</div>
+                    <div class="font-serif italic text-augury-500 text-2xl -mt-1">Insights</div>
+                </div>
+            </div>
+            <div class="h-12 w-px bg-slate-700"></div>
+            <div class="font-serif text-aurion-400 text-4xl tracking-tight lowercase leading-none">aurionpro</div>
+        </div>
+        <div class="w-20 h-1 bg-gradient-to-r from-augury-500 to-augury-700 rounded-full"></div>
+        <h1 class="text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-slate-100 font-serif">
+            Structured Credit:<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-augury-400 to-augury-600 italic">Risk, Securitisation &amp; Capital Relief</span>
+        </h1>
+        <p class="text-2xl text-slate-400 font-light max-w-4xl leading-relaxed">
+            An interactive flight simulator tracing the credit migration pipeline from digital loan origination to synthetic risk transfer — with the Indian regulatory lens.
+        </p>
+        <p class="text-base text-slate-500 font-light pt-2 border-t border-slate-800">
+            By <span class="text-slate-200 font-medium">Ajay Surana</span> — Co-founder, Augury Insights · CRO, Infrarisk (an Aurionpro Company) · 30+ years in treasury, structured finance &amp; credit risk.
+        </p>
+    </div>
+    <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-800 pt-5">
+        <span class="font-mono uppercase tracking-widest">Arrows · Space · Home/End · ⌘K Search · S Notes</span>
+        <span><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></span>
+    </div>
+</div>
+
+<!-- 2: Boomerang -->
+<div class="slide" :class="{ 'active': currentSlide === 2 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 items-center w-full max-w-7xl mx-auto">
+        <div class="col-span-7 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Axiom 01</span>
+            <h1 class="text-5xl md:text-6xl font-black text-slate-100 tracking-tight leading-tight">The Boomerang Rule</h1>
+            <p class="text-xl text-slate-400 leading-relaxed font-light">
+                Lending is fundamentally a <strong class="text-slate-200 font-semibold">collections business</strong>. Sourcing origination volume is vanity; cash flow recovery is sanity.
+            </p>
+            <p class="text-lg text-slate-500 leading-relaxed border-l-4 border-augury-500/40 pl-6">
+                No degree of financial structuring, legal insulating, or capital market tranching can manufacture safety out of structural default. The cash must return.
+            </p>
+        </div>
+        <div class="col-span-5 flex justify-center">
+            <div class="bg-slate-900/50 p-12 rounded-full border border-slate-800 shadow-[0_0_80px_rgba(240,140,92,0.06)]">
+                <svg class="w-56 h-56 text-augury-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 3C13.5 6.5 6.5 6.5 3 12c3.5 5.5 10.5 5.5 16 9 1.5-4.5-1.5-11.5 0-21z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 3: Intent vs Ability -->
+<div class="slide" :class="{ 'active': currentSlide === 3 }">
+    <div></div>
+    <div class="space-y-12 w-full max-w-7xl mx-auto">
+        <div class="text-center space-y-3">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Axiom 02</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">Intent vs. Ability: The Credit Faultline</h1>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+            <div class="bg-slate-900/60 border border-slate-700/50 p-10 rounded-3xl space-y-5">
+                <div class="flex items-center space-x-3 text-rose-400 font-bold uppercase tracking-widest text-sm font-mono">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <span>Intent to Pay (Behavioral)</span>
+                </div>
+                <p class="text-lg text-slate-300 leading-relaxed font-light">
+                    The integrity and fraudulent insulation of the borrower profile. Financial engineering <strong class="text-white font-bold">cannot cure bad intent</strong>. If fraudulent paper breaches the processing threshold, the entire downstream stack collapses.
+                </p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700/50 p-10 rounded-3xl space-y-5">
+                <div class="flex items-center space-x-3 text-emerald-400 font-bold uppercase tracking-widest text-sm font-mono">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v10"/></svg>
+                    <span>Ability to Pay (Mathematical)</span>
+                </div>
+                <p class="text-lg text-slate-300 leading-relaxed font-light">
+                    The quantitative coverage of cash flow parameters. This is the exclusive domain of structure. We isolate, buffer, hedge, and diversify cash generation metrics to manufacture credit performance.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 4: Thesis -->
+<div class="slide items-center justify-center text-center" :class="{ 'active': currentSlide === 4 }">
+    <div class="max-w-5xl space-y-8">
+        <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">The Core Thesis</span>
+        <h1 class="text-5xl md:text-6xl font-black text-slate-100 tracking-tight leading-[1.2]">
+            "Any credit risk is viable if it is<br><span class="border-b-[5px] border-augury-500 text-augury-400 pb-1">structured properly</span>."
+        </h1>
+        <p class="text-xl text-slate-400 max-w-4xl mx-auto leading-relaxed pt-6 font-light">
+            We do not decline atypical risk portfolios; we build specialized containment vessels around their idiosyncratic parameters to manufacture institutional investment grade profiles.
+        </p>
+    </div>
+</div>
+
+<!-- 5: Bicycle vs Lunar Rover -->
+<div class="slide" :class="{ 'active': currentSlide === 5 }">
+    <div></div>
+    <div class="grid grid-cols-2 gap-10 max-w-7xl mx-auto items-center w-full">
+        <div class="bg-slate-900/40 border border-slate-700/50 p-12 rounded-3xl flex flex-col items-center text-center space-y-8">
+            <svg class="w-32 h-32 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><polyline points="5.5 17.5 10 9 18.5 17.5"/><polyline points="10 9 15 9 18.5 17.5"/></svg>
+            <div class="space-y-3">
+                <h3 class="text-2xl font-black text-slate-200">Standard Corporate Credit</h3>
+                <p class="text-lg text-slate-400 max-w-sm mx-auto leading-relaxed font-light">The Commuter Bicycle. Rigid, static frameworks. If the company profile does not neatly fit the box, the capital request is rejected.</p>
+            </div>
+        </div>
+        <div class="bg-slate-900 border border-augury-500/40 p-12 rounded-3xl flex flex-col items-center text-center space-y-8 shadow-[0_0_60px_rgba(240,140,92,0.1)]">
+            <svg class="w-32 h-32 text-augury-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="6" rx="1"/><circle cx="6" cy="18" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M14 10L12 4L10 10"/><path d="M6 10V7M18 10V7"/></svg>
+            <div class="space-y-3">
+                <h3 class="text-2xl font-black text-augury-400">Structured Architecture</h3>
+                <p class="text-lg text-slate-300 max-w-sm mx-auto leading-relaxed font-light">The Lunar Rover. Custom-engineered machinery designed to cross unbankable, highly volatile cash flow terrains safely.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 6: Historical Evolution -->
+<div class="slide" :class="{ 'active': currentSlide === 6 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-7 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Historical Evolution</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Risk Pooling &amp; Secondary Liquidity</h1>
+            <p class="text-lg text-slate-300 leading-relaxed font-light">
+                Financial engineering is a historical continuity. Ancient Indian merchant guilds (<strong class="text-white"><span class="cite" data-tip="tip-srenis">Srenis</span></strong>) pooled highly variable credit profiles to offset catastrophic maritime cargo losses.
+            </p>
+            <p class="text-lg text-slate-300 leading-relaxed font-light">
+                Concurrently, <strong class="text-white"><span class="cite" data-tip="tip-hundi">Hundis</span></strong> created early secondary bill markets. The <strong class="text-augury-400 font-semibold"><span class="cite" data-tip="tip-shahjog">Shahjog Hundi</span></strong> introduced structural counterparty validation, creating a secure payment circuit restricted to liquid intermediaries.
+            </p>
+        </div>
+        <div class="col-span-5">
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-2xl space-y-5">
+                <svg class="w-10 h-10 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg>
+                <div>
+                    <h4 class="text-base font-bold font-mono text-sky-400 uppercase tracking-widest">Prussia: The <span class="cite" data-tip="tip-pfandbrief">Pfandbrief</span> (1769)</h4>
+                    <p class="text-base text-slate-400 mt-2 leading-relaxed">King Frederick II forced the pooling of war-torn noble agricultural assets. This established the Covered Bond market — pioneering structural diversification with full dual recourse protection.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 7: IP Royalty interactive (modernized) -->
+<div class="slide items-center justify-center" :class="{ 'active': currentSlide === 7 }" x-data="{ decision: null }">
+    <div class="w-full max-w-4xl bg-slate-900/80 border border-slate-700/60 rounded-3xl p-12 space-y-8 text-center shadow-2xl">
+        <span class="text-xs font-mono uppercase tracking-widest bg-augury-500/10 text-augury-400 px-4 py-1.5 rounded-lg border border-augury-500/30 font-bold">Interactive Case Screening</span>
+        <div class="space-y-4">
+            <h3 class="text-3xl font-black text-slate-100">Asset File: IP Royalty Streams</h3>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">A legendary musician wants upfront liquid funding. Asset pool: future digital streaming and masters royalty contracts across 50 classic catalogs. Standard commercial lenders refuse due to high volatility.</p>
+        </div>
+
+        <div x-show="decision === null" class="flex justify-center space-x-6 pt-6">
+            <button @click="decision = 'decline'" class="px-8 py-4 bg-red-950/40 text-red-400 border-2 border-red-500/40 rounded-2xl text-lg font-black uppercase tracking-widest hover:bg-red-900/60 transition">Decline Portfolio</button>
+            <button @click="decision = 'structure'" class="px-8 py-4 bg-emerald-950/40 text-emerald-400 border-2 border-emerald-500/40 rounded-2xl text-lg font-black uppercase tracking-widest hover:bg-emerald-900/60 transition">Isolate &amp; Structure</button>
+        </div>
+
+        <div x-show="decision === 'decline'" x-cloak class="p-6 bg-slate-950 rounded-2xl border-2 border-red-500/30 text-base text-slate-300 space-y-3 text-left">
+            <p class="text-red-400 font-black text-xl uppercase tracking-widest">Opportunity Cost Liquidated.</p>
+            <p class="leading-relaxed">By declining, you missed the architecture of the <strong class="text-white font-bold"><span class="cite" data-tip="tip-bowie">Bowie Bonds (1997)</span></strong> — $55M AAA placement against future royalty streams. The same blueprint powered <strong class="text-white"><span class="cite" data-tip="tip-hipgnosis">Hipgnosis Songs Fund (2018)</span></strong> (£1Bn+ LSE listing) and the <strong class="text-white"><span class="cite" data-tip="tip-rihanna">Rihanna catalog deal (2021)</span></strong>. Any predictable IP cash stream can be isolated.</p>
+            <button @click="decision = null" class="text-xs font-mono text-slate-500 hover:text-slate-300 underline mt-4 block transition">RESET SIMULATION</button>
+        </div>
+
+        <div x-show="decision === 'structure'" x-cloak class="p-6 bg-slate-950 rounded-2xl border-2 border-emerald-500/30 text-base text-slate-300 space-y-3 text-left">
+            <p class="text-emerald-400 font-black text-xl uppercase tracking-widest">Deal Executed.</p>
+            <p class="leading-relaxed">Correct. By severing the performance of the underlying IP catalogs from the artist's personal lifestyle risks, you execute a bankruptcy-remote cash transfer blueprint — the same structure that scaled from Bowie Bonds (1997) to Hipgnosis (2018) to the Rihanna catalog (2021).</p>
+            <button @click="decision = null" class="text-xs font-mono text-slate-500 hover:text-slate-300 underline mt-4 block transition">RESET SIMULATION</button>
+        </div>
+    </div>
+</div>
+
+<!-- 8: LOS Hygiene -->
+<div class="slide" :class="{ 'active': currentSlide === 8 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-5 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Pipeline Integrity</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">The Source: LOS Hygiene</h1>
+            <p class="text-lg text-slate-400 leading-relaxed font-light">
+                Securitisation is an architectural pipeline. If the origination data is flawed, downstream capital market failures are mathematically guaranteed.
+            </p>
+            <p class="text-lg text-slate-400 leading-relaxed font-light border-l-4 border-augury-500/40 pl-6">
+                Modern Loan Origination Systems (LOS) handling SME credit must implement automated data capture. Aurionpro's <strong class="text-slate-200">SmartLender</strong> &amp; <strong class="text-slate-200">iCashpro</strong> stacks are real-world examples of this layer.
+            </p>
+        </div>
+        <div class="col-span-7 bg-slate-900/80 border border-slate-700/60 p-8 rounded-3xl space-y-4 font-mono text-base shadow-2xl">
+            <div class="text-sm text-augury-500 font-bold border-b-2 border-slate-700 pb-3 uppercase tracking-widest">Automated Underwriting API Pipeline</div>
+            <div class="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 rounded-xl">
+                <span class="text-slate-300">1. Real-Time GST &amp; Tax Data Pull</span>
+                <span class="bg-emerald-950/50 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-md text-xs font-bold tracking-widest">VERIFIED</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 rounded-xl">
+                <span class="text-slate-300">2. Bank Statement Analyzer (Account Aggregator)</span>
+                <span class="bg-emerald-950/50 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-md text-xs font-bold tracking-widest">PASSED</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-slate-950 border border-slate-800 rounded-xl">
+                <span class="text-slate-300">3. Bureau Review &amp; Director KYC</span>
+                <span class="bg-emerald-950/50 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-md text-xs font-bold tracking-widest">CLEARED</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-slate-950 border-2 border-augury-500/30 rounded-xl">
+                <span class="text-augury-300">4. Human-In-The-Loop Verification</span>
+                <span class="text-augury-500 text-xs font-bold tracking-widest animate-pulse">PENDING AUDIT</span>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 9: Three Formats -->
+<div class="slide" :class="{ 'active': currentSlide === 9 }">
+    <div></div>
+    <div class="space-y-12 w-full max-w-7xl mx-auto">
+        <h1 class="text-5xl font-black text-slate-100 text-center tracking-tight">The Three Structural Formats</h1>
+        <div class="grid grid-cols-3 gap-8">
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-4">
+                <h3 class="text-xl font-black text-emerald-400 uppercase tracking-widest">Syndicated</h3>
+                <div class="h-1 w-10 bg-emerald-500/50 rounded-full"></div>
+                <p class="text-lg text-slate-400 leading-relaxed font-light"><strong class="text-slate-200">Consortium Sharing.</strong> Large balance exposures distributed horizontally. Completely contingent on core parent entity capacity.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-4">
+                <h3 class="text-xl font-black text-sky-400 uppercase tracking-widest">Project Finance</h3>
+                <div class="h-1 w-10 bg-sky-500/50 rounded-full"></div>
+                <p class="text-lg text-slate-400 leading-relaxed font-light"><strong class="text-slate-200">Asset Ring-Fencing.</strong> Single-purpose non-recourse infrastructure vehicles. Repayment tethered exclusively to standalone yields.</p>
+            </div>
+            <div class="bg-slate-900/90 border-2 border-augury-500/40 p-8 rounded-3xl space-y-4 shadow-[0_0_40px_rgba(240,140,92,0.1)]">
+                <h3 class="text-xl font-black text-augury-400 uppercase tracking-widest">Securitisation</h3>
+                <div class="h-1 w-10 bg-augury-500 rounded-full"></div>
+                <p class="text-lg text-slate-300 leading-relaxed font-light"><strong class="text-white font-semibold">The Liquidity Blender.</strong> Transforming vast pools of illiquid, highly fragmented loan profiles into tradable institutional market liabilities.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 10: Engineering Pillars -->
+<div class="slide" :class="{ 'active': currentSlide === 10 }">
+    <div></div>
+    <div class="max-w-6xl mx-auto w-full space-y-10">
+        <h1 class="text-5xl font-black text-slate-100 text-center tracking-tight">The Core Engineering Pillars</h1>
+        <div class="space-y-5">
+            <div class="flex items-center space-x-8 bg-slate-900/60 p-6 rounded-3xl border border-slate-700">
+                <div class="w-16 h-16 shrink-0 bg-sky-950/50 text-sky-400 font-mono text-xl font-black flex items-center justify-center rounded-2xl border border-sky-500/30">01</div>
+                <div>
+                    <h4 class="text-xl font-bold text-slate-200 mb-1 tracking-wide">True Sale Isolation</h4>
+                    <p class="text-lg text-slate-400 font-light leading-relaxed">Absolute transfer of ownership. Assets clear off the originator's balance sheet, insulating investors from any future parental bankruptcy events.</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-8 bg-slate-900/60 p-6 rounded-3xl border border-slate-700">
+                <div class="w-16 h-16 shrink-0 bg-emerald-950/50 text-emerald-400 font-mono text-xl font-black flex items-center justify-center rounded-2xl border border-emerald-500/30">02</div>
+                <div>
+                    <h4 class="text-xl font-bold text-slate-200 mb-1 tracking-wide">Asset Pooling</h4>
+                    <p class="text-lg text-slate-400 font-light leading-relaxed">Statistical risk smoothing. Blending thousands of granular, uncorrelated risks together to absorb idiosyncratic volatility via diversification math.</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-8 bg-slate-900/60 p-6 rounded-3xl border border-slate-700">
+                <div class="w-16 h-16 shrink-0 bg-rose-950/50 text-rose-400 font-mono text-xl font-black flex items-center justify-center rounded-2xl border border-rose-500/30">03</div>
+                <div>
+                    <h4 class="text-xl font-bold text-slate-200 mb-1 tracking-wide">Covenant Tranching</h4>
+                    <p class="text-lg text-slate-400 font-light leading-relaxed">Slicing a single underlying portfolio pool into separate layers of debt liabilities to accommodate distinct institutional risk-reward boundaries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 11: Legal Quarantine -->
+<div class="slide" :class="{ 'active': currentSlide === 11 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-12 text-center">
+        <div class="space-y-3">
+            <span class="text-sm font-mono uppercase tracking-widest text-sky-400 font-bold">Pillar 01</span>
+            <h1 class="text-5xl md:text-6xl font-black text-slate-100 tracking-tight">The Legal Quarantine</h1>
+            <p class="text-xl text-slate-400 font-light max-w-4xl mx-auto leading-relaxed">
+                The True Sale completely severs the cord. If the Originating Bank goes bankrupt, its corporate creditors have absolutely zero legal claim to the assets inside the SPV.
+            </p>
+        </div>
+        <div class="flex justify-center items-center space-x-10 mt-8">
+            <div class="p-8 bg-slate-900/50 border border-slate-700 rounded-3xl w-72">
+                <svg class="w-20 h-20 text-slate-500 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/></svg>
+                <h3 class="font-bold text-lg text-slate-300">Originator</h3>
+                <p class="text-sm text-slate-500 mt-2">Carries full corporate bankruptcy risk.</p>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-2">
+                <svg class="w-12 h-12 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                <span class="text-xs font-mono text-rose-400 font-bold uppercase tracking-widest">True Sale</span>
+            </div>
+            <div class="p-8 bg-sky-950/30 border-2 border-dashed border-sky-500/50 rounded-3xl w-72 shadow-[0_0_50px_rgba(56,189,248,0.15)]">
+                <svg class="w-20 h-20 text-sky-400 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <h3 class="font-bold text-lg text-sky-400">The SPV</h3>
+                <p class="text-sm text-sky-200/60 mt-2">Orphaned entity. Perfect bankruptcy remoteness.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 12: Asset Matrix -->
+<div class="slide" :class="{ 'active': currentSlide === 12 }">
+    <div></div>
+    <div class="space-y-10 w-full max-w-7xl mx-auto">
+        <h1 class="text-5xl font-black text-slate-100 text-center tracking-tight">The Asset Matrix</h1>
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-2xl font-black text-slate-200">RMBS</h3>
+                    <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75"/></svg>
+                </div>
+                <p class="text-sm text-emerald-400 font-bold uppercase tracking-widest">Highly Granular</p>
+                <p class="text-base text-slate-400 leading-relaxed font-light">Residential Mortgages. Thousands of small loans. High statistical predictability. Driven by consumer macroeconomics. Indian example: HDFC Ltd. pre-merger PTC issuances.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-2xl font-black text-slate-200">CMBS</h3>
+                    <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75"/></svg>
+                </div>
+                <p class="text-sm text-rose-400 font-bold uppercase tracking-widest">Lumpy &amp; Concentrated</p>
+                <p class="text-base text-slate-400 leading-relaxed font-light">Commercial Real Estate. Small pools of massive loans. Deeply idiosyncratic. A single default severely shocks the structure.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-4 border-t-4 border-t-augury-500">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-2xl font-black text-slate-200">SME ABS</h3>
+                    <svg class="w-8 h-8 text-augury-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349"/></svg>
+                </div>
+                <p class="text-sm text-augury-400 font-bold uppercase tracking-widest">The Hybrid</p>
+                <p class="text-base text-slate-300 leading-relaxed font-light">Commercial profiles with consumer volume. Heavily reliant on API-first origination systems (the Aurionpro stack) to parse millions of data points.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 13: Static vs Replenishing -->
+<div class="slide" :class="{ 'active': currentSlide === 13 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-5 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-sky-400 font-bold">Asset Cash Flow Behaviors</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Static vs.<br>Replenishing</h1>
+            <p class="text-lg text-slate-400 leading-relaxed font-light">
+                You cannot structure a credit card pool the same way you structure an auto loan pool. The underlying behavior dictates the SPV engineering.
+            </p>
+        </div>
+        <div class="col-span-7 space-y-6">
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-3xl flex items-center space-x-6">
+                <svg class="w-24 h-20 text-sky-400 shrink-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><line x1="10" y1="90" x2="90" y2="90" stroke="#334155"/><line x1="10" y1="90" x2="10" y2="10" stroke="#334155"/><path d="M 10 20 L 90 85"/></svg>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-200 mb-1">Amortizing (Auto / Mortgage)</h3>
+                    <p class="text-base text-slate-400 font-light">Pool balance steadily declines. Principal collections are immediately passed through to investors to pay down the bonds.</p>
+                </div>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-3xl flex items-center space-x-6">
+                <svg class="w-24 h-20 text-augury-500 shrink-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><line x1="10" y1="90" x2="90" y2="90" stroke="#334155"/><line x1="10" y1="90" x2="10" y2="10" stroke="#334155"/><path d="M 10 30 L 25 50 L 25 30 L 45 55 L 45 30 L 70 50 L 70 30 L 90 60"/></svg>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-200 mb-1">Revolving (Credit Cards / LOC)</h3>
+                    <p class="text-base text-slate-400 font-light">Short-term assets. During the "Revolving Period," principal collections are used to buy <strong class="text-slate-200">new loans</strong>, keeping the pool size constant.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 14: Ecosystem (rebuilt SVG-anchored) -->
+<div class="slide" :class="{ 'active': currentSlide === 14 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <h1 class="text-4xl md:text-5xl font-black text-slate-100 text-center tracking-tight">The Ecosystem &amp; Structural Friction</h1>
+        <div class="bg-slate-900/40 border border-slate-700/50 rounded-3xl p-8">
+            <svg viewBox="0 0 1000 480" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                <!-- Lines -->
+                <line x1="180" y1="240" x2="500" y2="240" stroke="#475569" stroke-width="2"/>
+                <line x1="500" y1="240" x2="820" y2="240" stroke="#38bdf8" stroke-width="3"/>
+                <line x1="500" y1="100" x2="500" y2="200" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 6"/>
+                <line x1="500" y1="280" x2="500" y2="380" stroke="#475569" stroke-width="2"/>
+                <line x1="180" y1="240" x2="350" y2="100" stroke="#475569" stroke-width="2" stroke-dasharray="6 6"/>
+                <!-- Originator -->
+                <g><rect x="60" y="200" width="220" height="80" rx="14" fill="#020617" stroke="#475569" stroke-width="1.5"/>
+                <text x="170" y="232" fill="#e2e8f0" font-size="20" font-weight="800" text-anchor="middle" font-family="system-ui">Originator</text>
+                <text x="170" y="258" fill="#64748b" font-size="11" text-anchor="middle" font-family="system-ui">Sells the Risk</text></g>
+                <!-- Arranger -->
+                <g><rect x="260" y="60" width="220" height="80" rx="14" fill="#020617" stroke="#475569" stroke-width="1.5"/>
+                <text x="370" y="92" fill="#e2e8f0" font-size="20" font-weight="800" text-anchor="middle" font-family="system-ui">Arranger</text>
+                <text x="370" y="118" fill="#64748b" font-size="11" text-anchor="middle" font-family="system-ui">Structures for Fees</text></g>
+                <!-- Rating Agency -->
+                <g><rect x="380" y="10" width="240" height="80" rx="14" fill="#451a03" stroke="#f59e0b" stroke-width="1.5"/>
+                <text x="500" y="42" fill="#fbbf24" font-size="20" font-weight="800" text-anchor="middle" font-family="system-ui">Rating Agency</text>
+                <text x="500" y="68" fill="#f59e0b" font-size="11" text-anchor="middle" font-family="system-ui">Stamps the Math (CRISIL / ICRA)</text></g>
+                <!-- SPV -->
+                <g><rect x="380" y="195" width="240" height="90" rx="16" fill="#082f49" stroke="#38bdf8" stroke-width="2.5"/>
+                <text x="500" y="245" fill="#38bdf8" font-size="28" font-weight="900" text-anchor="middle" font-family="system-ui">The SPV</text>
+                <text x="500" y="268" fill="#7dd3fc" font-size="11" text-anchor="middle" font-family="system-ui">Bankruptcy-Remote Trust</text></g>
+                <!-- Trustee -->
+                <g><rect x="380" y="380" width="240" height="80" rx="14" fill="#020617" stroke="#475569" stroke-width="1.5"/>
+                <text x="500" y="412" fill="#e2e8f0" font-size="20" font-weight="800" text-anchor="middle" font-family="system-ui">Trustee</text>
+                <text x="500" y="438" fill="#64748b" font-size="11" text-anchor="middle" font-family="system-ui">Enforces Covenants</text></g>
+                <!-- Investors -->
+                <g><rect x="720" y="200" width="220" height="80" rx="14" fill="#020617" stroke="#475569" stroke-width="1.5"/>
+                <text x="830" y="232" fill="#e2e8f0" font-size="20" font-weight="800" text-anchor="middle" font-family="system-ui">Investors</text>
+                <text x="830" y="258" fill="#64748b" font-size="11" text-anchor="middle" font-family="system-ui">Fund the Tranches</text></g>
+            </svg>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 15: Servicers -->
+<div class="slide" :class="{ 'active': currentSlide === 15 }">
+    <div></div>
+    <div class="space-y-10 w-full max-w-7xl mx-auto">
+        <div class="text-center space-y-3">
+            <span class="text-sm font-mono uppercase tracking-widest text-sky-400 font-bold">The Operational Reality</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">When the Pool Breaks</h1>
+            <p class="text-lg text-slate-400 max-w-4xl mx-auto font-light leading-relaxed">
+                The SPV is a legal ghost. It cannot send a collection agent or seize a factory. It relies entirely on designated Servicers to enforce the Boomerang Rule.
+            </p>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+            <div class="bg-slate-900/60 border border-slate-700 p-10 rounded-3xl space-y-4">
+                <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25"/></svg>
+                <h3 class="text-2xl font-bold text-slate-200">The Master Servicer</h3>
+                <p class="text-lg text-slate-400 leading-relaxed font-light">Handles routine administration. Collects monthly payments, manages escrows, passes cash through to the SPV. The "good weather" operator.</p>
+            </div>
+            <div class="bg-rose-950/20 border border-rose-500/30 p-10 rounded-3xl space-y-4">
+                <svg class="w-10 h-10 text-rose-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <h3 class="text-2xl font-bold text-rose-400">The Special Servicer</h3>
+                <p class="text-lg text-slate-300 leading-relaxed font-light">Takes over when a loan breaches covenants or defaults. Has authority to restructure debt, extend maturity, or force physical asset liquidation.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 16: Tranching Tower -->
+<div class="slide" :class="{ 'active': currentSlide === 16 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-7 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Stratification</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">The Tranching Tower</h1>
+            <p class="text-xl text-slate-400 leading-relaxed font-light">
+                Manufacturing different risk-reward vectors from the exact same pool of average commercial loans.
+            </p>
+        </div>
+        <div class="col-span-5 bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-3 flex flex-col h-[520px] shadow-2xl">
+            <div class="flex-[3] bg-gradient-to-br from-sky-900/60 to-slate-900 border border-sky-500/40 rounded-2xl flex items-center px-6">
+                <svg class="w-10 h-10 text-sky-400 mr-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75v10.5a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20.25V9.75z"/></svg>
+                <div><h3 class="font-black text-xl text-sky-400 uppercase tracking-widest">Senior (AAA)</h3><p class="text-sm text-slate-400 font-light mt-1">The Steel Vault. Highest priority, lowest yield.</p></div>
+            </div>
+            <div class="flex-[1.5] bg-gradient-to-br from-augury-900/40 to-slate-900 border border-augury-500/40 rounded-2xl flex items-center px-6">
+                <svg class="w-10 h-10 text-augury-400 mr-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5M3.75 6h16.5M3.75 18h16.5"/></svg>
+                <div><h3 class="font-black text-xl text-augury-400 uppercase tracking-widest">Mezzanine (BBB)</h3><p class="text-sm text-slate-400 font-light mt-1">The Shock Absorber.</p></div>
+            </div>
+            <div class="flex-[1] bg-gradient-to-br from-rose-900/40 to-slate-900 border border-rose-500/40 rounded-2xl flex items-center px-6">
+                <svg class="w-10 h-10 text-rose-400 mr-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div><h3 class="font-black text-lg text-rose-400 uppercase tracking-widest">Equity (First Loss)</h3><p class="text-xs text-slate-400 font-light mt-1">The Sponge. Absorbs initial defaults.</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 17: Credit Enhancements -->
+<div class="slide" :class="{ 'active': currentSlide === 17 }">
+    <div></div>
+    <div class="space-y-10 w-full max-w-7xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-black text-slate-100 text-center tracking-tight">Manufacturing the AAA: Credit Enhancements</h1>
+        <div class="grid grid-cols-2 gap-10">
+            <div class="bg-slate-900/60 border border-slate-700 p-10 rounded-3xl space-y-6">
+                <h3 class="text-2xl font-bold text-emerald-400 border-b border-slate-700 pb-3">Internal Mechanics</h3>
+                <ul class="space-y-4 text-lg text-slate-300 font-light">
+                    <li class="flex"><span class="text-emerald-500 mr-3 font-bold">1.</span><span><strong>Subordination:</strong> Tranching (The Tower).</span></li>
+                    <li class="flex"><span class="text-emerald-500 mr-3 font-bold">2.</span><span><strong>Overcollateralization (OC):</strong> Issuing ₹90 Cr of debt against a ₹100 Cr asset pool. The ₹10 Cr difference is a pure structural cushion.</span></li>
+                    <li class="flex"><span class="text-emerald-500 mr-3 font-bold">3.</span><span><strong>Excess Spread:</strong> Portfolio yield (12%) minus tranche coupon cost (7%) = 5% margin to absorb write-offs.</span></li>
+                    <li class="flex"><span class="text-emerald-500 mr-3 font-bold">4.</span><span><strong>Reserve Accounts:</strong> Cash trapped upfront in the SPV to cover short-term liquidity blips.</span></li>
+                </ul>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-10 rounded-3xl space-y-6">
+                <h3 class="text-2xl font-bold text-sky-400 border-b border-slate-700 pb-3">External Guarantees</h3>
+                <ul class="space-y-4 text-lg text-slate-300 font-light">
+                    <li class="flex"><span class="text-sky-500 mr-3 font-bold">1.</span><span><strong>Monoline Insurance:</strong> Third-party insurers wrapping the bond to guarantee principal.</span></li>
+                    <li class="flex"><span class="text-sky-500 mr-3 font-bold">2.</span><span><strong>Corporate Guarantees:</strong> Parent company backing (dilutes the True Sale premise).</span></li>
+                    <li class="flex"><span class="text-sky-500 mr-3 font-bold">3.</span><span><strong>Letters of Credit (LOC):</strong> Provided by highly rated commercial banks to cover specified shortfalls.</span></li>
+                    <li class="flex"><span class="text-sky-500 mr-3 font-bold">4.</span><span><strong>Liquidity Facility:</strong> Standby line for timing mismatches between pool collections and investor coupon dates.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 18: Waterfall -->
+<div class="slide items-center justify-center text-center" :class="{ 'active': currentSlide === 18 }">
+    <div class="max-w-4xl space-y-8">
+        <h1 class="text-5xl md:text-6xl font-black text-slate-100 tracking-tight">The Cash Flow Waterfall</h1>
+        <p class="text-2xl text-slate-300 font-light">Like a tiered champagne tower.</p>
+        <div class="flex justify-center my-8">
+            <svg class="w-48 h-48 text-augury-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M40 20 L60 20 L55 40 L45 40 Z" fill="rgba(240,140,92,0.5)"/>
+                <path d="M25 50 L45 50 L40 70 L30 70 Z" fill="rgba(240,140,92,0.5)"/>
+                <path d="M55 50 L75 50 L70 70 L60 70 Z" fill="rgba(240,140,92,0.15)"/>
+                <line x1="50" y1="5" x2="50" y2="15" stroke-dasharray="2 2" stroke="#fcd34d" stroke-width="3"/>
+            </svg>
+        </div>
+        <p class="text-xl text-slate-400 leading-relaxed bg-slate-900/80 p-8 rounded-3xl border border-slate-700 font-light">
+            Incoming cash collections fill the top layer (Senior) completely before a single drop overflows to the middle (Mezzanine). If there is a drought in collections, the bottom glasses (Equity) stay dry. The legal structure rigidly protects priority.
+        </p>
+    </div>
+</div>
+
+<!-- 19: Waterfall Tycoon (fixed) -->
+<div class="slide items-center justify-center" :class="{ 'active': currentSlide === 19 }"
+     x-data="{ cash: 100, senior: 0, mezz: 0, equity: 0, status: 'Distribute the portfolio collections.', state: 'start' }">
+    <div class="w-full max-w-5xl bg-slate-900/80 border border-slate-700/60 rounded-3xl p-12 space-y-8 text-center shadow-2xl">
+        <span class="text-xs font-mono uppercase tracking-widest bg-augury-500/10 text-augury-400 px-4 py-1.5 rounded-lg border border-augury-500/30 font-bold">Live Execution Lab</span>
+        <div class="space-y-3">
+            <h1 class="text-4xl font-black text-slate-100">Waterfall Tycoon</h1>
+            <p class="text-lg text-slate-400">Total Cash Received: <span class="text-emerald-400 font-bold text-2xl">₹<span x-text="cash"></span>M</span></p>
+            <div class="flex justify-center space-x-5 text-xs font-mono text-slate-500">
+                <span>Senior Owed: ₹80M</span>
+                <span>Mezz Owed: ₹15M</span>
+                <span>Equity: Residual</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-5 mt-8">
+            <button @click="if(senior < 80) { senior += 10; cash -= 10; status = 'Paying Senior interest...'; }"
+                    :disabled="cash <= 0 || state === 'failed' || senior >= 80"
+                    class="p-6 bg-sky-950/40 border-2 border-sky-500/40 rounded-2xl text-sky-400 font-bold hover:bg-sky-900/60 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <div class="text-lg mb-1 uppercase tracking-widest">Pay Senior</div>
+                <div class="text-base text-slate-300">Paid: ₹<span x-text="senior"></span>M</div>
+            </button>
+            <button @click="if(senior < 80) { status = '⚠ COVENANT BREACH! Subordination violated.'; state = 'failed'; } else if (mezz < 15) { mezz += 5; cash -= 5; status = 'Paying Mezzanine interest...'; }"
+                    :disabled="cash <= 0 || state === 'failed' || (senior >= 80 && mezz >= 15)"
+                    class="p-6 bg-augury-950/40 border-2 border-augury-500/40 rounded-2xl text-augury-400 font-bold hover:bg-augury-900/60 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <div class="text-lg mb-1 uppercase tracking-widest">Pay Mezz</div>
+                <div class="text-base text-slate-300">Paid: ₹<span x-text="mezz"></span>M</div>
+            </button>
+            <button @click="if(senior < 80 || mezz < 15) { status = '⚠ COVENANT BREACH! Subordination violated.'; state = 'failed'; } else { equity += cash; cash = 0; status = '✓ Excess spread released to Originator (Equity).'; state = 'won'; }"
+                    :disabled="cash <= 0 || state === 'failed' || state === 'won'"
+                    class="p-6 bg-rose-950/40 border-2 border-rose-500/40 rounded-2xl text-rose-400 font-bold hover:bg-rose-900/60 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <div class="text-lg mb-1 uppercase tracking-widest">Pay Equity</div>
+                <div class="text-base text-slate-300">Paid: ₹<span x-text="equity"></span>M</div>
+            </button>
+        </div>
+
+        <div class="mt-8 p-5 rounded-2xl text-xl font-bold tracking-wide transition-all border-2"
+             :class="state === 'failed' ? 'bg-red-950/80 text-red-400 border-red-500' : (state === 'won' ? 'bg-emerald-950/80 text-emerald-400 border-emerald-500' : 'bg-slate-900 text-slate-400 border-slate-800')"
+             x-text="status"></div>
+
+        <button @click="cash=100; senior=0; mezz=0; equity=0; status='Distribute the portfolio collections.'; state='start';" class="mt-4 text-xs font-mono text-slate-500 hover:text-slate-300 underline transition">RESET MONTH</button>
+    </div>
+</div>
+
+<!-- 20: NEW — Worked Example: Subordination Sizing -->
+<div class="slide" :class="{ 'active': currentSlide === 20 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Worked Example</span>
+            <h1 class="text-4xl md:text-5xl font-black text-slate-100 tracking-tight">Sizing the Subordination Buffer</h1>
+        </div>
+        <div class="grid grid-cols-12 gap-8">
+            <div class="col-span-7 bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-5">
+                <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold">Pool Specification</div>
+                <div class="grid grid-cols-2 gap-4 text-base">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-xs uppercase tracking-widest">Pool Size</div><div class="text-slate-100 font-bold text-2xl mt-1">₹1,000 Cr</div></div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-xs uppercase tracking-widest">Asset Class</div><div class="text-slate-100 font-bold text-lg mt-1">Granular SME Loans</div></div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-xs uppercase tracking-widest">PD (TTC)</div><div class="text-slate-100 font-bold text-2xl mt-1">3.0%</div></div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-xs uppercase tracking-widest">LGD</div><div class="text-slate-100 font-bold text-2xl mt-1">45%</div></div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-xs uppercase tracking-widest">Expected Loss</div><div class="text-emerald-400 font-bold text-2xl mt-1">1.35%</div></div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-augury-500/30"><div class="text-augury-400 text-xs uppercase tracking-widest">99.9% Stress Loss</div><div class="text-augury-400 font-bold text-2xl mt-1">~ 11.5%</div></div>
+                </div>
+                <div class="text-sm text-slate-400 font-light leading-relaxed pt-3 border-t border-slate-800">
+                    Apply the Basel ASRF curve (next slide) at the 99.9% confidence interval, with ρ = 0.04 for retail SME. The unexpected-loss tail sits roughly 10x the expected loss.
+                </div>
+            </div>
+            <div class="col-span-5 bg-slate-900 border border-augury-500/30 p-8 rounded-3xl space-y-5">
+                <div class="text-xs font-mono uppercase tracking-widest text-augury-500 font-bold">Capital Stack Output</div>
+                <div class="space-y-2">
+                    <div class="bg-sky-950/40 border border-sky-500/40 rounded-xl p-4 flex justify-between items-center">
+                        <div><div class="text-sky-400 font-bold uppercase tracking-widest text-sm">Senior AAA</div><div class="text-xs text-slate-400">88.5% thickness</div></div>
+                        <div class="text-2xl font-black text-sky-400">₹885 Cr</div>
+                    </div>
+                    <div class="bg-augury-950/40 border border-augury-500/40 rounded-xl p-4 flex justify-between items-center">
+                        <div><div class="text-augury-400 font-bold uppercase tracking-widest text-sm">Mezzanine BBB</div><div class="text-xs text-slate-400">7% thickness</div></div>
+                        <div class="text-2xl font-black text-augury-400">₹70 Cr</div>
+                    </div>
+                    <div class="bg-rose-950/40 border border-rose-500/40 rounded-xl p-4 flex justify-between items-center">
+                        <div><div class="text-rose-400 font-bold uppercase tracking-widest text-sm">Equity / First Loss</div><div class="text-xs text-slate-400">4.5% thickness (covers EL ×3.3)</div></div>
+                        <div class="text-2xl font-black text-rose-400">₹45 Cr</div>
+                    </div>
+                </div>
+                <div class="text-xs text-slate-500 font-light italic pt-2 border-t border-slate-800">Senior survives a 1-in-1,000 stress year. Mezz absorbs idiosyncratic tail. Equity absorbs the normal cycle.</div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 21: NINJA + India parallels -->
+<div class="slide items-center justify-center text-center" :class="{ 'active': currentSlide === 21 }">
+    <div class="max-w-6xl mx-auto space-y-8 scroll-area">
+        <svg class="w-24 h-24 text-red-500 mx-auto" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <h1 class="text-5xl md:text-6xl font-black text-slate-100 leading-tight">The Origination Illusion</h1>
+        <p class="text-2xl text-slate-300 font-bold tracking-widest uppercase">No Income, No Job, No Assets.</p>
+        <p class="text-lg text-slate-400 leading-relaxed max-w-4xl mx-auto font-light border-t border-slate-800 pt-6">
+            In 2008, the world learned: a pristine SPV waterfall means nothing if the asset pool is garbage. India's own version is more visceral —
+            <strong class="text-white"><span class="cite" data-tip="tip-ilfs">IL&amp;FS (2018)</span></strong>, <strong class="text-white"><span class="cite" data-tip="tip-dhfl">DHFL (2019)</span></strong>, and the NBFC liquidity freeze. Pristine paper, hollow underwriting.
+        </p>
+        <div class="grid grid-cols-3 gap-5 mt-6 text-left max-w-5xl mx-auto">
+            <div class="bg-slate-900/60 border border-rose-500/30 p-5 rounded-2xl"><div class="text-rose-400 font-bold text-sm uppercase tracking-widest"><span class="cite" data-tip="tip-ilfs">IL&amp;FS · 2018</span></div><p class="text-slate-300 text-sm mt-2 font-light">₹91,000 Cr group default cascaded through MFs, pension funds, banks. Triggered the NBFC crisis.</p></div>
+            <div class="bg-slate-900/60 border border-rose-500/30 p-5 rounded-2xl"><div class="text-rose-400 font-bold text-sm uppercase tracking-widest"><span class="cite" data-tip="tip-dhfl">DHFL · 2019</span></div><p class="text-slate-300 text-sm mt-2 font-light">India's first NBFC resolved under IBC. Allegations of fictitious loans hit even AAA-rated paper.</p></div>
+            <div class="bg-slate-900/60 border border-rose-500/30 p-5 rounded-2xl"><div class="text-rose-400 font-bold text-sm uppercase tracking-widest"><span class="cite" data-tip="tip-yesbank">YES Bank · 2020</span></div><p class="text-slate-300 text-sm mt-2 font-light">AT1 write-down. Subordination math worked. Investor disclosure didn't.</p></div>
+        </div>
+        <p class="text-xl text-rose-400 font-bold italic pt-4">Structure enhances ability; it cannot cure intent.</p>
+    </div>
+</div>
+
+<!-- 22: Correlation Trap (KaTeX) -->
+<div class="slide" :class="{ 'active': currentSlide === 22 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-emerald-400 font-mono uppercase tracking-widest text-emerald-400 font-bold">Quantitative Vulnerabilities</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">The Correlation Trap</h1>
+        </div>
+        <div class="bg-slate-900/80 border border-slate-700/60 p-10 rounded-3xl text-center shadow-2xl">
+            <div class="text-sky-400">
+                $$ C(u_1, \dots, u_n) = \Phi_\Sigma\!\left( \Phi^{-1}(u_1), \dots, \Phi^{-1}(u_n) \right) $$
+            </div>
+            <p class="text-xs text-slate-500 font-mono uppercase tracking-widest mt-3"><span class="cite" data-tip="tip-copula">Li's Gaussian Copula (2000)</span></p>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-3">
+                <h3 class="text-xl font-bold text-slate-200">The Flawed Assumption</h3>
+                <p class="text-base text-slate-400 font-light leading-relaxed">
+                    Pre-2008 models assumed default correlation ($\Sigma$) was static and geographically isolated. If a borrower in Mumbai defaults, it shouldn't impact a borrower in Delhi. Diversification was assumed constant.
+                </p>
+            </div>
+            <div class="bg-red-950/20 border-2 border-red-500/30 p-8 rounded-3xl space-y-3">
+                <h3 class="text-xl font-black text-red-400">Systemic Tail Collapse</h3>
+                <p class="text-base text-slate-300 font-light leading-relaxed">
+                    In severe stress (liquidity freeze, rate hikes), diversification evaporates. <strong class="text-white">Correlation non-linearly snaps to 1.0</strong>, breaking the model. India 2018: AAA-rated commercial paper traded at distress levels overnight.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 23: Basel ASRF (KaTeX) -->
+<div class="slide" :class="{ 'active': currentSlide === 23 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-emerald-400 font-bold">Regulatory Capital Sizing</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">Basel ASRF Framework</h1>
+        </div>
+        <div class="bg-slate-900/80 border border-slate-700/60 p-10 rounded-3xl text-center shadow-2xl">
+            <div class="text-emerald-400 text-2xl">
+                $$ P(L \le x) \;=\; \Phi\!\left( \frac{\sqrt{1-\rho}\;\Phi^{-1}(x) \;-\; \Phi^{-1}(\text{PD})}{\sqrt{\rho}} \right) $$
+            </div>
+            <p class="text-xs text-slate-500 font-mono uppercase tracking-widest mt-4"><span class="cite" data-tip="tip-asrf">Asymptotic Single Risk Factor Model — Vasicek / Basel II IRB</span></p>
+        </div>
+        <p class="text-lg text-center text-slate-400 max-w-5xl mx-auto font-light leading-relaxed">
+            The global regulatory standard. This equation models the probability distribution of losses for a massive, granular portfolio. To secure an AAA rating, your subordination buffers must be sized thick enough to survive a <strong class="text-white">99.9% stress interval</strong> on this curve.
+        </p>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 24: War Room sim with formula toggle -->
+<div class="slide" :class="{ 'active': currentSlide === 24 }"
+     x-data="{
+        unemployment: 4.5, rateShock: 50, correlation: 0.15, equityBuffer: 6, tailLoss: 0, simulated: false, showFormula: false,
+        runSimulation() {
+            let basePD = (this.unemployment / 100) * 0.85;
+            let rateMultiplier = 1 + (this.rateShock / 1000);
+            let expectedDefault = basePD * rateMultiplier;
+            let systemicShock = expectedDefault + (expectedDefault * this.correlation * 4.5);
+            this.tailLoss = Math.min(100, parseFloat((systemicShock * 100).toFixed(1)));
+            this.simulated = true;
+        }
+     }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-12 gap-10">
+        <div class="col-span-6 space-y-6 flex flex-col justify-center">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold bg-augury-500/10 inline-block px-3 py-1 rounded">Executive War Room</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Squeeze the Sponge</h1>
+            <p class="text-lg text-slate-400 font-light">Dial in macro inputs. Watch how systemic tail correlation liquefies the structural buffers.</p>
+
+            <div class="bg-slate-900/60 p-6 rounded-3xl border border-slate-700 space-y-4">
+                <div class="space-y-1">
+                    <label class="flex justify-between text-xs font-bold text-slate-300 uppercase tracking-widest">
+                        <span>Unemployment Rate</span><span class="text-rose-400" x-text="unemployment + '%'"></span>
+                    </label>
+                    <input type="range" min="3" max="15" step="0.5" x-model.number="unemployment" @input="simulated = false" class="w-full h-2 bg-slate-800 rounded-lg appearance-none accent-rose-500">
+                </div>
+                <div class="space-y-1">
+                    <label class="flex justify-between text-xs font-bold text-slate-300 uppercase tracking-widest">
+                        <span>Rate Shock (BPS)</span><span class="text-augury-400" x-text="'+' + rateShock + ' bps'"></span>
+                    </label>
+                    <input type="range" min="0" max="500" step="25" x-model.number="rateShock" @input="simulated = false" class="w-full h-2 bg-slate-800 rounded-lg appearance-none accent-augury-500">
+                </div>
+                <div class="space-y-1">
+                    <label class="flex justify-between text-xs font-bold text-slate-300 uppercase tracking-widest">
+                        <span>Asset Correlation (ρ)</span><span class="text-sky-400" x-text="correlation"></span>
+                    </label>
+                    <input type="range" min="0.05" max="0.95" step="0.05" x-model.number="correlation" @input="simulated = false" class="w-full h-2 bg-slate-800 rounded-lg appearance-none accent-sky-500">
+                </div>
+                <div class="space-y-1 pt-3 border-t border-slate-700">
+                    <label class="flex justify-between text-xs font-bold text-emerald-400 uppercase tracking-widest">
+                        <span>Set Equity Buffer</span><span x-text="equityBuffer + '%'"></span>
+                    </label>
+                    <input type="range" min="2" max="25" step="1" x-model.number="equityBuffer" @input="simulated = false" class="w-full h-2 bg-slate-800 rounded-lg appearance-none accent-emerald-500">
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button @click="runSimulation()" class="flex-1 py-3 bg-augury-500 text-slate-950 text-base font-black uppercase tracking-widest rounded-2xl hover:bg-augury-400 transition shadow-lg shadow-augury-500/20">Execute Macro Shock</button>
+                <button @click="showFormula = !showFormula" class="px-4 py-3 bg-slate-800 text-slate-300 text-xs font-mono uppercase tracking-widest rounded-2xl hover:bg-slate-700 transition">Show Formula</button>
+            </div>
+            <div x-show="showFormula" x-cloak class="bg-slate-950 p-4 rounded-xl border border-slate-700 text-xs text-slate-400 font-mono leading-relaxed">
+                basePD = unemployment × 0.85<br>
+                rateMult = 1 + rateShock / 1000<br>
+                EL = basePD × rateMult<br>
+                tailLoss = EL × (1 + ρ × 4.5) × 100
+            </div>
+        </div>
+
+        <div class="col-span-6 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative h-[600px] flex flex-col justify-end overflow-hidden">
+            <div class="text-center absolute top-8 left-0 w-full z-30" x-show="simulated" x-cloak>
+                <div class="text-xs text-slate-400 uppercase tracking-widest font-mono">Calculated Tail Loss</div>
+                <div class="text-6xl font-black text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]" x-text="tailLoss + '%'"></div>
+            </div>
+            <div class="relative w-full h-[420px] flex flex-col border-x-4 border-t-4 border-slate-700 rounded-t-2xl overflow-hidden bg-slate-950 z-10">
+                <div class="flex-[6] bg-gradient-to-b from-sky-900/30 to-sky-900/10 border-b border-sky-500/40 flex items-center justify-center">
+                    <span class="text-xl font-black text-sky-400 z-20">SENIOR AAA</span>
+                </div>
+                <div class="flex-[1.5] bg-gradient-to-b from-augury-900/30 to-augury-900/10 border-b border-augury-500/40 flex items-center justify-center">
+                    <span class="text-lg font-bold text-augury-400 z-20">MEZZANINE</span>
+                </div>
+                <div class="bg-gradient-to-b from-emerald-900/30 to-emerald-900/10 flex items-center justify-center transition-all duration-300" :style="'height: ' + (equityBuffer / 25 * 30) + '%'">
+                    <span class="text-base font-bold text-emerald-400 z-20" x-text="'EQUITY ' + equityBuffer + '%'"></span>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full bg-red-600/90 transition-all duration-1000 ease-out z-30 flex items-start justify-center pt-2 border-t-4 border-red-400"
+                     :style="'height: ' + (simulated ? tailLoss : 0) + '%'">
+                    <span class="text-white font-black uppercase tracking-widest mt-2 text-sm" x-show="simulated && tailLoss > (equityBuffer + 15)">SENIOR BREACHED</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 25: ALM -->
+<div class="slide" :class="{ 'active': currentSlide === 25 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-5 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Institutional Strategy</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Why Do Banks Do This?</h1>
+            <p class="text-lg text-slate-400 leading-relaxed font-light">
+                Not just for structuring fees. Securitisation is the ultimate tool for Asset Liability Management (ALM) and balance sheet optimization.
+            </p>
+        </div>
+        <div class="col-span-7 bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-5">
+            <h3 class="text-xl font-black text-slate-200">The Maturity Mismatch</h3>
+            <div class="relative h-24 w-full flex items-center justify-between px-3">
+                <div class="w-1/3 bg-rose-950/50 border border-rose-500/50 h-16 rounded-xl flex items-center justify-center text-rose-400 font-bold text-center leading-tight text-sm">Short-Term Deposits<br>(Liabilities)</div>
+                <svg class="w-14 h-7 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                <div class="w-1/3 bg-emerald-950/50 border border-emerald-500/50 h-16 rounded-xl flex items-center justify-center text-emerald-400 font-bold text-center leading-tight text-sm">20-Year Mortgages<br>(Assets)</div>
+            </div>
+            <p class="text-base text-slate-400 font-light">Banks fund long-term assets with short-term, flight-risk deposits. Selling loans via an SPV instantly converts illiquid long-term assets back into liquid cash, eliminating ALM duration risk.</p>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 26: RWA Relief -->
+<div class="slide" :class="{ 'active': currentSlide === 26 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-sky-400 font-bold">Regulatory Capital</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">Risk-Weighted Assets (RWA) Relief</h1>
+        </div>
+        <div class="grid grid-cols-2 gap-12 mt-8">
+            <div class="bg-slate-900/60 border border-slate-700 p-8 rounded-3xl space-y-5">
+                <h3 class="text-xl font-bold text-slate-200 text-center border-b border-slate-800 pb-3">Standard Balance Sheet</h3>
+                <div class="h-32 bg-slate-800 rounded-xl border-2 border-slate-700 flex items-center justify-center flex-col">
+                    <span class="text-slate-300 font-bold text-lg uppercase tracking-widest">SME Loan Pool (₹1,000 Cr)</span>
+                    <span class="text-slate-500 font-mono text-xs mt-2">100% Risk Weighting</span>
+                </div>
+                <div class="h-14 bg-red-950/40 border border-red-500/50 rounded-xl flex items-center justify-center">
+                    <span class="text-red-400 font-bold text-sm">Capital Held: ₹80 Cr (Locked)</span>
+                </div>
+            </div>
+            <div class="bg-slate-900/90 border-2 border-sky-500/30 p-8 rounded-3xl space-y-5 shadow-[0_0_50px_rgba(56,189,248,0.1)]">
+                <h3 class="text-xl font-bold text-sky-400 text-center border-b border-slate-800 pb-3">Securitized Transfer</h3>
+                <div class="flex space-x-2 h-32">
+                    <div class="flex-[8] bg-sky-950/30 border border-sky-500/30 rounded-xl flex items-center justify-center flex-col opacity-60">
+                        <span class="text-sky-300 font-bold uppercase text-sm">Senior (Sold)</span>
+                        <span class="text-sky-400/50 font-mono text-xs mt-1">0% Bank RWA</span>
+                    </div>
+                    <div class="flex-[2] bg-slate-800 border-2 border-augury-500/50 rounded-xl flex items-center justify-center flex-col">
+                        <span class="text-augury-400 font-bold uppercase text-xs text-center">Equity (Retained)</span>
+                        <span class="text-augury-500/70 font-mono text-xs mt-1">1250% RWA</span>
+                    </div>
+                </div>
+                <div class="h-14 bg-emerald-950/40 border border-emerald-500/50 rounded-xl flex items-center justify-center">
+                    <span class="text-emerald-400 font-bold text-sm">Capital Freed for New Lending</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 27: Synthetic -->
+<div class="slide" :class="{ 'active': currentSlide === 27 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8 text-center">
+        <span class="text-sm font-mono uppercase tracking-widest text-emerald-400 font-bold">Unfunded Structures</span>
+        <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Synthetic Securitisation</h1>
+        <p class="text-xl text-slate-400 max-w-4xl mx-auto font-light leading-relaxed">
+            Moving the <strong class="text-slate-200">Risk</strong> without moving the physical <strong class="text-slate-200">Cash</strong>.
+        </p>
+        <div class="bg-slate-900 border border-slate-700 p-10 rounded-3xl max-w-4xl mx-auto">
+            <div class="flex items-center justify-between w-full">
+                <div class="p-5 bg-slate-950 border border-slate-700 rounded-xl w-56">
+                    <svg class="w-10 h-10 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6"/></svg>
+                    <h4 class="font-bold text-lg text-slate-200">The Bank</h4>
+                    <p class="text-xs text-slate-500 mt-2">Keeps loans on balance sheet.</p>
+                </div>
+                <div class="flex flex-col items-center justify-center w-full px-6 space-y-3">
+                    <div class="w-full relative flex items-center">
+                        <div class="absolute w-full border-t-2 border-emerald-500 border-dashed"></div>
+                        <div class="mx-auto bg-slate-900 px-3 text-emerald-400 font-bold text-xs tracking-widest z-10">PAYS CDS PREMIUM →</div>
+                    </div>
+                    <div class="w-full relative flex items-center">
+                        <div class="absolute w-full border-t-2 border-rose-500"></div>
+                        <div class="mx-auto bg-slate-900 px-3 text-rose-400 font-bold text-xs tracking-widest z-10">← LOSS PROTECTION PAYOUT</div>
+                    </div>
+                </div>
+                <div class="p-5 bg-slate-950 border border-slate-700 rounded-xl w-56">
+                    <svg class="w-10 h-10 text-slate-400 mx-auto mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+                    <h4 class="font-bold text-lg text-slate-200">Hedge Fund / Investor</h4>
+                    <p class="text-xs text-slate-500 mt-2">Sells Credit Default Swap (CDS).</p>
+                </div>
+            </div>
+        </div>
+        <p class="text-sm text-augury-400 font-mono uppercase tracking-widest pt-2">⚠ Under current RBI rules, synthetic securitisation is largely restricted for Indian originators — see next slide.</p>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 28: NEW — India Regulatory -->
+<div class="slide" :class="{ 'active': currentSlide === 28 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">The Indian Regulatory Lens</span>
+            <h1 class="text-4xl md:text-5xl font-black text-slate-100 tracking-tight">RBI Securitisation Framework</h1>
+            <p class="text-base text-slate-400 font-light max-w-4xl mx-auto"><span class="cite" data-tip="tip-ssa-md">Master Direction on Securitisation of Standard Assets (Sept 2021)</span> — the post-<span class="cite" data-tip="tip-ilfs">IL&amp;FS</span> rulebook.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold">MHP</div>
+                <h3 class="text-lg font-bold text-slate-200">Minimum Holding Period</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">Originator must hold loans for 3–12 months (tenor-dependent) before securitising. Stops "originate-to-distribute" abuse.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">MRR</div>
+                <h3 class="text-lg font-bold text-slate-200">Minimum Retention Requirement</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">5%–10% of pool retained by originator (skin-in-the-game). Aligns incentives between originator and investor.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-augury-400 font-bold">SSA Direction</div>
+                <h3 class="text-lg font-bold text-slate-200">Standard Asset Direction</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">Covers PTC and Direct Assignment (DA). Defines simple-transparent-comparable (STC) criteria for capital relief.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold">Synthetic ban</div>
+                <h3 class="text-lg font-bold text-slate-200">No Synthetic Securitisation</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">Synthetic structures and re-securitisations are prohibited for most regulated entities. India learned from 2008.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold"><span class="cite" data-tip="tip-sarfaesi">SARFAESI</span> / <span class="cite" data-tip="tip-ibc">IBC</span></div>
+                <h3 class="text-lg font-bold text-slate-200">Enforcement Backbone</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">Special Servicers leverage <span class="cite" data-tip="tip-sarfaesi">SARFAESI</span> to seize secured collateral. <span class="cite" data-tip="tip-ibc">IBC</span> drives unsecured corporate recoveries.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-augury-500/40 p-6 rounded-2xl space-y-3">
+                <div class="text-xs font-mono uppercase tracking-widest text-augury-400 font-bold">SEBI · Trustees</div>
+                <h3 class="text-lg font-bold text-slate-200">PTC Listing &amp; Trustee Rules</h3>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">SEBI's Listing Obligations &amp; Disclosure Requirements for PTCs. Trustee accountability tightened post-IL&amp;FS.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 29: SRT -->
+<div class="slide" :class="{ 'active': currentSlide === 29 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-7 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">The Holy Grail</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Significant Risk Transfer (SRT)</h1>
+            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                The dominant strategy for Tier 1 institutions today. The bank does not need funding; it just needs to appease regulators.
+            </p>
+            <p class="text-base text-slate-400 leading-relaxed font-light border-l-4 border-augury-500 pl-5">
+                By synthesizing a mezzanine/equity tranche and selling it via a Credit Linked Note (CLN) to institutional investors, the bank retains the prime assets but legally transfers the strict regulatory capital burden. In Europe and US, SRT issuance crossed $25Bn in 2024.
+            </p>
+        </div>
+        <div class="col-span-5 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl space-y-5 text-center">
+            <svg class="w-20 h-20 mx-auto text-augury-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35"/></svg>
+            <h3 class="text-2xl font-bold text-slate-200">Maximum ROE</h3>
+            <p class="text-slate-400 text-base">Banks keep the client relationship and the core yield, while institutional investors eat the tail risk. Return on Equity skyrockets.</p>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 30: STS -->
+<div class="slide" :class="{ 'active': currentSlide === 30 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-10">
+        <div class="text-center space-y-2">
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight">The <span class="cite" data-tip="tip-sts">STS Framework</span></h1>
+            <p class="text-lg text-slate-400 font-light">EU's post-2008 mandate; conceptually mirrored in RBI's STC criteria.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-sky-950/20 border border-sky-500/30 p-8 rounded-3xl text-center space-y-3">
+                <div class="text-sky-400 font-bold uppercase tracking-widest text-base">Simple</div>
+                <p class="text-slate-400 font-light text-base">Homogeneous asset pools. No complex re-securitisations. You cannot securitise a securitisation.</p>
+            </div>
+            <div class="bg-emerald-950/20 border border-emerald-500/30 p-8 rounded-3xl text-center space-y-3">
+                <div class="text-emerald-400 font-bold uppercase tracking-widest text-base">Transparent</div>
+                <p class="text-slate-400 font-light text-base">Loan-level historical data must be provided to investors. No opaque collateral or hidden NINJA paper.</p>
+            </div>
+            <div class="bg-augury-950/20 border border-augury-500/30 p-8 rounded-3xl text-center space-y-3">
+                <div class="text-augury-400 font-bold uppercase tracking-widest text-base">Standardised</div>
+                <p class="text-slate-400 font-light text-base">Enforceable <strong class="text-slate-200">5% skin-in-the-game</strong>. The originator must retain a material net economic interest.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 31: Tokenization -->
+<div class="slide" :class="{ 'active': currentSlide === 31 }">
+    <div></div>
+    <div class="grid grid-cols-12 gap-12 max-w-7xl mx-auto w-full items-center">
+        <div class="col-span-6 bg-slate-900 border border-slate-700 p-10 rounded-3xl flex flex-col items-center justify-center space-y-6">
+            <svg class="w-24 h-24 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-indigo-400 tracking-widest uppercase">Smart Contracts</h3>
+                <p class="text-slate-400 mt-2 text-base">Replacing the Trustee and the Paying Agent.</p>
+            </div>
+        </div>
+        <div class="col-span-6 space-y-6">
+            <span class="text-sm font-mono uppercase tracking-widest text-indigo-400 font-bold">The Horizon</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-[1.1]">Tokenization of RWAs</h1>
+            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                Real World Assets are moving on-chain. A cash flow waterfall is no longer a 500-page legal document.
+            </p>
+            <p class="text-base text-slate-400 leading-relaxed font-light border-l-4 border-indigo-500 pl-5">
+                It is an immutable snippet of code. When an SME makes a payment, the smart contract instantly routes fractions to Senior, Mezz, and Equity wallets. Live examples: <strong class="text-white"><span class="cite" data-tip="tip-maple">Maple</span>, <span class="cite" data-tip="tip-centrifuge">Centrifuge</span>, <span class="cite" data-tip="tip-goldfinch">Goldfinch</span>, <span class="cite" data-tip="tip-ondo">Ondo Finance</span></strong>, and India's <strong class="text-white"><span class="cite" data-tip="tip-rbi-token">RBI tokenized deposit pilot (2023+)</span></strong>.
+            </p>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 32: NEW — Glossary -->
+<div class="slide" :class="{ 'active': currentSlide === 32 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-6">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-sky-400 font-bold">Take Home Reference</span>
+            <h1 class="text-4xl md:text-5xl font-black text-slate-100 tracking-tight">Glossary</h1>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-sm">
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">SPV</span><span class="text-slate-400"> · Special Purpose Vehicle. Bankruptcy-remote trust.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">PTC</span><span class="text-slate-400"> · Pass-Through Certificate. Indian securitisation instrument.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">DA</span><span class="text-slate-400"> · Direct Assignment of loan portfolios.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">SRT</span><span class="text-slate-400"> · Significant Risk Transfer.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">CDS / CLN</span><span class="text-slate-400"> · Credit Default Swap / Credit Linked Note.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">OC</span><span class="text-slate-400"> · Overcollateralization.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">PD / LGD / EAD</span><span class="text-slate-400"> · Probability of Default / Loss Given Default / Exposure at Default.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">EL / UL</span><span class="text-slate-400"> · Expected Loss / Unexpected Loss.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">RWA</span><span class="text-slate-400"> · Risk-Weighted Assets.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">ASRF</span><span class="text-slate-400"> · Asymptotic Single Risk Factor (Basel IRB).</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">MRR / MHP</span><span class="text-slate-400"> · Minimum Retention / Holding Period (RBI).</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">STC / STS</span><span class="text-slate-400"> · Simple, Transparent, Comparable / Standardised.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">RMBS / CMBS</span><span class="text-slate-400"> · Residential / Commercial MBS.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">ALM</span><span class="text-slate-400"> · Asset Liability Management.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">LOS</span><span class="text-slate-400"> · Loan Origination System.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">SARFAESI</span><span class="text-slate-400"> · Securitisation &amp; Reconstruction Act, 2002.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">IBC</span><span class="text-slate-400"> · Insolvency &amp; Bankruptcy Code, 2016.</span></div>
+            <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl"><span class="text-augury-400 font-bold font-mono">RWA · On-Chain</span><span class="text-slate-400"> · Real World Asset tokenization.</span></div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 33: NEW — Reading -->
+<div class="slide" :class="{ 'active': currentSlide === 33 }">
+    <div></div>
+    <div class="max-w-6xl mx-auto w-full space-y-8">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-emerald-400 font-bold">Recommended Reading</span>
+            <h1 class="text-4xl md:text-5xl font-black text-slate-100 tracking-tight">Go Deeper</h1>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+            <div class="bg-slate-900/60 border border-slate-700 p-7 rounded-3xl space-y-3">
+                <h3 class="text-lg font-bold text-augury-400 uppercase tracking-widest border-b border-slate-800 pb-2">Foundational Texts</h3>
+                <ul class="space-y-3 text-base text-slate-300 font-light">
+                    <li><strong>Fabozzi &amp; Kothari</strong> · <em>Securitisation: The Tool of Financial Transformation</em></li>
+                    <li><strong>Vinod Kothari</strong> · <em>Securitisation, Asset Reconstruction &amp; Enforcement of Security Interests</em> (India focus)</li>
+                    <li><strong>Mark Adelson</strong> · <em>Structured Finance &amp; Collateralized Debt Obligations</em></li>
+                    <li><strong>BIS</strong> · <em>Basel II IRB Framework &amp; Securitisation Framework (2014, 2020 revisions)</em></li>
+                </ul>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-7 rounded-3xl space-y-3">
+                <h3 class="text-lg font-bold text-sky-400 uppercase tracking-widest border-b border-slate-800 pb-2">Indian Regulatory &amp; Cases</h3>
+                <ul class="space-y-3 text-base text-slate-300 font-light">
+                    <li><strong>RBI</strong> · Master Direction — Securitisation of Standard Assets (Sept 2021)</li>
+                    <li><strong>RBI</strong> · Master Direction — Transfer of Loan Exposures (Sept 2021)</li>
+                    <li><strong>SEBI</strong> · Listing &amp; Disclosure norms for Securitised Debt Instruments</li>
+                    <li><strong>Cases</strong> · IL&amp;FS Resolution (2018+), DHFL IBC Resolution (2021), YES Bank AT1</li>
+                </ul>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-700 p-7 rounded-3xl space-y-3 col-span-2">
+                <h3 class="text-lg font-bold text-rose-400 uppercase tracking-widest border-b border-slate-800 pb-2">Critical &amp; Forward-Looking</h3>
+                <ul class="grid grid-cols-2 gap-3 text-base text-slate-300 font-light">
+                    <li><strong>Felix Salmon</strong> · <em>Recipe for Disaster: The Formula That Killed Wall Street</em> (on Li's copula)</li>
+                    <li><strong>Gary Gorton</strong> · <em>Slapped by the Invisible Hand</em></li>
+                    <li><strong>BIS Working Papers</strong> · on SRT, synthetic securitisation post-2017</li>
+                    <li><strong>Industry</strong> · ICRA / CRISIL annual Indian securitisation market reports</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 34: About the Trainer -->
+<div class="slide" :class="{ 'active': currentSlide === 34 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full">
+        <div class="text-center space-y-2 mb-10">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">About the Trainer</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight font-serif">Ajay Surana</h1>
+            <p class="text-lg text-slate-400 font-light">Co-founder, <span class="font-serif text-slate-200">Augury Insights</span> &nbsp;·&nbsp; CRO, Infrarisk (an <span class="font-serif text-aurion-400 lowercase">aurionpro</span> Company)</p>
+        </div>
+        <div class="grid grid-cols-12 gap-12 items-center">
+            <div class="col-span-4 flex justify-center">
+                <div class="relative">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-augury-500/30 to-aurion-500/30 blur-2xl"></div>
+                    <div class="relative w-64 h-64 rounded-full bg-slate-900 border-4 border-augury-500/40 flex items-center justify-center shadow-2xl overflow-hidden">
+                        <svg class="w-40 h-40 text-slate-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                        <div class="absolute bottom-3 left-0 right-0 text-center">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-mono bg-slate-950/80 px-2 py-1 rounded">Photo coming soon</span>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-2 -right-2 bg-augury-500 text-slate-950 font-serif font-bold text-xl rounded-full w-16 h-16 flex items-center justify-center shadow-xl border-4 border-slate-950">AS</div>
+                </div>
+            </div>
+            <div class="col-span-8 space-y-6">
+                <p class="text-xl text-slate-300 font-light leading-relaxed">
+                    Ajay is a credit risk practitioner and educator with <strong class="text-white">30+ years</strong> across treasury, structured finance, and lending technology leadership. He designs executive learning experiences for senior risk and treasury decision-makers at banks, NBFCs, and institutional lenders.
+                </p>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="bg-slate-900/60 border border-slate-700 px-4 py-3 rounded-xl"><div class="text-augury-500 font-bold font-mono text-xs uppercase tracking-widest">30+ Years</div><div class="text-slate-300 mt-1">Treasury &amp; Credit Risk</div></div>
+                    <div class="bg-slate-900/60 border border-slate-700 px-4 py-3 rounded-xl"><div class="text-augury-500 font-bold font-mono text-xs uppercase tracking-widest">Co-founder</div><div class="text-slate-300 mt-1">Augury Insights</div></div>
+                    <div class="bg-slate-900/60 border border-slate-700 px-4 py-3 rounded-xl"><div class="text-aurion-400 font-bold font-mono text-xs uppercase tracking-widest">CRO</div><div class="text-slate-300 mt-1">Infrarisk × Aurionpro</div></div>
+                    <div class="bg-slate-900/60 border border-slate-700 px-4 py-3 rounded-xl"><div class="text-aurion-400 font-bold font-mono text-xs uppercase tracking-widest">AI-Native</div><div class="text-slate-300 mt-1">Bespoke risk simulations</div></div>
+                </div>
+                <blockquote class="border-l-4 border-augury-500 pl-6 py-2">
+                    <p class="font-serif italic text-2xl text-slate-200 leading-snug">"Treasury and risk training with bespoke simulations, gamification, case studies, and proprietary AI tools."</p>
+                </blockquote>
+                <a href="https://www.linkedin.com/in/ajaysurana/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-augury-400 hover:text-augury-300 text-sm font-mono uppercase tracking-widest transition">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    Connect on LinkedIn →
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 35: Follow & Connect -->
+<div class="slide" :class="{ 'active': currentSlide === 35 }">
+    <div></div>
+    <div class="max-w-7xl mx-auto w-full space-y-10">
+        <div class="text-center space-y-2">
+            <span class="text-sm font-mono uppercase tracking-widest text-augury-500 font-bold">Stay Connected</span>
+            <h1 class="text-5xl font-black text-slate-100 tracking-tight font-serif">Follow &amp; Connect</h1>
+            <p class="text-lg text-slate-400 font-light max-w-3xl mx-auto">Keep the conversation going — primary channel is LinkedIn.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Augury Insights -->
+            <a href="https://www.linkedin.com/company/auguryinsights" target="_blank" rel="noopener" class="group bg-slate-900/60 border border-slate-700 hover:border-augury-500/50 p-7 rounded-3xl transition-all hover:shadow-[0_0_40px_rgba(240,140,92,0.15)] flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="font-serif font-bold text-white text-3xl leading-none">AI</span>
+                    <div class="h-8 w-px bg-slate-700"></div>
+                    <div class="leading-tight">
+                        <div class="font-serif font-semibold text-white text-lg">Augury</div>
+                        <div class="font-serif italic text-augury-500 text-lg -mt-1">Insights</div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed mb-5 flex-grow">
+                    Treasury and risk training with bespoke simulations, gamification, case studies, and proprietary AI tools.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center gap-2 text-slate-300 group-hover:text-augury-400 transition">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span class="font-mono text-xs">/company/auguryinsights</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-300 group-hover:text-augury-400 transition">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+                        <span class="font-mono text-xs">auguryinsights.com</span>
+                    </div>
+                </div>
+            </a>
+            <!-- Ajay Surana -->
+            <a href="https://www.linkedin.com/in/ajaysurana/" target="_blank" rel="noopener" class="group bg-slate-900 border-2 border-augury-500/40 hover:border-augury-500 p-7 rounded-3xl transition-all hover:shadow-[0_0_60px_rgba(240,140,92,0.2)] flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-14 h-14 rounded-full bg-augury-500 text-slate-950 font-serif font-bold text-2xl flex items-center justify-center shadow-xl">AS</div>
+                    <div>
+                        <div class="font-serif text-white text-xl font-semibold leading-tight">Ajay Surana</div>
+                        <div class="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Trainer · Connect Direct</div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed mb-5 flex-grow">
+                    Co-founder, Augury Insights · CRO, Infrarisk (an Aurionpro Company). 30+ years across treasury, structured finance &amp; credit risk.
+                </p>
+                <div class="flex items-center gap-2 text-augury-400 group-hover:text-augury-300 transition">
+                    <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span class="font-mono text-xs">/in/ajaysurana</span>
+                </div>
+            </a>
+            <!-- Aurionpro -->
+            <a href="https://www.linkedin.com/company/aurionpro/" target="_blank" rel="noopener" class="group bg-slate-900/60 border border-slate-700 hover:border-aurion-500/50 p-7 rounded-3xl transition-all hover:shadow-[0_0_40px_rgba(39,141,136,0.15)] flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="font-serif text-aurion-400 text-3xl tracking-tight lowercase leading-none font-medium">aurionpro</div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed mb-5 flex-grow">
+                    Lending &amp; transaction banking technology. The LOS, treasury, and waterfall plumbing in production at banks across India and beyond.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center gap-2 text-slate-300 group-hover:text-aurion-300 transition">
+                        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <span class="font-mono text-xs">/company/aurionpro</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-300 group-hover:text-aurion-300 transition">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+                        <span class="font-mono text-xs">aurionpro.com</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="text-center pt-2">
+            <p class="text-sm text-slate-500 font-light italic">If this masterclass was useful, please consider sharing on LinkedIn and tagging us — it helps more risk practitioners find it.</p>
+        </div>
+    </div>
+    <div class="text-right text-[11px] border-t border-slate-800 pt-4"><span class="font-serif text-slate-300">Augury</span> <span class="font-serif italic text-augury-500">Insights</span> <span class="text-slate-600 mx-2">×</span> <span class="font-serif text-aurion-400 lowercase tracking-tight">aurionpro</span></div>
+</div>
+
+<!-- 36: Closing -->
+<div class="slide items-center justify-center text-center" :class="{ 'active': currentSlide === 36 }">
+    <div class="max-w-5xl mx-auto space-y-10">
+        <h1 class="text-6xl md:text-7xl font-black text-slate-100 leading-tight font-serif">Masterclass Complete.</h1>
+        <p class="text-2xl text-slate-300 font-light leading-relaxed max-w-4xl mx-auto">
+            From digital SME origination to Synthetic Risk Transfer, you have mapped the entire plumbing of the global credit architecture — and the Indian regulatory perimeter that contains it.
+        </p>
+        <div class="pt-4 space-y-3">
+            <svg class="w-20 h-20 mx-auto text-augury-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 3C13.5 6.5 6.5 6.5 3 12c3.5 5.5 10.5 5.5 16 9 1.5-4.5-1.5-11.5 0-21z"/></svg>
+            <p class="text-base text-augury-500 font-bold tracking-widest uppercase">Never forget the boomerang.</p>
+        </div>
+        <div class="mt-8 p-6 bg-slate-900 border border-slate-700 rounded-2xl inline-block">
+            <h3 class="text-xl font-bold text-slate-200 font-serif">The Floor is Open</h3>
+            <p class="text-slate-400 mt-1 font-mono uppercase tracking-widest text-xs">Executive Q&amp;A Session</p>
+        </div>
+        <p class="text-sm text-slate-500 font-light pt-4">Connect with Ajay and the firms on the previous slide ↑</p>
+    </div>
+</div>
+
+<!-- ============================================================
+     Phase 3 + 4: Citations, Search, Speaker Notes, Deep Linking
+     ============================================================ -->
+
+<!-- Search Overlay -->
+<div x-show="showSearch" x-cloak @click.self="showSearch = false" class="fixed inset-0 z-[100] search-mask flex items-start justify-center pt-24 no-print">
+    <div class="w-full max-w-2xl mx-4 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="flex items-center px-5 py-3 border-b border-slate-800">
+            <svg class="w-5 h-5 text-slate-500 mr-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+            <input id="search-input" type="text" placeholder="Search across all 36 slides…" x-model="searchQuery" @input="runSearch()" @keydown.escape="showSearch = false" class="flex-1 bg-transparent outline-none text-slate-100 placeholder-slate-500"/>
+            <span class="kbd ml-3">ESC</span>
+        </div>
+        <div class="max-h-[60vh] overflow-y-auto">
+            <template x-for="(r, i) in searchResults" :key="i">
+                <button @click="gotoSlide(r.slide)" class="w-full text-left px-5 py-3 border-b border-slate-800/50 hover:bg-slate-800/60 transition group flex gap-4">
+                    <div class="font-mono text-xs text-augury-400 font-bold w-16 shrink-0 pt-0.5">Slide <span x-text="r.slide"></span></div>
+                    <div class="text-sm text-slate-300 group-hover:text-white leading-snug" x-html="r.snippet"></div>
+                </button>
+            </template>
+            <div x-show="searchQuery.length >= 2 && searchResults.length === 0" class="px-5 py-8 text-center text-slate-500 text-sm">No matches for "<span x-text="searchQuery" class="text-slate-300"></span>"</div>
+            <div x-show="searchQuery.length < 2" class="px-5 py-4 text-xs text-slate-500 font-mono uppercase tracking-widest text-center">Type at least 2 characters · ESC to close · Click result to jump</div>
+        </div>
+    </div>
+</div>
+
+<!-- Speaker Notes Panel -->
+<div x-show="speakerMode" x-cloak class="fixed bottom-20 left-6 right-6 z-40 max-w-3xl mx-auto no-print">
+    <div class="notes-panel border border-augury-500/40 rounded-2xl shadow-2xl p-5">
+        <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-800">
+            <div class="flex items-center gap-3 flex-wrap">
+                <span class="bg-augury-500/15 text-augury-400 font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-augury-500/30 font-bold">Speaker Notes</span>
+                <span class="text-xs text-slate-500 font-mono">Slide <span x-text="currentSlide" class="text-slate-300 font-bold"></span></span>
+                <span class="text-xs text-augury-400 font-mono" x-show="notes[currentSlide]" x-text="notes[currentSlide]?.time"></span>
+            </div>
+            <button @click="speakerMode = false" class="text-slate-500 hover:text-slate-300 text-xs font-mono">Press S to close</button>
+        </div>
+        <template x-if="notes[currentSlide]">
+            <div>
+                <div class="font-serif font-bold text-augury-300 text-lg mb-1.5" x-text="notes[currentSlide].title"></div>
+                <p class="text-sm text-slate-300 leading-relaxed" x-text="notes[currentSlide].body"></p>
+            </div>
+        </template>
+        <template x-if="!notes[currentSlide]">
+            <div class="text-sm text-slate-500 italic">No notes for slide <span x-text="currentSlide"></span> yet.</div>
+        </template>
+    </div>
+</div>
+
+<!-- Citation Tooltip Templates -->
+<div class="hidden">
+    <div id="tip-srenis"><div class="tip-card"><div class="tip-title">Sreni — Ancient Indian Guilds</div><div class="tip-body">Merchant and craft guilds dating to ~8th century BCE. Pooled commercial credit, underwrote maritime cargo risk, and arbitrated disputes — among the earliest documented proto-securitisation structures.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Sreni" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-hundi"><div class="tip-card"><div class="tip-title">Hundi — Pre-modern Bill of Exchange</div><div class="tip-body">Indigenous Indian credit and remittance instruments, predating colonial banking. Several variants existed for trade, travel, and counterparty risk management — the earliest secondary bill markets on the subcontinent.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Hundi" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~4 min</span></div></div></div>
+    <div id="tip-shahjog"><div class="tip-card"><div class="tip-title">Shahjog Hundi</div><div class="tip-body">A Hundi variant payable only to a respectable, named holder (Shah). Established structural counterparty validation centuries before modern KYC — restricting circulation to vetted intermediaries.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Hundi" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~4 min</span></div></div></div>
+    <div id="tip-pfandbrief"><div class="tip-card"><div class="tip-title">Pfandbrief (1769)</div><div class="tip-body">German covered bond established by King Frederick II after the Seven Years' War. Pooled noble agricultural assets with full dual recourse — the structural ancestor of modern covered-bond markets.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Pfandbrief" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~4 min</span></div></div></div>
+    <div id="tip-bowie"><div class="tip-card"><div class="tip-title">Bowie Bonds (1997)</div><div class="tip-body">$55M AAA-rated 10-year notes backed by future royalties from David Bowie's pre-1990 catalog (25 albums, ~287 songs). First major intellectual-property securitisation. Prudential Insurance was the sole investor.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Bowie_Bonds" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-hipgnosis"><div class="tip-card"><div class="tip-title">Hipgnosis Songs Fund (2018)</div><div class="tip-body">LSE-listed investment trust that scaled music IP securitisation to institutional scale — acquired catalogs of Shakira, Neil Young, Justin Bieber, Mark Ronson, et al. Peaked above £1Bn AUM before a 2024 take-private by Concord/Apollo.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Hipgnosis_Songs_Fund" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~6 min</span></div></div></div>
+    <div id="tip-rihanna"><div class="tip-card"><div class="tip-title">Music Catalog Deals (2020–2023)</div><div class="tip-body">A wave of nine-figure IP sales: Bob Dylan ($300M+ to UMG, 2020), Bruce Springsteen ($550M to Sony, 2021), Justin Bieber ($200M to Hipgnosis, 2022). Securitisation logic — predictable streaming yields — drives institutional pricing.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Music_catalog" target="_blank" rel="noopener" class="tip-source">Background →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-ilfs"><div class="tip-card"><div class="tip-title">IL&FS Default (2018)</div><div class="tip-body">~₹91,000 Cr group default by Infrastructure Leasing &amp; Financial Services. Triggered India's NBFC liquidity crisis. Government superseded the board; SFIO and ED investigations followed. AAA-rated paper traded at distress overnight.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Infrastructure_Leasing_%26_Financial_Services" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~8 min</span></div></div></div>
+    <div id="tip-dhfl"><div class="tip-card"><div class="tip-title">DHFL Resolution (2019–2021)</div><div class="tip-body">Dewan Housing Finance — India's first financial-services firm resolved under the IBC. Piramal Capital acquired DHFL for ₹34,250 Cr after allegations of fictitious loans and round-tripping surfaced via Cobrapost.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Dewan_Housing_Finance_Corporation" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~6 min</span></div></div></div>
+    <div id="tip-yesbank"><div class="tip-card"><div class="tip-title">YES Bank AT1 Write-down (2020)</div><div class="tip-body">RBI superseded the board; ~₹8,415 Cr of Additional Tier 1 perpetual bonds were written down to zero as part of the reconstruction. Bombay HC overturned the write-down in Jan 2023 — SC appeal pending.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Yes_Bank" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~6 min</span></div></div></div>
+    <div id="tip-copula"><div class="tip-card"><div class="tip-title">Li's Gaussian Copula (2000)</div><div class="tip-body">David X. Li's correlation formula was used industry-wide to price CDO tranches. Assumed default correlation was static and well-behaved. Felix Salmon's 2009 Wired piece "Recipe for Disaster" labeled it the formula that "killed Wall Street."</div><div class="tip-footer"><a href="https://www.wired.com/2009/02/wp-quant/" target="_blank" rel="noopener" class="tip-source">Wired (Salmon) →</a><span class="tip-time">~12 min</span></div></div></div>
+    <div id="tip-asrf"><div class="tip-card"><div class="tip-title">Asymptotic Single Risk Factor (Vasicek)</div><div class="tip-body">The Basel II IRB formula. Models the loss distribution of an asymptotically granular portfolio under one systematic factor. AAA tranches must survive at the 99.9% confidence interval. Gordy (2003) is the canonical paper.</div><div class="tip-footer"><a href="https://www.bis.org/bcbs/irbriskweight.pdf" target="_blank" rel="noopener" class="tip-source">BIS IRB Note (PDF) →</a><span class="tip-time">~20 min</span></div></div></div>
+    <div id="tip-ssa-md"><div class="tip-card"><div class="tip-title">RBI Master Direction — SSA (Sept 2021)</div><div class="tip-body">RBI's post-IL&amp;FS rulebook on Securitisation of Standard Assets. Defines MHP, MRR, eligibility, STC (Simple-Transparent-Comparable) framework, and explicitly prohibits synthetic securitisation for most regulated entities.</div><div class="tip-footer"><a href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12165" target="_blank" rel="noopener" class="tip-source">RBI Official →</a><span class="tip-time">~30 min</span></div></div></div>
+    <div id="tip-sarfaesi"><div class="tip-card"><div class="tip-title">SARFAESI Act (2002)</div><div class="tip-body">Securitisation and Reconstruction of Financial Assets &amp; Enforcement of Security Interest Act. Allows banks and ARCs to enforce collateral and possess secured assets without court intervention — the legal backbone of Indian special servicing.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Securitisation_and_Reconstruction_of_Financial_Assets_and_Enforcement_of_Security_Interest_Act,_2002" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~8 min</span></div></div></div>
+    <div id="tip-ibc"><div class="tip-card"><div class="tip-title">Insolvency &amp; Bankruptcy Code (2016)</div><div class="tip-body">India's consolidated insolvency framework. 330-day max resolution timeline. NCLT (adjudication) and NCLAT (appeal) as the judicial machinery. Drove the DHFL, Essar Steel, and Bhushan Power resolutions.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Insolvency_and_Bankruptcy_Code,_2016" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~10 min</span></div></div></div>
+    <div id="tip-sts"><div class="tip-card"><div class="tip-title">EU STS Regulation (2017/2402)</div><div class="tip-body">EU's Simple, Transparent, Standardised securitisation framework. Mandates 5% risk retention, loan-level transparency, ban on re-securitisations, and homogeneous asset pools. Conceptually mirrored in RBI's STC criteria.</div><div class="tip-footer"><a href="https://en.wikipedia.org/wiki/Securitisation_Regulation" target="_blank" rel="noopener" class="tip-source">Wikipedia →</a><span class="tip-time">~8 min</span></div></div></div>
+    <div id="tip-maple"><div class="tip-card"><div class="tip-title">Maple Finance</div><div class="tip-body">On-chain institutional lending protocol. Capital pools from accredited investors lend to vetted borrowers (market-makers, prop-trading firms, real-world credit). $2B+ originated cumulatively.</div><div class="tip-footer"><a href="https://maple.finance" target="_blank" rel="noopener" class="tip-source">maple.finance →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-centrifuge"><div class="tip-card"><div class="tip-title">Centrifuge</div><div class="tip-body">Decentralised platform bringing real-world assets on-chain as collateral — SME invoices, trade finance receivables, royalty streams. Among the most active RWA protocols by TVL; MakerDAO has been a key counterparty.</div><div class="tip-footer"><a href="https://centrifuge.io" target="_blank" rel="noopener" class="tip-source">centrifuge.io →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-goldfinch"><div class="tip-card"><div class="tip-title">Goldfinch Finance</div><div class="tip-body">Decentralised credit protocol lending USDC to emerging-market businesses. Pioneered "trust-through-consensus" — auditors stake capital to vouch for borrowers, replacing traditional credit committee.</div><div class="tip-footer"><a href="https://goldfinch.finance" target="_blank" rel="noopener" class="tip-source">goldfinch.finance →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-ondo"><div class="tip-card"><div class="tip-title">Ondo Finance</div><div class="tip-body">Tokenisation of institutional-grade products. Flagship: OUSG (tokenized BlackRock short-dated US Treasury ETF) and USDY (yield-bearing stablecoin alternative). $1B+ TVL in tokenized treasuries by 2024.</div><div class="tip-footer"><a href="https://ondo.finance" target="_blank" rel="noopener" class="tip-source">ondo.finance →</a><span class="tip-time">~5 min</span></div></div></div>
+    <div id="tip-rbi-token"><div class="tip-card"><div class="tip-title">RBI Tokenized Deposit / CBDC Pilot</div><div class="tip-body">Wholesale e₹ pilot (Nov 2022) tested CBDC settlement of government securities. Retail pilot followed Dec 2022. Tokenized deposits and programmable settlements are under active exploration.</div><div class="tip-footer"><a href="https://www.rbi.org.in/Scripts/FAQView.aspx?Id=158" target="_blank" rel="noopener" class="tip-source">RBI CBDC FAQ →</a><span class="tip-time">~8 min</span></div></div></div>
+</div>
+
+<!-- Deck state and behavior -->
+<script>
+function deck() {
+    return {
+        currentSlide: 1,
+        totalSlides: 36,
+        showJump: false,
+        showSearch: false,
+        speakerMode: false,
+        searchQuery: '',
+        searchResults: [],
+        notes: {
+            1:  { title: "Opening — Frame the Class",         time: "~2 min",  body: "Set the frame: lending is fundamentally a collections business. Flight-simulator metaphor — the deck is interactive. Audience will operate dials on slide 19 (Waterfall Tycoon) and 24 (War Room)." },
+            2:  { title: "Boomerang Rule",                    time: "~3 min",  body: "Repeat the line: origination volume is vanity, recovery is sanity. It sticks. Anchor everything downstream to this single axiom." },
+            3:  { title: "Intent vs Ability",                 time: "~3 min",  body: "Behavioral vs mathematical. Make clear: structure addresses ability only. No financial engineering cures fraud." },
+            4:  { title: "Core Thesis",                       time: "~1 min",  body: "Pause for impact. The phrase 'any credit risk is viable if structured properly' is the whole class in one sentence." },
+            6:  { title: "Srenis, Hundis, Pfandbrief",        time: "~4 min",  body: "India-first framing: securitisation is not a Western import. Srenis pooled risk before Wall Street existed. Hover citations for sources." },
+            7:  { title: "IP Royalties — Audience Vote",      time: "~6 min",  body: "Let the class vote with the buttons. Most groups decline initially. Reveal the Bowie → Hipgnosis → Rihanna progression to flip the room." },
+            8:  { title: "LOS Hygiene",                       time: "~3 min",  body: "Plug Aurionpro SmartLender naturally — this is the layer Aurionpro actually builds. Account Aggregator is the modern Indian frame." },
+           14:  { title: "Ecosystem Map",                     time: "~4 min",  body: "Walk left-to-right slowly. Pause on each role. Audience often confuses Trustee vs Servicer — preempt the question." },
+           18:  { title: "Champagne Waterfall",               time: "~2 min",  body: "Quick metaphor stop. Set up the live game next slide." },
+           19:  { title: "Waterfall Tycoon — Live Lab",       time: "~6 min",  body: "Invite a volunteer. Deliberately try Pay Equity first to trigger the covenant breach. Use Reset between runs. This is the highest-energy moment." },
+           20:  { title: "Worked Example — Numbers",          time: "~6 min",  body: "Walk the math slowly. Anchor on the 99.9% stress interval — that is the take-home for AAA sizing. EL of 1.35% vs 11.5% stress loss." },
+           21:  { title: "India's NINJA Moment",              time: "~6 min",  body: "Heavy room moment. IL&FS, DHFL, YES Bank AT1. Pause after: structure enhances ability; it cannot cure intent." },
+           22:  { title: "Correlation Trap",                  time: "~4 min",  body: "Show the formula, don't teach it. Point: when ρ snaps to 1.0, diversification is a fiction. India 2018 parallel hits hard." },
+           23:  { title: "Basel ASRF",                        time: "~3 min",  body: "Point at the math, do not solve it. 'This is what the regulator runs to size your capital.' Move on. Audience will trust you more if you don't drill." },
+           24:  { title: "War Room — Macro Shock",            time: "~8 min",  body: "Audience suggests inputs. Run the sim live. The 'SENIOR BREACHED' banner is the climax — wait for the gasp." },
+           25:  { title: "ALM / Maturity Mismatch",           time: "~3 min",  body: "Borrow short, lend long. Banks securitise to unwind duration risk. Indian NBFCs in 2018 are the cautionary tale." },
+           26:  { title: "RWA Relief",                        time: "~3 min",  body: "Frame in ROE terms. CFOs care about ROE not RWA — connect the two." },
+           27:  { title: "Synthetic Securitisation",          time: "~3 min",  body: "Move risk, keep cash. Flag that India largely prohibits this — leads into the regulatory slide." },
+           28:  { title: "India Regulatory Lens",             time: "~6 min",  body: "Most India-relevant slide for senior risk officers. Emphasize MRR/MHP and the synthetic prohibition. This will be a Q&A magnet." },
+           29:  { title: "SRT — Capital Strategy",            time: "~4 min",  body: "Global tier-1 banks live and die by SRT. ~$25Bn issuance in 2024. India: not yet, but the direction is clear." },
+           30:  { title: "STS Framework",                     time: "~3 min",  body: "Post-2008 mandate. The principles are universal even if specific regimes differ. RBI's STC mirrors this." },
+           31:  { title: "Tokenization Horizon",              time: "~4 min",  body: "Not crypto-hype — institutional. Ondo, Centrifuge, Maple are doing what RBI's tokenized deposit pilot anticipates." },
+           32:  { title: "Glossary",                          time: "~1 min",  body: "Take-home reference. Tell audience this is downloadable." },
+           33:  { title: "Recommended Reading",               time: "~1 min",  body: "Kothari for India, Fabozzi for foundations, Salmon for the cautionary tale." },
+           34:  { title: "Trainer Bio",                       time: "~1 min",  body: "Keep brief — credentials speak for themselves. Bridge to the connect slide." },
+           35:  { title: "Connect — LinkedIn First",          time: "~1 min",  body: "Highlight Augury (training arm) and Infrarisk/Aurionpro (tech arm). If you have a LinkedIn QR printed, hold it up here." },
+           36:  { title: "Q&A — The Floor",                   time: "Open",    body: "Most useful questions come from senior treasury heads. Allocate 15–20 min minimum. India-specific scenarios get the deepest engagement." }
+        },
+        init() {
+            const m = location.hash.match(/^#slide-(\d+)$/);
+            if (m) {
+                const n = parseInt(m[1], 10);
+                if (n >= 1 && n <= this.totalSlides) this.currentSlide = n;
+            }
+            this.$watch('currentSlide', v => {
+                history.replaceState(null, '', '#slide-' + v);
+            });
+            this.$nextTick(() => this.initTooltips());
+        },
+        initTooltips() {
+            if (typeof tippy === 'undefined') { setTimeout(() => this.initTooltips(), 100); return; }
+            tippy('.cite', {
+                theme: 'augury',
+                animation: 'scale-subtle',
+                placement: 'top',
+                interactive: true,
+                allowHTML: true,
+                maxWidth: 380,
+                delay: [200, 0],
+                content: (ref) => {
+                    const id = ref.getAttribute('data-tip');
+                    const tmpl = document.getElementById(id);
+                    return tmpl ? tmpl.innerHTML : '<div class="tip-card">No content</div>';
+                }
+            });
+        },
+        handleKey(e) {
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                this.showSearch = true;
+                this.$nextTick(() => { const el = document.getElementById('search-input'); if (el) el.focus(); });
+                return;
+            }
+            if (e.key === 'Escape') {
+                if (this.showSearch) { this.showSearch = false; return; }
+                if (this.showJump)   { this.showJump = false; return; }
+                if (this.speakerMode){ this.speakerMode = false; return; }
+            }
+            if (e.target.matches('input, textarea')) return;
+            if (e.key === 's' || e.key === 'S') { this.speakerMode = !this.speakerMode; return; }
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                this.currentSlide = Math.min(this.totalSlides, this.currentSlide + 1);
+            }
+            if (e.key === 'ArrowLeft') this.currentSlide = Math.max(1, this.currentSlide - 1);
+            if (e.key === 'Home') this.currentSlide = 1;
+            if (e.key === 'End')  this.currentSlide = this.totalSlides;
+        },
+        runSearch() {
+            const q = this.searchQuery.toLowerCase().trim();
+            if (q.length < 2) { this.searchResults = []; return; }
+            const results = [];
+            document.querySelectorAll('.slide').forEach(slide => {
+                const classAttr = slide.getAttribute(':class') || '';
+                const match = classAttr.match(/currentSlide === (\d+)/);
+                if (!match) return;
+                const slideNum = parseInt(match[1], 10);
+                const text = (slide.textContent || '').replace(/\s+/g, ' ').trim();
+                const lower = text.toLowerCase();
+                const pos = lower.indexOf(q);
+                if (pos !== -1) {
+                    const start = Math.max(0, pos - 60);
+                    const end = Math.min(text.length, pos + q.length + 100);
+                    let snippet = text.substring(start, end);
+                    const matchIdx = snippet.toLowerCase().indexOf(q);
+                    const before = snippet.substring(0, matchIdx);
+                    const matched = snippet.substring(matchIdx, matchIdx + q.length);
+                    const after = snippet.substring(matchIdx + q.length);
+                    snippet = before + '<mark class="bg-augury-500/30 text-augury-200 rounded px-0.5">' + matched + '</mark>' + after;
+                    results.push({ slide: slideNum, snippet: (start > 0 ? '…' : '') + snippet + (end < text.length ? '…' : '') });
+                }
+            });
+            results.sort((a, b) => a.slide - b.slide);
+            this.searchResults = results.slice(0, 25);
+        },
+        gotoSlide(n) {
+            this.currentSlide = n;
+            this.showSearch = false;
+            this.searchQuery = '';
+            this.searchResults = [];
+        }
+    }
+}
+</script>
+
+</body>
+</html>
